@@ -28,7 +28,7 @@ const login = async (req, res) => {
 
       if (passCompare) {
         //   5m just for check will change it
-        const token = await generateToken(result._id, "5m");
+        const token = await generateToken(result._id, "300m");
 
         return res.json({
           success: true,
