@@ -10,11 +10,17 @@ app.use(cors());
 app.use(express.json());
 
 // Import Routers
-
+const registerRouter = require("./routes/registerRouter");
+const loginRouter = require("./routes/loginRouter");
+const tweetsRouter = require("./routes/tweetsRouter");
+const usersRouter = require("./routes/usersRouter");
 
 
 // Routes Middleware
-
+app.use("/register" , registerRouter)
+app.use("/login" , loginRouter)
+app.use("/users" , usersRouter)
+app.use("/tweets" , tweetsRouter)
 
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
