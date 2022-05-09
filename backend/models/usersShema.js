@@ -1,4 +1,5 @@
 const mongoos = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const users = new mongoos.Schema({
   userName: { type: String, required: true },
@@ -8,7 +9,12 @@ const users = new mongoos.Schema({
   coverImage: { type: String },
   following: [{ type: mongoos.Schema.Types.ObjectId, ref: "User" }],
   followers: [{ type: mongoos.Schema.Types.ObjectId, ref: "User" }],
-  bookMark: [{type:mongoos.Schema.Types.ObjectId , ref:"User"}]
+  bookMark: [{ type: mongoos.Schema.Types.ObjectId, ref: "User" }],
 });
 
-module.exports = mongoos.model("User",users)
+users.pre("save", async function () {
+  this.email = this.email.toLowerCase();
+  this.password = await bcrypt.hash(this.password, 10);
+});
+
+module.exports = mongoos.model("User", users);
