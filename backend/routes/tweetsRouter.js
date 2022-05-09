@@ -1,9 +1,13 @@
-const express = require("express")
+const express = require("express");
 
-//import controlles  
+//import controlles
+const { createNewTweet } = require("../controllers/tweets");
 
-const tweetsRouter = express.Router()
+//import authentication middleware
+const authentication = require("../middleware/authentication");
+const tweetsRouter = express.Router();
 
+tweetsRouter.post("/", authentication, createNewTweet);
 
-//export Router 
-module.exports = tweetsRouter
+//export Router
+module.exports = tweetsRouter;
