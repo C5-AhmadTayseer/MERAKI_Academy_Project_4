@@ -1,4 +1,5 @@
 const userModel = require("../models/usersShema");
+const { param } = require("../routes/registerRouter");
 
 // const follow = (req, res) => {
 //   const _id = req.params.id;
@@ -41,6 +42,8 @@ const userModel = require("../models/usersShema");
 //   //     res.json({ err: err });
 //   //   }
 // };
+
+//how to handle not added the same user again ? , maybe can handle it in FE ? ..
 const follow = async (req, res) => {
   const params = req.params.id;
 
@@ -79,6 +82,79 @@ const follow = async (req, res) => {
   }
 };
 
+const unFollow = async (req, res) => {
+  const params = req.params.id;
+
+  const signInUser = req.token.userId;
+
+  try {
+    console.log(params);
+    const removeFromFollower = await userModel.updateMany(
+      { _id: params },
+      {
+        $pull: { followers: signInUser },
+      },
+      { new: true }
+    );
+
+    if (removeFromFollower) {
+      console.log(params);
+      const removeFromFollowing = await userModel.updateMany(
+        { _id: signInUser },
+        {
+          $pull: { following: params },
+        },
+        { new: true }
+      );
+      console.log(removeFromFollower, " removed from Follower");
+      console.log(removeFromFollowing, "removed from Following");
+
+      return res.status(201).json({
+        success: true,
+        message: "Removed successfully",
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      messge: "Server Error",
+      err: err.message,
+    });
+  }
+};
+
 //the unfollow will be the same with pull operator instead of push ....
 
-module.exports = follow;
+/*
+const follow = async (req, res) => {
+  const userId = req.params.id;
+  console.log(userId);
+  const findUser = await userModel.find({ _id: userId });
+
+  const isFollwing =
+    findUser[0].followers && findUser[0].followers.includes(userId);
+  console.log(isFollwing);
+  const option = isFollwing ? "$pull" : "$addToSet";
+
+  req.token.userId = await userModel
+    .findByIdAndUpdate(
+      req.token.userId,
+      {
+        [option]: { following: userId },
+      },
+      { new: true }
+    )
+    .catch((err) => {
+      console.log(err);
+    });
+
+  res.json(req.token.userId);
+};
+
+
+
+*/
+
+module.exports = {
+  follow,
+  unFollow,
+};

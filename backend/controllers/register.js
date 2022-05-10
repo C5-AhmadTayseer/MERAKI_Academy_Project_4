@@ -29,13 +29,15 @@ const register = async (req, res) => {
       userInfo: response,
     });
   } catch (err) {
+    console.log(err);
+
     if (err.code === 11000) {
       res.status(409).json({
         success: false,
         message: "email already exist",
       });
     } else {
-      res.status(500).json({
+      res.status(500).json({    
         message: "Server Error",
         err: err.message,
       });

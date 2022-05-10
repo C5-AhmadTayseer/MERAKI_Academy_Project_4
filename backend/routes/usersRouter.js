@@ -8,7 +8,9 @@ const {
 } = require("../controllers/users");
 
 //follow Controller
-const follow = require("../controllers/follow");
+const { follow, unFollow } = require("../controllers/follow");
+
+
 
 //authentication
 const authentication = require("../middleware/authentication");
@@ -22,6 +24,8 @@ usersRouter.delete("/:id", deleteUser);
 usersRouter.put("/:id", updateUserInfo);
 
 usersRouter.post("/:id/follow", authentication, follow);
+
+usersRouter.put("/:id/follow", authentication, unFollow);
 
 //export Router
 module.exports = usersRouter;
