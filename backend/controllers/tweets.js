@@ -122,16 +122,29 @@ const deleteTweetById = async (req, res) => {
   try {
     const result = await tweetModel.findByIdAndDelete(id);
     if (result) {
-      console.log(result);
-      return res.json(result);
+      // console.log(result);
+      return res.status(201).json({
+        success: true,
+        message: "Tweet Deleted",
+        tweet: result,
+      });
     } else {
-      res.json("Not");
+      res.status(404).json({
+        success: false,
+        message: `the tweet with ${id} is not found `,
+      });
     }
   } catch (err) {
-    console.log(err);
-    res.json(err);
+    // console.log(err);
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+      err: err.message,
+    });
   }
 };
+
+
 
 //export
 module.exports = {
