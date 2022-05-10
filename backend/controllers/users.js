@@ -27,6 +27,64 @@ const getUserById = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  id = req.params.id;
+  try {
+    const result = await usersModel.findByIdAndDelete(id);
+    if (result) {
+      // console.log(result);
+      return res.status(201).json({
+        success: true,
+        message: "User Deleted",
+        tweet: result,
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: `There's No User with id:${id}`,
+      });
+    }
+  } catch (err) {
+    // console.log(err);
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+      err: err.message,
+    });
+  }
+};
+
+const updateUserInfo = async (req, res) => {
+  let id = req.params.id;
+  //  ========
+  const { proffileImage, coverImage } = req.body;
+
+  try {
+    const result = await usersModel.findByIdAndUpdate(
+      id,
+      {
+        proffileImage,
+        coverImage,
+      },
+      { new: true }
+    );
+
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+      err: err.message,
+    });
+  }
+};
+
+
+
 //export
 
-module.exports = getUserById;
+module.exports = {
+  getUserById,
+  deleteUser,
+  updateUserInfo
+};
