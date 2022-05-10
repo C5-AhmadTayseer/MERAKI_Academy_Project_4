@@ -5,6 +5,8 @@ const {
   createNewTweet,
   getAllTweets,
   getTweetById,
+  updateTweet,
+  deleteTweetById,
 } = require("../controllers/tweets");
 
 //import authentication middleware
@@ -16,6 +18,10 @@ tweetsRouter.post("/", authentication, createNewTweet);
 tweetsRouter.get("/", authentication, getAllTweets);
 
 tweetsRouter.get("/:id", authentication, getTweetById);
+
+tweetsRouter.put("/:id" , authentication , updateTweet )
+
+tweetsRouter.delete("/:id" , authentication ,deleteTweetById )
 
 //export Router
 module.exports = tweetsRouter;

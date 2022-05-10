@@ -81,9 +81,63 @@ const getTweetById = async (req, res) => {
   }
 };
 
+// used return inside if , to solve (Can't set headers after they are sent to the client)
+const updateTweet = async (req, res) => {
+  let id = req.params.id;
+  const { tweetBody } = req.body;
+
+  try {
+    const result = await tweetModel.findByIdAndUpdate(
+      id,
+
+      { tweetBody },
+      { new: true }
+    );
+
+    res.status(201).json({
+      success: true,
+      message: "Tweet Updated",
+      tweet: result,
+    });
+  } catch (err) {
+    if (err.kind === "ObjectId") {
+      return res.status(404).json({
+        success: false,
+        message: "The tweet is not found",
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: "Server Error",
+        err: err.message,
+      });
+    }
+
+    res.json(err);
+  }
+};
+
+const deleteTweetById = async (req, res) => {
+  id = req.params.id;
+  try {
+    const result = await tweetModel.findByIdAndDelete(id);
+    if (result) {
+      console.log(result);
+      return res.json(result);
+    } else {
+      res.json("Not");
+    }
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+  }
+};
+
 //export
 module.exports = {
   createNewTweet,
   getAllTweets,
   getTweetById,
+  updateTweet,
+  deleteTweetById,
 };
