@@ -144,7 +144,34 @@ const deleteTweetById = async (req, res) => {
   }
 };
 
+const getAllTweetByUser = async (req, res) => {
+  let id = req.params.id;
 
+  try {
+    const result = await tweetModel
+      .find({ userId: id })
+      .populate("userId", "-password");
+    // maybe will exclude email
+    res.status(201).json({
+      success: true,
+      message: `All tweets By ${id} `,
+      tweets: result,
+    });
+  } catch (err) {
+    // console.log(err);
+    if (err.kind === "ObjectId") {
+      return res.status(404).json({
+        success: true,
+        message: `There's no tweets yet By ${id} `,
+      });
+    }
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+      err: err.message,
+    });
+  }
+};
 
 //export
 module.exports = {
@@ -153,4 +180,5 @@ module.exports = {
   getTweetById,
   updateTweet,
   deleteTweetById,
+  getAllTweetByUser,
 };
