@@ -1,6 +1,6 @@
 const express = require("express");
 
-//import controlles
+//import controlles (tweets Controller)
 const {
   createNewTweet,
   getAllTweets,
@@ -10,8 +10,12 @@ const {
   getAllTweetByUser,
 } = require("../controllers/tweets");
 
+//import (comments Controller)
+const createNewComment = require("../controllers/comments");
+
 //import authentication middleware
 const authentication = require("../middleware/authentication");
+
 const tweetsRouter = express.Router();
 
 tweetsRouter.post("/", authentication, createNewTweet);
@@ -25,6 +29,8 @@ tweetsRouter.put("/:id", authentication, updateTweet);
 tweetsRouter.delete("/:id", authentication, deleteTweetById);
 
 tweetsRouter.get("/user/:id", authentication, getAllTweetByUser);
+
+tweetsRouter.post("/:id/comments", authentication, createNewComment);
 
 //export Router
 module.exports = tweetsRouter;

@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const userModel = require("../models/usersShema");
 
 //generate token ,
-const generateToken = (userId, expiresIn) => {
+const generateToken =async (userId, expiresIn) => {
   const payload = {
     userId: userId,
   };
@@ -11,7 +11,7 @@ const generateToken = (userId, expiresIn) => {
   const options = {
     expiresIn: expiresIn,
   };
-  return jwt.sign(payload, process.env.SECRET, options);
+  return await jwt.sign(payload, process.env.SECRET, options);
 };
 
 //(will check it again if i need to populate info from the result to send it with token .)

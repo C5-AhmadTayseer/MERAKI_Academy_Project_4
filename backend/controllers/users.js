@@ -79,12 +79,9 @@ const updateUserInfo = async (req, res) => {
   }
 };
 
-
-
 //export
-
 module.exports = {
   getUserById,
   deleteUser,
-  updateUserInfo
+  updateUserInfo,
 };

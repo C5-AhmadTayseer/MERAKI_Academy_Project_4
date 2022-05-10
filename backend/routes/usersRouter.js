@@ -7,6 +7,12 @@ const {
   updateUserInfo,
 } = require("../controllers/users");
 
+//follow Controller
+const follow = require("../controllers/follow");
+
+//authentication
+const authentication = require("../middleware/authentication");
+
 const usersRouter = express.Router();
 
 usersRouter.get("/:id", getUserById);
@@ -14,6 +20,8 @@ usersRouter.get("/:id", getUserById);
 usersRouter.delete("/:id", deleteUser);
 
 usersRouter.put("/:id", updateUserInfo);
+
+usersRouter.post("/:id/follow", authentication, follow);
 
 //export Router
 module.exports = usersRouter;
