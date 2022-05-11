@@ -144,17 +144,49 @@ const deleteTweetById = async (req, res) => {
   }
 };
 
-
-//will handle resulut to deal with , when clicked on user should get all the info to show it 
+//will handle resulut to deal with , when clicked on user should get all the info to show it
 
 const getAllTweetByUser = async (req, res) => {
   let id = req.params.id;
 
   try {
+    // const result = await tweetModel
+    //   .find({ userId: id })
+    //   .populate("userId", "-password");
     const result = await tweetModel
       .find({ userId: id })
-      .populate("userId", "-password");
-    // maybe will exclude email
+      .populate({
+        path: "userId",
+        select: "userName proffileImage coverImage following followers",
+        populate: [
+          {
+            path: "following",
+            model: "User",
+            select: "userName proffileImage",
+          },
+          {
+            path: "followers",
+            model: "User",
+            select: "userName proffileImage",
+          },
+        ],
+      })
+      .populate({
+        path: "comments",
+        populate: [
+          {
+            path: "commenter",
+            model: "User",
+            select: "userName proffileImage",
+          },
+        ],
+      });
+
+    // got followers , following (userName and profileImage)
+    //need to get comments and commenter .(Done , just need to add followers to the user to check it)
+    //Done . 
+
+
     res.status(201).json({
       success: true,
       message: `All tweets By ${id} `,
