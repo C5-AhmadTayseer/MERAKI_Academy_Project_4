@@ -1,23 +1,43 @@
-import React from "react";
+import React, { useState, useEffect, createContext } from "react";
 import "./App.css";
 import Register from "./components/Register";
+import Login from "./components/Login";
 
 import { Routes, Route, Link } from "react-router-dom";
 
+export const isLoggedInContext = createContext();
+
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const localStorageToken = JSON.parse(localStorage.getItem("token"));
+    if (localStorageToken) {
+      setIsLoggedIn(true);
+      setToken(localStorageToken);
+      console.log(token , "UseEffect in App");
+      return
+    }
+    console.log("There's No Token in LocalStorage");
+  }, []);
+
   return (
     <div className="App">
-      <h1>Hello world</h1>
-      {/* Links just for testeing */}
+      <isLoggedInContext.Provider value={{ setIsLoggedIn, token }}>
+        <h1>Login Test {isLoggedIn + ""}</h1>
+        {/* Links just for testeing */}
 
-      <Link to="/register">Register</Link>
-      <Link to="/login">Login</Link>
-      <Link to="/home">home</Link>
-      {/* side Bar , to be fixed before routes?  */}
+        <Link to="/register">Register</Link>
+        <Link to="/login">Login</Link>
+        <Link to="/home">home</Link>
+        {/* side Bar , to be fixed before routes?  */}
 
-      <Routes>
-        <Route path="/register" element={<Register />}></Route>
-      </Routes>
+        <Routes>
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+        </Routes>
+      </isLoggedInContext.Provider>
     </div>
   );
 }
