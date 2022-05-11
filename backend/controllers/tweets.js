@@ -34,7 +34,25 @@ const getAllTweets = async (req, res) => {
     // populated userId to can use the informations like images , username when show all tweets ,
     const result = await tweetModel
       .find({})
-      .populate("userId", "-password -email");
+      .populate(
+        "userId",
+        "userName profileImage"
+        // {
+        //   path:"userId",
+        //   select:"userName proffileImage"
+        // }
+      )
+      .populate({
+        path: "comments",
+        populate: 
+          {
+            path: "commenter",
+            select: "userName profileImage",
+          },
+        
+      });
+        // will populate likes when make it . 
+
     res.json(result);
   } catch (err) {
     res.json(err);
@@ -184,8 +202,7 @@ const getAllTweetByUser = async (req, res) => {
 
     // got followers , following (userName and profileImage)
     //need to get comments and commenter .(Done , just need to add followers to the user to check it)
-    //Done . 
-
+    //Done .
 
     res.status(201).json({
       success: true,
