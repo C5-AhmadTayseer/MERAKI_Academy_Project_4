@@ -37,6 +37,36 @@ const addToBookMark = async (req, res) => {
   }
 };
 
+const removeFromBookMark = async (req, res) => {
+  const signInUser = req.token.userId;
+
+  const params = req.params.id;
+
+  try {
+    const result = await userModel.updateMany(
+      { _id: signInUser },
+      {
+        $pull: { bookMark: params },
+      },
+      { new: true }
+    );
+    console.log(result, "delete BookMark");
+
+    res.status(200).json({
+      success: true,
+      message: "tweet deleted from Bookmark",
+    });
+  } catch (err) {
+    console.log(err, "deleteBookMark Err");
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+      err: err.message,
+    });
+  }
+};
+
 module.exports = {
   addToBookMark,
+  removeFromBookMark,
 };
