@@ -82,6 +82,9 @@ const follow = async (req, res) => {
   }
 };
 
+
+//the unfollow will be the same with pull operator instead of push ....
+
 const unFollow = async (req, res) => {
   const params = req.params.id;
 
@@ -112,6 +115,7 @@ const unFollow = async (req, res) => {
       return res.status(201).json({
         success: true,
         message: "Removed successfully",
+        process:`Id=>${signInUser} unfollow=>${params}`
       });
     }
   } catch (err) {
@@ -121,9 +125,22 @@ const unFollow = async (req, res) => {
     });
   }
 };
+/* response even when deleted and make a request again (can handle by check modifiedCount), ({
+  acknowledged: true,
+  modifiedCount: 0,
+  upsertedId: null,
+  upsertedCount: 0,
+  matchedCount: 1
+}  removed from Follower
 
-//the unfollow will be the same with pull operator instead of push ....
-
+{
+  acknowledged: true,
+  modifiedCount: 0,
+  upsertedId: null,
+  upsertedCount: 0,
+  matchedCount: 1
+} removed from Following
+)
 /*
 const follow = async (req, res) => {
   const userId = req.params.id;

@@ -25,7 +25,7 @@ usersRouter.put("/:id", updateUserInfo);
 
 usersRouter.post("/:id/follow", authentication, follow);
 
-usersRouter.put("/:id/follow", authentication, unFollow);
+usersRouter.delete("/:id/follow", authentication, unFollow);
 
 //export Router
 module.exports = usersRouter;
