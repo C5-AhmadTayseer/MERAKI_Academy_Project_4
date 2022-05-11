@@ -144,6 +144,9 @@ const deleteTweetById = async (req, res) => {
   }
 };
 
+
+//will handle resulut to deal with , when clicked on user should get all the info to show it 
+
 const getAllTweetByUser = async (req, res) => {
   let id = req.params.id;
 
