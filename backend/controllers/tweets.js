@@ -30,7 +30,7 @@ const createNewTweet = async (req, res) => {
 //======================================
 
 const getAllTweets = async (req, res) => {
-  const signInUserId = req.token.userId
+  const signInUserId = req.token.userId;
   try {
     // populated userId to can use the informations like images , username when show all tweets ,
     const result = await tweetModel
@@ -45,17 +45,14 @@ const getAllTweets = async (req, res) => {
       )
       .populate({
         path: "comments",
-        populate: 
-          {
-            path: "commenter",
-            select: "userName profileImage",
-          },
-        
+        populate: {
+          path: "commenter",
+          select: "userName profileImage",
+        },
       });
-        // will populate likes when make it . 
+    // will populate likes when make it .
 
-    res.json({tweets:result , 
-    signInUserId:signInUserId});
+    res.json({ tweets: result, signInUserId: signInUserId });
   } catch (err) {
     res.json(err);
   }
@@ -107,12 +104,23 @@ const updateTweet = async (req, res) => {
   const { tweetBody } = req.body;
 
   try {
-    const result = await tweetModel.findByIdAndUpdate(
-      id,
+    const result = await tweetModel
+      .findByIdAndUpdate(
+        id,
 
-      { tweetBody },
-      { new: true }
-    );
+        { tweetBody },
+        { new: true }
+      )
+      .populate("userId", "userName profileImage")
+      .populate({
+        path: "comments",
+        populate: [
+          {
+            path: "commenter",
+            select:"userName profileImage"
+          },
+        ],
+      });
 
     res.status(201).json({
       success: true,

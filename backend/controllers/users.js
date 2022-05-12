@@ -3,6 +3,12 @@ const usersModel = require("../models/usersShema");
 const getUserById = async (req, res) => {
   id = req.params.id;
 
+
+  //populate , then get the user to check his bookmark if includes tweet id inside bookmark array  .? 
+
+  //or get it by using get book mark for user .. 
+
+  
   try {
     const result = await usersModel.findById(id);
     // console.log(result); want to remove password from result
