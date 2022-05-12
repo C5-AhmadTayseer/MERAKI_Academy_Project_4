@@ -7,6 +7,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
 
   const addUser = () => {
+    
     const newUser = { userName, password, email };
     console.log(newUser);
     axios

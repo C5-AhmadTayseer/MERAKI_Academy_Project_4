@@ -79,7 +79,7 @@ const getAllBookMarkTweets = async (req, res) => {
         {
           path: "userId",
           model: "User",
-          select: "userName proffileImage",
+          select: "userName profileImage",
         },
         {
           path: "comments",
@@ -87,7 +87,7 @@ const getAllBookMarkTweets = async (req, res) => {
           populate: {
             path: "commenter",
             model: "User",
-            select: "userName proffileImage",
+            select: "userName profileImage",
           },
         },
       ],

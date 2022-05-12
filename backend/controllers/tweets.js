@@ -30,6 +30,7 @@ const createNewTweet = async (req, res) => {
 //======================================
 
 const getAllTweets = async (req, res) => {
+  const signInUserId = req.token.userId
   try {
     // populated userId to can use the informations like images , username when show all tweets ,
     const result = await tweetModel
@@ -53,7 +54,8 @@ const getAllTweets = async (req, res) => {
       });
         // will populate likes when make it . 
 
-    res.json(result);
+    res.json({tweets:result , 
+    signInUserId:signInUserId});
   } catch (err) {
     res.json(err);
   }
@@ -175,17 +177,17 @@ const getAllTweetByUser = async (req, res) => {
       .find({ userId: id })
       .populate({
         path: "userId",
-        select: "userName proffileImage coverImage following followers",
+        select: "userName profileImage coverImage following followers",
         populate: [
           {
             path: "following",
             model: "User",
-            select: "userName proffileImage",
+            select: "userName profileImage",
           },
           {
             path: "followers",
             model: "User",
-            select: "userName proffileImage",
+            select: "userName profileImage",
           },
         ],
       })
@@ -195,7 +197,7 @@ const getAllTweetByUser = async (req, res) => {
           {
             path: "commenter",
             model: "User",
-            select: "userName proffileImage",
+            select: "userName profileImage",
           },
         ],
       });

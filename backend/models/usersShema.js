@@ -5,7 +5,7 @@ const users = new mongoos.Schema({
   userName: { type: String, required: true },
   password: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  proffileImage: { type: String },
+  profileImage: { type: String },
   coverImage: { type: String },
   following: [{ type: mongoos.Schema.Types.ObjectId, ref: "User" }],
   followers: [{ type: mongoos.Schema.Types.ObjectId, ref: "User" }],

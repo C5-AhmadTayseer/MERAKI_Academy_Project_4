@@ -2,6 +2,7 @@ import React, { useState, useEffect, createContext } from "react";
 import "./App.css";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import Home from "./components/Home";
 
 import { Routes, Route, Link } from "react-router-dom";
 
@@ -16,8 +17,8 @@ function App() {
     if (localStorageToken) {
       setIsLoggedIn(true);
       setToken(localStorageToken);
-      console.log(token , "UseEffect in App");
-      return
+      console.log(token, "UseEffect in App");
+      return;
     }
     console.log("There's No Token in LocalStorage");
   }, []);
@@ -36,6 +37,7 @@ function App() {
         <Routes>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/home" element={<Home />}></Route>
         </Routes>
       </isLoggedInContext.Provider>
     </div>

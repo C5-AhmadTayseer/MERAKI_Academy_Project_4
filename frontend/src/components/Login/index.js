@@ -17,11 +17,11 @@ const Login = () => {
     axios
       .post("http://localhost:5000/login", user)
       .then((result) => {
-        // console.log(result);
+        console.log(result);
         console.log(result.data.token, "Sign In");
         setIsLoggedIn(true);
         localStorage.setItem("token", JSON.stringify(result.data.token));
-        // navigate("/home")  << will use it when make home component 
+        navigate("/home")  
       })
       .catch((err) => {
         console.log(err, "Sign In Error");

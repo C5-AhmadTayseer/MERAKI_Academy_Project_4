@@ -57,13 +57,13 @@ const deleteUser = async (req, res) => {
 const updateUserInfo = async (req, res) => {
   let id = req.params.id;
   //  ========
-  const { proffileImage, coverImage } = req.body;
+  const { profileImage, coverImage } = req.body;
 
   try {
     const result = await usersModel.findByIdAndUpdate(
       id,
       {
-        proffileImage,
+        profileImage,
         coverImage,
       },
       { new: true }

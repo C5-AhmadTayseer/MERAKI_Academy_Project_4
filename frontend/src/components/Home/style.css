@@ -1,0 +1,24 @@
+.test1 { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.test1 img { 
+width: 30px;
+height: 30px;
+border-radius: 100%;
+}
+
+.tweetInfo { 
+    display: flex;
+    flex-direction: column;
+    background-color: floralwhite;
+}
+
+.CommentsSection { 
+    display: flex;
+    flex-direction: column;
+    background-color: blanchedalmond;
+    border-bottom: 1px solid;
+}
