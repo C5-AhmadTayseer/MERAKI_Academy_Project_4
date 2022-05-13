@@ -11,18 +11,16 @@ const AllTweets = () => {
   const { setAllTweet, allTweet } = useContext(isLoggedInContext);
 
   // i got all the signin user info using backEnd with all tweets ,(to take bookmark array and later userName and profile photo to use it .)
-
   const [userBookMark, setUserBookMark] = useState("");
   const [userFollower, setUserFollower] = useState("");
-   
-  //   const allTweet = allTweet;
-  //   const ALL = AllTweets
-  //will use useEffect to make the getAllTweets run when page runder
+
+  //info for the loggend in user (userName , pforileImage )
+  const [loggedInUserName, setLoggedInUserName] = useState("");
+  const [loggedInProfileImage, setLoggedInProfileImage] = useState("");
+
   const navigate = useNavigate();
   const TOKEN = JSON.parse(localStorage.getItem("token"));
-  //   const [tweets, setTweets] = useState("");
 
-  //   context ..?
   const [signInUserId, setSignInUserId] = useState("");
   console.log("in alltweet app:", allTweet);
   useEffect(() => {
@@ -43,12 +41,14 @@ const AllTweets = () => {
         // console.log(result.data.tweets);
         setAllTweet(result.data.tweets);
         // setTweets(result.data.tweets);
-        //--
         // console.log(result, "AFTER MODIFY BackEnd");
         // console.log(result.data.newResult.bookMark);
-        setUserFollower(result.data.newResult.following)
-        console.log("xxxxxxxxxxxxxxxx", result.data.newResult.followers);
+        setUserFollower(result.data.newResult.following);
+        // console.log("xxxxxxxxxxxxxxxx", result.data.newResult.followers); << i was mistake with making it .followers T_T
         setUserBookMark(result.data.newResult.bookMark);
+        //-- to get extra info abuot SignIn user to use it ..
+        setLoggedInUserName(result.data.newResult.userName);
+        setLoggedInProfileImage(result.data.newResult.profileImage);
       })
       .catch((err) => {
         console.log(err);
@@ -69,20 +69,19 @@ const AllTweets = () => {
       {console.log(allTweet, "============")}
       {allTweet &&
         allTweet.map((element, index) => {
-          // console.log("element:",el)
-          // condition in button section to detrmine if will make a delete and update
-          //   let tweetPublisher = element.userId._id;
-          console.log(userFollower,"Follow ----$$");
-          // console.log(signInUserId);
+          // Test Values ,,
+          // console.log(userFollower, "Follow ----$$");
+          // console.log(loggedInUserName, "USERNAME");
+          // console.log(loggedInProfileImage, "PROFILE IMAGE");
           return (
             <div className="result-Container">
               <div className="tweetInfo">
                 <div className="test1">
-                  <Follow 
-                  PublisherId={element.userId._id} 
-                  userFollower={userFollower}
-                  setUserFollower={setUserFollower}
-                  signInUserId={signInUserId}
+                  <Follow
+                    PublisherId={element.userId._id}
+                    userFollower={userFollower}
+                    setUserFollower={setUserFollower}
+                    signInUserId={signInUserId}
                   />
                   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg" />
                   <p> {element.userId.userName} </p>
@@ -91,6 +90,8 @@ const AllTweets = () => {
               </div>
 
               {/* Comments component ...  */}
+
+              {/* <Need to Modifiy To be >div On Click will open comment section . */}
               {element.comments.map((el, ind) => {
                 // comment component
                 return (
@@ -109,9 +110,19 @@ const AllTweets = () => {
                 signInUserId={signInUserId}
                 userBookMark={userBookMark}
                 setUserBookMark={setUserBookMark}
+                // will use another proprs , to pass it to create comment (will make it as a button on click appear popUp)
+
+                //Publisher Info
+                userNamePublisher={element.userId.userName}
+                PublisherIdProfileImg={element.userId.profileImage}
+                tweetContent={element.tweetBody}
+                //logged in info
+                loggedInUserName={loggedInUserName}
+                loggedInProfileImage={loggedInProfileImage}
+
               />
             </div>
-          );
+          )
         })}
     </div>
   );

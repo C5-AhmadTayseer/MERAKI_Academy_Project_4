@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 
+import CreateComment from "../CreateComment/CreateCommet";
 import { isLoggedInContext } from "../../App";
 
 const Buttons = ({
@@ -12,13 +13,21 @@ const Buttons = ({
   setBookMarkTweet,
   userBookMark,
   setUserBookMark,
+  userNamePublisher,
+  PublisherIdProfileImg,
+  tweetContent,
+  loggedInUserName,
+  loggedInProfileImage,
 }) => {
   // console.log(props);
-  console.log(bookMarkTweet);
+  // console.log(bookMarkTweet);
   // console.log(userBookMark);
   const { allTweet, setAllTweet } = useContext(isLoggedInContext);
   const [isAddedToBookMark, setIsAddedToBookMark] = useState(false);
   const [tweetBody, setTweetBody] = useState("");
+  // temp state will remove it
+  const [isInCommentMode, setIsInCommentMode] = useState(false);
+
   const TOKEN = JSON.parse(localStorage.getItem("token"));
 
   //(function , TOKEN) >>
@@ -181,6 +190,27 @@ const Buttons = ({
             add To book mark
           </button>
         )}
+        <div className="CreateComment">
+          <button
+            onClick={() => {
+              setIsInCommentMode(!isInCommentMode);
+            }}
+          >
+            create Comment
+          </button>
+          {isInCommentMode ? (
+            <CreateComment
+              userNamePublisher={userNamePublisher}
+              PublisherIdProfileImg={PublisherIdProfileImg}
+              tweetContent={tweetContent}
+              loggedInUserName={loggedInUserName}
+              loggedInProfileImage={loggedInProfileImage}
+              tweetId={tweetId}
+            />
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     </div>
   );

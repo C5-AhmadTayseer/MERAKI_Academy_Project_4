@@ -27,9 +27,19 @@ const createNewComment = async (req, res) => {
         $push: { comments: response },
       },
       { new: true }
-    );
+    ).populate("userId", "userName profileImage")
+    .populate({
+      path: "comments",
+      populate: [
+        {
+          path: "commenter",
+          select: "userName profileImage",
+        },
+      ],
+    });
+    
     console.log(result, "Result");
-    res.json(response);
+    res.json(result);
   } catch (err) {
     console.log(err);
   }
