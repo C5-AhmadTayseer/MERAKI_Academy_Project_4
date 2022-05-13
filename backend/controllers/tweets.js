@@ -1,4 +1,5 @@
 const tweetModel = require("../models/tweetsSchema");
+const userModel = require("../models/usersShema");
 
 const createNewTweet = async (req, res) => {
   const { tweetBody, comments } = req.body;
@@ -7,7 +8,8 @@ const createNewTweet = async (req, res) => {
 
   const newTweet = new tweetModel({ userId, tweetBody, comments });
   try {
-    const result = await newTweet.save();
+    let result = await newTweet.save();
+    result = await result.populate("userId")
     // for test .
     //  const test = await result.populate("userId" , "userName")
     // console.log(test);
@@ -50,11 +52,27 @@ const getAllTweets = async (req, res) => {
           select: "userName profileImage",
         },
       });
-    // will populate likes when make it .
 
-    res.json({ tweets: result, signInUserId: signInUserId });
+    if (result) {
+      // To Solve addToBookMark after reloading the page ....
+      try {
+        const loggedInUser = await userModel.findById(signInUserId).select("-password")
+        res.status(201).json({
+          tweets: result,
+          signInUserId: signInUserId,
+          newResult: loggedInUser,
+        });
+      } catch (err) {
+        res.json({
+          message: "EROR IN FINDALLTWEETS",
+          err: err,
+        });
+      }
+    }
+
+    // will populate likes when make it .
   } catch (err) {
-    res.json(err);
+    res.status(500).json(err);
   }
 };
 
@@ -117,7 +135,7 @@ const updateTweet = async (req, res) => {
         populate: [
           {
             path: "commenter",
-            select:"userName profileImage"
+            select: "userName profileImage",
           },
         ],
       });

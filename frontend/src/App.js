@@ -14,6 +14,7 @@ export const isLoggedInContext = createContext();
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState("");
+  const [signInUser, setSignInUserId] = useState("");
   const [allTweet, setAllTweet] = useState();
 
   useEffect(() => {
@@ -31,7 +32,13 @@ function App() {
     <div className="App">
       {/* <allTweetContext.Provider></allTweetContext.Provider> */}
       <isLoggedInContext.Provider
-        value={{ setIsLoggedIn, token, setAllTweet, allTweet }}
+        value={{
+          setIsLoggedIn,
+          setAllTweet,
+          allTweet,
+          signInUser,
+          setSignInUserId,
+        }}
       >
         {console.log("app", allTweet)}
         <h1>Login Test {isLoggedIn + ""}</h1>
@@ -40,14 +47,14 @@ function App() {
         <Link to="/register">Register</Link>
         <Link to="/login">Login</Link>
         <Link to="/home">home</Link>
-        {/* <Link to="bookmark">BookMark</Link> */}
+        <Link to="bookmark">BookMark</Link>
         {/* side Bar , to be fixed before routes?  */}
 
         <Routes>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/home" element={<Home />}></Route>
-          {/* <Route path="/bookmark" element={<BookMark />}></Route> */}
+          <Route path="/bookmark" element={<BookMark />}></Route>
         </Routes>
       </isLoggedInContext.Provider>
     </div>

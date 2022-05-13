@@ -52,6 +52,13 @@ const removeFromBookMark = async (req, res) => {
       { new: true }
     );
     console.log(result, "delete BookMark");
+// to solve remove to bookmark after refresh
+    if (result.modifiedCount === 0) {
+      console.log("==== inside deleteBookMark BE");
+      return res.status(404).json({
+        message: "NOT FOUND",
+      });
+    }
 
     res.status(200).json({
       success: true,
@@ -102,7 +109,11 @@ const getAllBookMarkTweets = async (req, res) => {
 
     // result.populate
 
-    res.status(201).json(result.bookMark);
+    res.status(201).json({
+      success: true,
+      tweets: result.bookMark,
+      signInUserId: signInUser,
+    });
   } catch (err) {
     res.status(500).json({
       success: false,

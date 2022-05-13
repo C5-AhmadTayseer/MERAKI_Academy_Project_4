@@ -1,9 +1,21 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 
-import { isLoggedInContext } from "../../../App";
+import { isLoggedInContext } from "../../App";
 
-const Buttons = ({ tweetId, tweetPublisher, signInUserId }) => {
+const Buttons = ({
+  tweetId,
+  tweetPublisher,
+  signInUserId,
+  isBookMarkTweet,
+  bookMarkTweet,
+  setBookMarkTweet,
+  userBookMark,
+  setUserBookMark,
+}) => {
+  // console.log(props);
+  console.log(bookMarkTweet);
+  // console.log(userBookMark);
   const { allTweet, setAllTweet } = useContext(isLoggedInContext);
   const [isAddedToBookMark, setIsAddedToBookMark] = useState(false);
   const [tweetBody, setTweetBody] = useState("");
@@ -53,14 +65,15 @@ const Buttons = ({ tweetId, tweetPublisher, signInUserId }) => {
         },
       })
       .then((result) => {
-        const mappedArr = allTweet.filter((element) => {
+        const filterArray = allTweet.filter((element) => {
           {
             // return result.data.tweet;
             return element._id !== tweetId;
           }
         });
-        // console.log(mappedArr);
-        setAllTweet([...mappedArr]);
+        console.log(filterArray, "FFFilter");
+        // setAllTweet([...filterArray]);
+        setAllTweet(filterArray);
       });
   };
 
@@ -95,7 +108,18 @@ const Buttons = ({ tweetId, tweetPublisher, signInUserId }) => {
       })
       .then((result) => {
         console.log("Remove == bookMark Rwsult", result);
+        // console.log(bookMarkTweet, "Before Filter");
+        console.log(bookMarkTweet);
+        if (bookMarkTweet) {
+          const filterBookMark = bookMarkTweet.filter((element) => {
+            return tweetId !== element._id;
+          });
+          setBookMarkTweet(filterBookMark);
+          setUserBookMark(filterBookMark);
+        }
         setIsAddedToBookMark(false);
+
+        // console.log(filterBookMark, "AFTER FILTER");
       })
       .catch((err) => {
         console.log("Remove == BookMark Error", err);
@@ -133,8 +157,11 @@ const Buttons = ({ tweetId, tweetPublisher, signInUserId }) => {
       <div>
         {/* BookMark and >>createComment<<sperated component    */}
 
-{/*> Add || to check if it's om bookmark <..(it's not working on twitter , after refresh still (BookMark) => but on click message said it's already in book mark , (can handle it ..))  */}
-        {isAddedToBookMark ? (
+        {/* Add || to check if it's om bookmark ..(it's not working on twitter , after refresh still (BookMark) => but on click message said it's already in book mark , (can handle it ..))  */}
+        {/* {isAddedToBookMark  ? ( */}
+        {isAddedToBookMark ||
+        isBookMarkTweet ||
+        userBookMark.includes(tweetId) ? (
           <button
             onClick={(e) => {
               removeFromBookMark(tweetId);

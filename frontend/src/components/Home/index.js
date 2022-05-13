@@ -2,8 +2,8 @@ import "./style.css";
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
 import AllTweets from "../allTweets/";
+import PostTweet from "../PostTweet/index"
 // import { isLoggedInContext } from "../../App";
 
 const Home = () => {
@@ -38,6 +38,7 @@ const Home = () => {
 
   return (
     <div>
+      <PostTweet />
       <h2>Home Page</h2>
       {/* classname just for test */}
       <AllTweets />
