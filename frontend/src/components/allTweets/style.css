@@ -1,0 +1,78 @@
+.tweets-Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: solid 2px var(--SubColor);
+  width: 50%;
+  margin-top: 100px;
+  height: calc(100vh);
+  /* to center it  */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+}
+
+.tweets-Container .oneTweet {
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  border-top: 1px solid var(--SubColor);
+  border-bottom: 1px solid var(--SubColor);
+  justify-content: start;
+  align-items: center;
+  padding: 10px;
+  line-height: 20px;
+}
+
+.oneTweet .publisherImg {
+  width: 48px;
+  height: 100%;
+  margin-right: 12px;
+}
+.oneTweet .publisherImg img {
+  width: 48px;
+  height: 48px;
+  border-radius: 100%;
+}
+
+.oneTweet .Container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 100%;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.oneTweet p {
+  text-align: left;
+}
+
+.oneTweet .displayName {
+  width: 100%;
+  height: 10%;
+  margin-top: 5px;
+  /* margin-top: 5px; */
+}
+
+.oneTweet .tweetBody {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.oneTweet .tweetbtn {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 30%;
+}
+
+.oneTweet .tweetbtn button {
+}

@@ -3,8 +3,18 @@
     padding: 0;
   }
   
+:root { 
+  --mainColor : #ffffff ;
+  --mainColor2: rgb(15 20 25);
+  --SubColor : rgb(239 243 244);
+  --likeColor:rgb(249 24 128) ;
+  --blueColor1 : #1d9bf0;
+  --blueColor2 : #8ecdf8;
+
+}
+
   body { 
-   
+   background-color: var(--mainColor);
   }
   .App {
     text-align: center;

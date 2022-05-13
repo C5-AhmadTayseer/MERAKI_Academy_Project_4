@@ -37,8 +37,8 @@ const CreateComment = ({
           }
           return element;
         });
-        console.log(result, "CCCCCCCCCCC Added");
-        console.log(mappedArr , "NEEEEEEEEEEW");
+        // console.log(result, "CCCCCCCCCCC Added");
+        // console.log(mappedArr , "NEEEEEEEEEEW");
         setAllTweet([...mappedArr]);
       })
       .catch((err) => {

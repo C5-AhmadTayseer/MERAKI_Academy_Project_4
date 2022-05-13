@@ -1,3 +1,4 @@
+import "./style.css";
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -65,7 +66,7 @@ const AllTweets = () => {
   // console.log(userBookMark, "BOOKMARK FOR USER");
 
   return (
-    <div className="container">
+    <div className="tweets-Container">
       {console.log(allTweet, "============")}
       {allTweet &&
         allTweet.map((element, index) => {
@@ -74,20 +75,44 @@ const AllTweets = () => {
           // console.log(loggedInUserName, "USERNAME");
           // console.log(loggedInProfileImage, "PROFILE IMAGE");
           return (
-            <div className="result-Container">
-              <div className="tweetInfo">
-                <div className="test1">
-                  <Follow
-                    PublisherId={element.userId._id}
-                    userFollower={userFollower}
-                    setUserFollower={setUserFollower}
-                    signInUserId={signInUserId}
-                  />
+            <>
+              <div className="oneTweet">
+                <div className="publisherImg">
                   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg" />
-                  <p> {element.userId.userName} </p>
                 </div>
-                <p>Tweet Body {element.tweetBody}</p>
+
+                <div className="Container">
+                  <div className="displayName">
+                    <p> {element.userId.userName} </p>
+                  </div>
+                  <div className="tweetBody">
+                  <p>Tweet Body {element.tweetBody}</p>
+                  </div>
+                  {/* have className tweetbtn in Buttons component */}
+                    <Buttons
+                      tweetId={element._id}
+                      tweetPublisher={element.userId._id}
+                      signInUserId={signInUserId}
+                      userBookMark={userBookMark}
+                      setUserBookMark={setUserBookMark}
+                      // will use another proprs , to pass it to create comment (will make it as a button on click appear popUp)
+
+                      //Publisher Info
+                      userNamePublisher={element.userId.userName}
+                      PublisherIdProfileImg={element.userId.profileImage}
+                      tweetContent={element.tweetBody}
+                      //logged in info
+                      loggedInUserName={loggedInUserName}
+                      loggedInProfileImage={loggedInProfileImage}
+                    />
+                </div>
               </div>
+              <Follow
+                PublisherId={element.userId._id}
+                userFollower={userFollower}
+                setUserFollower={setUserFollower}
+                signInUserId={signInUserId}
+              />
 
               {/* Comments component ...  */}
 
@@ -103,26 +128,8 @@ const AllTweets = () => {
                 );
               })}
               {/* Buttons */}
-
-              <Buttons
-                tweetId={element._id}
-                tweetPublisher={element.userId._id}
-                signInUserId={signInUserId}
-                userBookMark={userBookMark}
-                setUserBookMark={setUserBookMark}
-                // will use another proprs , to pass it to create comment (will make it as a button on click appear popUp)
-
-                //Publisher Info
-                userNamePublisher={element.userId.userName}
-                PublisherIdProfileImg={element.userId.profileImage}
-                tweetContent={element.tweetBody}
-                //logged in info
-                loggedInUserName={loggedInUserName}
-                loggedInProfileImage={loggedInProfileImage}
-
-              />
-            </div>
-          )
+            </>
+          );
         })}
     </div>
   );

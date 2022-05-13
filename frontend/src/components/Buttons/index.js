@@ -136,9 +136,9 @@ const Buttons = ({
   };
 
   return (
-    <div>
+    <div className="tweetbtn">
       {tweetPublisher === signInUserId ? (
-        <div className="buttons">
+        <>
           <input
             placeholder="Update"
             onChange={(e) => {
@@ -159,59 +159,56 @@ const Buttons = ({
           >
             Delete
           </button>
-        </div>
+        </>
       ) : (
         ""
       )}
-      <div>
-        {/* BookMark and >>createComment<<sperated component    */}
 
-        {/* Add || to check if it's om bookmark ..(it's not working on twitter , after refresh still (BookMark) => but on click message said it's already in book mark , (can handle it ..))  */}
-        {/* {isAddedToBookMark  ? ( */}
-        {isAddedToBookMark ||
-        isBookMarkTweet ||
-        userBookMark.includes(tweetId) ? (
-          <button
-            onClick={(e) => {
-              removeFromBookMark(tweetId);
-            }}
-          >
-            Remve Frombook mark
-          </button>
-        ) : (
-          <button
-            onClick={(e) => {
-              e.target = tweetId;
-              console.log(e.target, "EE");
-              console.log(tweetId, "Add =====");
-              addToBookMark(tweetId);
-            }}
-          >
-            add To book mark
-          </button>
-        )}
-        <div className="CreateComment">
-          <button
-            onClick={() => {
-              setIsInCommentMode(!isInCommentMode);
-            }}
-          >
-            create Comment
-          </button>
-          {isInCommentMode ? (
-            <CreateComment
-              userNamePublisher={userNamePublisher}
-              PublisherIdProfileImg={PublisherIdProfileImg}
-              tweetContent={tweetContent}
-              loggedInUserName={loggedInUserName}
-              loggedInProfileImage={loggedInProfileImage}
-              tweetId={tweetId}
-            />
-          ) : (
-            ""
-          )}
-        </div>
-      </div>
+      {/* BookMark and >>createComment<<sperated component    */}
+
+      {/* Add || to check if it's om bookmark ..(it's not working on twitter , after refresh still (BookMark) => but on click message said it's already in book mark , (can handle it ..))  */}
+      {/* {isAddedToBookMark  ? ( */}
+      {isAddedToBookMark ||
+      isBookMarkTweet ||
+      userBookMark.includes(tweetId) ? (
+        <button
+          onClick={(e) => {
+            removeFromBookMark(tweetId);
+          }}
+        >
+          Remve Frombook mark
+        </button>
+      ) : (
+        <button
+          onClick={(e) => {
+            e.target = tweetId;
+            console.log(e.target, "EE");
+            console.log(tweetId, "Add =====");
+            addToBookMark(tweetId);
+          }}
+        >
+          add To book mark
+        </button>
+      )}
+      <button
+        onClick={() => {
+          setIsInCommentMode(!isInCommentMode);
+        }}
+      >
+        create Comment
+      </button>
+      {isInCommentMode ? (
+        <CreateComment
+          userNamePublisher={userNamePublisher}
+          PublisherIdProfileImg={PublisherIdProfileImg}
+          tweetContent={tweetContent}
+          loggedInUserName={loggedInUserName}
+          loggedInProfileImage={loggedInProfileImage}
+          tweetId={tweetId}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };
