@@ -4,7 +4,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import BookMark from "./components/BookMark";
-
+import LeftSideBar from "./components/SideBar-left";
 import { Routes, Route, Link } from "react-router-dom";
 
 export const isLoggedInContext = createContext();
@@ -43,11 +43,11 @@ function App() {
         {console.log("app", allTweet)}
         <h1>Login Test {isLoggedIn + ""}</h1>
         {/* Links just for testeing */}
-
-        <Link to="/register">Register</Link>
+        <LeftSideBar />
+        {/* <Link to="/register">Register</Link>
         <Link to="/login">Login</Link>
         <Link to="/home">home</Link>
-        <Link to="bookmark">BookMark</Link>
+        <Link to="bookmark">BookMark</Link> */}
         {/* side Bar , to be fixed before routes?  */}
 
         <Routes>
