@@ -10,14 +10,12 @@ const {
 //follow Controller
 const { follow, unFollow } = require("../controllers/follow");
 
-
-
 //authentication
 const authentication = require("../middleware/authentication");
 
 const usersRouter = express.Router();
 
-usersRouter.get("/:id", getUserById);
+usersRouter.get("/:id", authentication, getUserById);
 
 usersRouter.delete("/:id", deleteUser);
 

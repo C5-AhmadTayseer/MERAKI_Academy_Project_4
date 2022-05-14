@@ -9,7 +9,7 @@ const createNewTweet = async (req, res) => {
   const newTweet = new tweetModel({ userId, tweetBody, comments });
   try {
     let result = await newTweet.save();
-    result = await result.populate("userId")
+    result = await result.populate("userId");
     // for test .
     //  const test = await result.populate("userId" , "userName")
     // console.log(test);
@@ -56,7 +56,9 @@ const getAllTweets = async (req, res) => {
     if (result) {
       // To Solve addToBookMark after reloading the page ....
       try {
-        const loggedInUser = await userModel.findById(signInUserId).select("-password")
+        const loggedInUser = await userModel
+          .findById(signInUserId)
+          .select("-password");
         res.status(201).json({
           tweets: result,
           signInUserId: signInUserId,
@@ -194,7 +196,8 @@ const deleteTweetById = async (req, res) => {
 
 const getAllTweetByUser = async (req, res) => {
   let id = req.params.id;
-
+  const signInUserId = req.token.userId;
+  // modify for FE , need to get logged in userId
   try {
     // const result = await tweetModel
     //   .find({ userId: id })
@@ -227,16 +230,28 @@ const getAllTweetByUser = async (req, res) => {
           },
         ],
       });
-
     // got followers , following (userName and profileImage)
     //need to get comments and commenter .(Done , just need to add followers to the user to check it)
     //Done .
-
-    res.status(201).json({
-      success: true,
-      message: `All tweets By ${id} `,
-      tweets: result,
-    });
+    // Modify to use Same Component in FE
+    if (result) {
+      // To Solve addToBookMark after reloading the page ....
+      try {
+        const loggedInUser = await userModel
+          .findById(signInUserId)
+          .select("-password");
+        res.status(201).json({
+          tweets: result,
+          signInUserId: signInUserId,
+          newResult: loggedInUser,
+        });
+      } catch (err) {
+        res.json({
+          message: "EROR IN FINDALL TWEETS FOR USER",
+          err: err,
+        });
+      }
+    }
   } catch (err) {
     // console.log(err);
     if (err.kind === "ObjectId") {

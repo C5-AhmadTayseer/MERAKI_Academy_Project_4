@@ -1,18 +1,13 @@
 const usersModel = require("../models/usersShema");
 
 const getUserById = async (req, res) => {
+  signInUserId = req.token.userId
   id = req.params.id;
 
-
-  //populate , then get the user to check his bookmark if includes tweet id inside bookmark array  .? 
-
-  //or get it by using get book mark for user .. 
-
-  
+ //Edit For FE , will modify result using populate and sending info about signin user using token . 
   try {
-    const result = await usersModel.findById(id);
+    const result = await usersModel.findById(id)
     // console.log(result); want to remove password from result
-
     res.status(200).json({
       success: true,
       message: `The user with ${id}`,
@@ -25,6 +20,8 @@ const getUserById = async (req, res) => {
         message: `The user is not found`,
       });
     }
+
+
     res.status(500).json({
       success: false,
       message: `Server Error`,
