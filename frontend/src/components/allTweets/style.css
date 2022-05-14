@@ -1,7 +1,7 @@
 .tweets-Container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   border: solid 2px var(--SubColor);
   width: 50%;
@@ -12,7 +12,7 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  padding: 10px;
+  padding: 0 10px 10px;
 }
 
 .tweets-Container .oneTweet {

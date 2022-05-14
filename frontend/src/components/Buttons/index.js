@@ -18,6 +18,8 @@ const Buttons = ({
   tweetContent,
   loggedInUserName,
   loggedInProfileImage,
+  setProfileTweets,
+  profilTweets,
 }) => {
   // console.log(props);
   // console.log(bookMarkTweet);
@@ -74,15 +76,24 @@ const Buttons = ({
         },
       })
       .then((result) => {
-        const filterArray = allTweet.filter((element) => {
-          {
+
+        if (allTweet) {
+          const filterArray = allTweet.filter((element) => {
             // return result.data.tweet;
             return element._id !== tweetId;
-          }
-        });
-        console.log(filterArray, "FFFilter");
+          });
+          setAllTweet(filterArray);
+          console.log(filterArray, "FFFilter");
+          console.log("aaaaaaaaa" , profilTweets);
+        }
+        if (profilTweets) {
+          console.log(profilTweets, "AFTER FILTER PROFILE ..");
+          const filterArrayForProfile = profilTweets.filter((element) => {
+            return element._id !== tweetId;
+          });
+          setProfileTweets(filterArrayForProfile);
+        }
         // setAllTweet([...filterArray]);
-        setAllTweet(filterArray);
       });
   };
 

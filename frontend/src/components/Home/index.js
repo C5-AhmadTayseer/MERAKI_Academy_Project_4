@@ -7,7 +7,6 @@ const Home = () => {
   return (
     <div>
       <PostTweet />
-      <h2>Home Page</h2>
       <AllTweets />
     </div>
   );

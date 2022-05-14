@@ -5,6 +5,8 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import BookMark from "./components/BookMark";
 import LeftSideBar from "./components/SideBar-left";
+import Profile from "./components/Profile";
+import FollowersSection from "./components/FollowersSection.js";
 import { Routes, Route, Link } from "react-router-dom";
 
 export const isLoggedInContext = createContext();
@@ -12,6 +14,11 @@ export const isLoggedInContext = createContext();
 // export const allTweetContext = createContext();
 
 function App() {
+//Test
+const [profileFollower, setProfileFollower] = useState("");
+const [profileFollowing, setProfileFollowing] = useState("");
+
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState("");
   const [signInUser, setSignInUserId] = useState("");
@@ -30,7 +37,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <allTweetContext.Provider></allTweetContext.Provider> */}
       <isLoggedInContext.Provider
         value={{
           setIsLoggedIn,
@@ -38,10 +44,14 @@ function App() {
           allTweet,
           signInUser,
           setSignInUserId,
+          // Test
+          profileFollower,
+          setProfileFollower,
+          profileFollowing,
+          setProfileFollowing
         }}
       >
         {console.log("app", allTweet)}
-        <h1>Login Test {isLoggedIn + ""}</h1>
         {/* Links just for testeing */}
         <LeftSideBar />
         {/* <Link to="/register">Register</Link>
@@ -55,6 +65,11 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/bookmark" element={<BookMark />}></Route>
+          <Route path="/profile/:id" element={<Profile />}></Route>
+          <Route
+            path="/followers"
+            element={FollowersSection}
+          ></Route>
         </Routes>
       </isLoggedInContext.Provider>
     </div>

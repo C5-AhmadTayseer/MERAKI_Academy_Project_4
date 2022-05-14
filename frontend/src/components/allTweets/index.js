@@ -78,7 +78,13 @@ const AllTweets = () => {
             <>
               <div className="oneTweet">
                 <div className="publisherImg">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg" />
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg"
+                    onClick={() => {
+                      // console.log(element,"{{{{{{{{"); < navigate to params
+                      navigate(`/profile/${element.userId._id}`);
+                    }}
+                  />
                 </div>
 
                 <div className="Container">
@@ -86,25 +92,25 @@ const AllTweets = () => {
                     <p> {element.userId.userName} </p>
                   </div>
                   <div className="tweetBody">
-                  <p>Tweet Body {element.tweetBody}</p>
+                    <p>Tweet Body {element.tweetBody}</p>
                   </div>
                   {/* have className tweetbtn in Buttons component */}
-                    <Buttons
-                      tweetId={element._id}
-                      tweetPublisher={element.userId._id}
-                      signInUserId={signInUserId}
-                      userBookMark={userBookMark}
-                      setUserBookMark={setUserBookMark}
-                      // will use another proprs , to pass it to create comment (will make it as a button on click appear popUp)
+                  <Buttons
+                    tweetId={element._id}
+                    tweetPublisher={element.userId._id}
+                    signInUserId={signInUserId}
+                    userBookMark={userBookMark}
+                    setUserBookMark={setUserBookMark}
+                    // will use another proprs , to pass it to create comment (will make it as a button on click appear popUp)
 
-                      //Publisher Info
-                      userNamePublisher={element.userId.userName}
-                      PublisherIdProfileImg={element.userId.profileImage}
-                      tweetContent={element.tweetBody}
-                      //logged in info
-                      loggedInUserName={loggedInUserName}
-                      loggedInProfileImage={loggedInProfileImage}
-                    />
+                    //Publisher Info
+                    userNamePublisher={element.userId.userName}
+                    PublisherIdProfileImg={element.userId.profileImage}
+                    tweetContent={element.tweetBody}
+                    //logged in info
+                    loggedInUserName={loggedInUserName}
+                    loggedInProfileImage={loggedInProfileImage}
+                  />
                 </div>
               </div>
               <Follow
