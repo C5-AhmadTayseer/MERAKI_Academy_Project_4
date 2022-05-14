@@ -18,13 +18,12 @@ const Buttons = ({
   tweetContent,
   loggedInUserName,
   loggedInProfileImage,
-  setProfileTweets,
-  profilTweets,
 }) => {
   // console.log(props);
   // console.log(bookMarkTweet);
   // console.log(userBookMark);
-  const { allTweet, setAllTweet } = useContext(isLoggedInContext);
+  const { allTweet, setAllTweet, setProfileTweets, profilTweets } =
+    useContext(isLoggedInContext);
   const [isAddedToBookMark, setIsAddedToBookMark] = useState(false);
   const [tweetBody, setTweetBody] = useState("");
   // temp state will remove it
@@ -76,7 +75,6 @@ const Buttons = ({
         },
       })
       .then((result) => {
-
         if (allTweet) {
           const filterArray = allTweet.filter((element) => {
             // return result.data.tweet;
@@ -84,7 +82,7 @@ const Buttons = ({
           });
           setAllTweet(filterArray);
           console.log(filterArray, "FFFilter");
-          console.log("aaaaaaaaa" , profilTweets);
+          console.log("aaaaaaaaa", profilTweets);
         }
         if (profilTweets) {
           console.log(profilTweets, "AFTER FILTER PROFILE ..");

@@ -17,7 +17,7 @@ function App() {
 //Test
 const [profileFollower, setProfileFollower] = useState("");
 const [profileFollowing, setProfileFollowing] = useState("");
-
+const [profilTweets, setProfileTweets] = useState("");
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState("");
@@ -48,7 +48,9 @@ const [profileFollowing, setProfileFollowing] = useState("");
           profileFollower,
           setProfileFollower,
           profileFollowing,
-          setProfileFollowing
+          setProfileFollowing,
+          profilTweets,
+          setProfileTweets
         }}
       >
         {console.log("app", allTweet)}

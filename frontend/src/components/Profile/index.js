@@ -1,15 +1,25 @@
 import "./style.css";
 import axios from "axios";
-import React, { useEffect, useState , useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import Comments from "../Comments.js";
 import Buttons from "../Buttons/index.js";
 import Follow from "../Follow/";
+import ProfileHeader from "../ProfileHeader";
+
 import { isLoggedInContext } from "../../App";
 
 const Profile = () => {
-  // Test , 
-  const {profileFollower , setProfileFollower , profileFollowing , setProfileFollowing} = useContext(isLoggedInContext)
+  // Test ,
+  const {
+    profilTweets,
+    setProfileTweets,
+    profileFollower,
+    setProfileFollower,
+    profileFollowing,
+    setProfileFollowing,
+  } = useContext(isLoggedInContext);
+
   // const [profileFollower, setProfileFollower] = useState("");
   // const [profileFollowing, setProfileFollowing] = useState("");
 
@@ -17,9 +27,12 @@ const Profile = () => {
   const TOKEN = JSON.parse(localStorage.getItem("token"));
   const navigate = useNavigate();
 
-  const [profilTweets, setProfileTweets] = useState("");
   const [userBookMark, setUserBookMark] = useState("");
   const [userFollower, setUserFollower] = useState("");
+
+  //image
+  const [coverImage, setCoverImage] = useState("");
+  const [profileImage, setProfileImage] = useState("");
 
   //Test
   // const [profileFollower, setProfileFollower] = useState("");
@@ -54,6 +67,10 @@ const Profile = () => {
         ////
         setProfileFollower(result.data.tweets[0].userId.followers);
         setProfileFollowing(result.data.tweets[0].userId.following);
+        //images
+        setCoverImage(result.data.tweets[0].userId.coverImage);
+        // profileImage
+        setProfileImage(result.data.tweets[0].userId.profileImage);
       })
       .catch((err) => {
         console.log(err);
@@ -61,12 +78,13 @@ const Profile = () => {
         console.log(err, "Catch inside Profile");
       });
   };
-
+  console.log(coverImage, "CoverImage");
   console.log(profileFollower, "Profile Follower");
   console.log(profileFollowing, "Profile Following");
 
   return (
     <>
+      <ProfileHeader setCoverImage={setCoverImage} coverImage={coverImage} profileImage={profileImage} setProfileImage={setProfileImage}  />
       <div className="Header">
         <div className="BackButton">
           <button
@@ -77,13 +95,13 @@ const Profile = () => {
             Back
           </button>
         </div>
-        <div className="rightHeader">//USER</div>
+        <div className="rightHeader">
+          userName , Tweets {profilTweets.length}
+        </div>
       </div>
 
       <div className="Test">
-        <Link to="/followers">
-          Followers {profileFollower.length}
-        </Link>
+        <Link to="/followers">Followers {profileFollower.length}</Link>
         <Link to="">Following {profileFollowing.length}</Link>
       </div>
 
@@ -91,7 +109,7 @@ const Profile = () => {
         {profilTweets &&
           profilTweets.map((element, index) => {
             console.log(element, "PROFILE ELEMENT ");
-                return (
+            return (
               <>
                 <div className="oneTweet">
                   <div className="publisherImg">
@@ -119,7 +137,7 @@ const Profile = () => {
                       userBookMark={userBookMark}
                       setUserBookMark={setUserBookMark}
                       // will use another proprs , to pass it to create comment (will make it as a button on click appear popUp)
-// CONTEXT ? 
+                      // CONTEXT ?
                       //for Profile .
                       //Publisher Info
                       userNamePublisher={element.userId.userName}
@@ -128,8 +146,10 @@ const Profile = () => {
                       //logged in info
                       loggedInUserName={loggedInUserName}
                       loggedInProfileImage={loggedInProfileImage}
-                      setProfileTweets={setProfileTweets}
-                      profilTweets={profilTweets}
+
+                      //make it as a context
+                      // setProfileTweets={setProfileTweets}
+                      // profilTweets={profilTweets}
                     />
                   </div>
                 </div>
