@@ -17,7 +17,10 @@ const AllTweets = () => {
     userFollower,
     setUserFollower,
     userBookMark,
-    setUserBookMark
+    setUserBookMark,
+    //
+    userLikes,
+    setUserLikes,
   } = useContext(isLoggedInContext);
 
   // i got all the signin user info using backEnd with all tweets ,(to take bookmark array and later userName and profile photo to use it .)
@@ -47,7 +50,7 @@ const AllTweets = () => {
         // console.log(result , "result from get all tweets");
         console.log(result.data);
         setSignInUserId(result.data.signInUserId);
-        console.log(result , "HHOOOME");
+        console.log(result, "HHOOOME");
         // console.log(result.data.tweets);
         setAllTweet(result.data.tweets);
         // setTweets(result.data.tweets);
@@ -56,10 +59,12 @@ const AllTweets = () => {
         setUserFollower(result.data.newResult.following);
         // console.log("xxxxxxxxxxxxxxxx", result.data.newResult.followers); << i was mistake with making it .followers T_T
         setUserBookMark(result.data.newResult.bookMark);
-        
+
         //-- to get extra info abuot SignIn user to use it ..
         setLoggedInUserName(result.data.newResult.userName);
         setLoggedInProfileImage(result.data.newResult.profileImage);
+        //Likes
+        setUserLikes(result.data.newResult.likesTweet);
       })
       .catch((err) => {
         console.log(err);
@@ -74,7 +79,7 @@ const AllTweets = () => {
       });
   };
   // console.log(userBookMark, "BOOKMARK FOR USER");
-
+  // console.log(userLikes , "USER LIKES INSIDE HOME PAGE");
   return (
     <div className="tweets-Container">
       {/* {console.log(allTweet, "============")} */}
@@ -113,10 +118,10 @@ const AllTweets = () => {
                   <Buttons
                     tweetId={element._id}
                     tweetPublisher={element.userId._id}
+                    
                     // userBookMark={userBookMark}
                     // setUserBookMark={setUserBookMark}
                     // will use another proprs , to pass it to create comment (will make it as a button on click appear popUp)
-
                     //Publisher Info
                     userNamePublisher={element.userId.userName}
                     PublisherIdProfileImg={element.userId.profileImage}

@@ -30,6 +30,9 @@ const Buttons = ({
     setUserBookMark,
     singleTweet,
     setSingleTweet,
+    //For Like Button .
+    userLikes,
+    setUserLikes,
   } = useContext(isLoggedInContext);
   const [isAddedToBookMark, setIsAddedToBookMark] = useState(false);
   const [tweetBody, setTweetBody] = useState("");
@@ -176,6 +179,45 @@ const Buttons = ({
       });
   };
 
+  const likeTweet = (tweetId) => {
+    axios
+      .post(
+        `http://localhost:5000/likes/${tweetId}`,
+        {},
+        {
+          headers: {
+            authorization: `Bearer ${TOKEN}`,
+          },
+        }
+      )
+      .then((result) => {
+        console.log("LIKE Result", result);
+        setUserLikes([...userLikes, tweetId]);
+      })
+      .catch((err) => {
+        console.log("LIKE Error", err);
+      });
+  };
+
+  const unLikeTweet = (tweetId) => {
+    axios
+      .delete(`http://localhost:5000/likes/${tweetId}`, {
+        headers: {
+          authorization: `Bearer ${TOKEN}`,
+        },
+      })
+      .then((result) => {
+        console.log("UNLIKE Result", result);
+        const filterArray = userLikes.filter((element) => {
+          return element !== tweetId;
+        });
+        setUserLikes([...filterArray]);
+      })
+      .catch((err) => {
+        console.log("UNLIKE Error", err);
+      });
+  };
+
   return (
     <div className="tweetbtn">
       {tweetPublisher === signInUserId ? (
@@ -249,6 +291,23 @@ const Buttons = ({
         />
       ) : (
         ""
+      )}
+      {userLikes.includes(tweetId) ? (
+        <button
+          onClick={() => {
+            unLikeTweet(tweetId);
+          }}
+        >
+          UnLike
+        </button>
+      ) : (
+        <button
+          onClick={() => {
+            likeTweet(tweetId);
+          }}
+        >
+          Like
+        </button>
       )}
     </div>
   );

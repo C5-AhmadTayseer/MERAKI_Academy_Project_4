@@ -29,8 +29,11 @@ function App() {
   //
   const [userFollower, setUserFollower] = useState("");
   const [userBookMark, setUserBookMark] = useState("");
-//
-const [depState , setDepState] = useState(false)
+  //
+  const [depState, setDepState] = useState(false);
+  //
+  const [userLikes, setUserLikes] = useState("");
+
   useEffect(() => {
     const localStorageToken = JSON.parse(localStorage.getItem("token"));
     if (localStorageToken) {
@@ -65,8 +68,12 @@ const [depState , setDepState] = useState(false)
           //for buttons test
           userBookMark,
           setUserBookMark,
+          //depState to re-render the page onChange for profile component .()
           depState,
-          setDepState
+          setDepState,
+          //
+          userLikes,
+          setUserLikes,
         }}
       >
         {console.log("app", allTweet)}
