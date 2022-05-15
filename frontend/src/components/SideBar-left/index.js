@@ -1,41 +1,48 @@
 import "./style.css";
-// import React , {useContext} from "react"; >> to navigate to user profile ..
-import { Link , useNavigate} from "react-router-dom";
-
-
+import { FaTwitter } from "react-icons/fa";
+import { RiHome7Fill } from "react-icons/ri";
+import { Link, useNavigate } from "react-router-dom";
 
 const LeftSideBar = () => {
   return (
     <div className="Left-sidebar">
-      <Link to="home">
-        <img className="logo" src={require("./logo.png")} />
-      </Link>
-      <div>
-        <Link to="/home">Home</Link>
-      </div>
+      <div className="Links">
+        <Link to="home">
+          <FaTwitter className="logo" />
+        </Link>
+        <div className="sideIcons">
+          <Link to="/home">
+            <RiHome7Fill />
+         <span>Home</span>
+          </Link>
+        </div>
 
-      <div>
-        <Link to="/home">Notifications</Link>
-      </div>
-      <div>
-        <Link to="/home">Explore</Link>
-      </div>
-      <div>
-        <Link to="/home">Messages</Link>
-      </div>
-      <div>
-        <Link to="/bookmark">Bookmarks</Link>
-      </div>
-      <div>
-        <Link to="/home">Lists</Link>
-      </div>
-      <div>
-        <Link to="">Profile</Link>
+        <div className="sideIcons">
+          <Link to="/home">Notifications</Link>
+        </div>
+
+        <div className="sideIcons">
+          <Link to="/home">Explore</Link>
+        </div>
+
+        <div className="sideIcons">
+          <Link to="/home">Messages</Link>
+        </div>
+
+        <div className="sideIcons">
+          <Link to="/bookmark">Bookmarks</Link>
+        </div>
+        <div className="sideIcons">
+          <Link to="/home">Lists</Link>
+        </div>
+        <div className="sideIcons">
+          <Link to="">Profile</Link>
+        </div>
       </div>
       <button>Tweet</button>
+
       <div> img With userName</div>
     </div>
-    
   );
 };
 

@@ -18,6 +18,10 @@ const AllTweets = () => {
     setUserFollower,
     userBookMark,
     setUserBookMark,
+    //for post and left-side bar
+    setLoggedInUserName,
+    setLoggedInProfileImage,
+
     //
     userLikes,
     setUserLikes,
@@ -26,9 +30,9 @@ const AllTweets = () => {
   // i got all the signin user info using backEnd with all tweets ,(to take bookmark array and later userName and profile photo to use it .)
   // const [userFollower, setUserFollower] = useState("");
 
-  //info for the loggend in user (userName , pforileImage )
-  const [loggedInUserName, setLoggedInUserName] = useState("");
-  const [loggedInProfileImage, setLoggedInProfileImage] = useState("");
+  //info for the loggend in user (userName , pforileImage ) (make it as context .)
+  // const [loggedInUserName, setLoggedInUserName] = useState("");
+  // const [loggedInProfileImage, setLoggedInProfileImage] = useState("");
 
   const navigate = useNavigate();
   const TOKEN = JSON.parse(localStorage.getItem("token"));
@@ -118,7 +122,6 @@ const AllTweets = () => {
                   <Buttons
                     tweetId={element._id}
                     tweetPublisher={element.userId._id}
-                    
                     // userBookMark={userBookMark}
                     // setUserBookMark={setUserBookMark}
                     // will use another proprs , to pass it to create comment (will make it as a button on click appear popUp)
@@ -126,9 +129,9 @@ const AllTweets = () => {
                     userNamePublisher={element.userId.userName}
                     PublisherIdProfileImg={element.userId.profileImage}
                     tweetContent={element.tweetBody}
-                    //logged in info
-                    loggedInUserName={loggedInUserName}
-                    loggedInProfileImage={loggedInProfileImage}
+                    //logged in info (make it as a context .)
+                    // loggedInUserName={loggedInUserName}
+                    // loggedInProfileImage={loggedInProfileImage}
                   />
                 </div>
               </div>

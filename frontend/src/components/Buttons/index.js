@@ -13,8 +13,6 @@ const Buttons = ({
   userNamePublisher,
   PublisherIdProfileImg,
   tweetContent,
-  loggedInUserName,
-  loggedInProfileImage,
   isDeleteinProfile,
 }) => {
   // console.log(props);
@@ -28,6 +26,10 @@ const Buttons = ({
     signInUserId,
     userBookMark,
     setUserBookMark,
+    //
+    loggedInUserName,
+    loggedInProfileImage,
+    //
     singleTweet,
     setSingleTweet,
     //For Like Button .

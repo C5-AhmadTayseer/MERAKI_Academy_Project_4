@@ -1,0 +1,60 @@
+.newPost {
+  display: flex;
+  height: 20vh;
+  width: 100%;
+  padding: 10px;
+}
+
+.profileImage {
+  width: 10%;
+  height: 100%;
+}
+.profileImage .round-photo {
+  width: 100%;
+  border-radius: 100%;
+}
+
+.input-btnContainer {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+
+.input-btnContainer .newPost-input {
+  height: 70%;
+  border-bottom: 1px solid var(--SubColor);
+  margin-bottom: 5px;
+}
+
+.input-btnContainer .newPost-input input {
+  width: 100%;
+  height: 100%;
+  border-color: transparent;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.newPost-Btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.newPost-Btns .POST {
+  width: 80px;
+  height: 35px;
+  border-radius: 18px;
+  /* padding: 10px; */
+  border-color: transparent;
+  background-color: var(--blueColor2);
+  color: var(--mainColor);
+  text-align: center;
+  transition: 0.3s;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.newPost-Btns .POST:hover {
+  background-color: var(--blueColor1);
+  transition: 0.3s;
+}

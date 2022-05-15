@@ -32,6 +32,11 @@ function App() {
   //
   const [depState, setDepState] = useState(false);
   //
+
+  //that will be used in create post to take the photo , and in leftSide bar to show image with userName values will set on all tweet (homePage)
+  const [loggedInUserName, setLoggedInUserName] = useState("");
+  const [loggedInProfileImage, setLoggedInProfileImage] = useState("");
+
   const [userLikes, setUserLikes] = useState("");
 
   useEffect(() => {
@@ -68,6 +73,11 @@ function App() {
           //for buttons test
           userBookMark,
           setUserBookMark,
+          //for post and left-sidebar . 
+          loggedInUserName,
+          setLoggedInUserName,
+          loggedInProfileImage,
+          setLoggedInProfileImage,
           //depState to re-render the page onChange for profile component .()
           depState,
           setDepState,

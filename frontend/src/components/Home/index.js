@@ -5,7 +5,11 @@ import PostTweet from "../PostTweet/index"
 
 const Home = () => {
   return (
-    <div>
+    <div className="Main">
+      <div className="Section-Header">
+      <p>Home</p>
+      <p>Icon</p>
+      </div>
       <PostTweet />
       <AllTweets />
     </div>
