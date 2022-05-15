@@ -8,6 +8,7 @@ import LeftSideBar from "./components/SideBar-left";
 import Profile from "./components/Profile";
 import FollowersSection from "./components/FollowersSection.js";
 import FollowingSection from "./components/FollowingSection";
+import OneTweet from "./components/OneTweet";
 import { Routes, Route, Link } from "react-router-dom";
 
 export const isLoggedInContext = createContext();
@@ -24,8 +25,11 @@ function App() {
   const [token, setToken] = useState("");
   const [signInUserId, setSignInUserId] = useState("");
   const [allTweet, setAllTweet] = useState();
+  const [singleTweet, setSingleTweet] = useState("");
   //
   const [userFollower, setUserFollower] = useState("");
+  const [userBookMark, setUserBookMark] = useState("");
+
 
   useEffect(() => {
     const localStorageToken = JSON.parse(localStorage.getItem("token"));
@@ -56,6 +60,11 @@ function App() {
           setProfileTweets,
           userFollower,
           setUserFollower,
+          singleTweet,
+          setSingleTweet,
+          //for buttons test
+          userBookMark,
+          setUserBookMark
         }}
       >
         {console.log("app", allTweet)}
@@ -75,6 +84,7 @@ function App() {
           <Route path="/profile/:id" element={<Profile />}></Route>
           <Route path="/followers" element={<FollowersSection />}></Route>
           <Route path="/following" element={<FollowingSection />}></Route>
+          <Route path="/tweets/:id" element={<OneTweet />}></Route>
         </Routes>
       </isLoggedInContext.Provider>
     </div>

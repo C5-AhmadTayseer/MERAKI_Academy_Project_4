@@ -10,8 +10,6 @@ const Buttons = ({
   isBookMarkTweet,
   bookMarkTweet,
   setBookMarkTweet,
-  userBookMark,
-  setUserBookMark,
   userNamePublisher,
   PublisherIdProfileImg,
   tweetContent,
@@ -21,8 +19,17 @@ const Buttons = ({
   // console.log(props);
   // console.log(bookMarkTweet);
   // console.log(userBookMark);
-  const { allTweet, setAllTweet, setProfileTweets, profilTweets , signInUserId} =
-    useContext(isLoggedInContext);
+  const {
+    allTweet,
+    setAllTweet,
+    setProfileTweets,
+    profilTweets,
+    signInUserId,
+    userBookMark,
+    setUserBookMark,
+    singleTweet,
+    setSingleTweet
+  } = useContext(isLoggedInContext);
   const [isAddedToBookMark, setIsAddedToBookMark] = useState(false);
   const [tweetBody, setTweetBody] = useState("");
   // temp state will remove it
@@ -89,6 +96,10 @@ const Buttons = ({
             return element._id !== tweetId;
           });
           setProfileTweets(filterArrayForProfile);
+        }
+        console.log(singleTweet._id ,"INSIDE DELETE");
+        if(singleTweet._id === tweetId) {
+        //  
         }
         // setAllTweet([...filterArray]);
       });

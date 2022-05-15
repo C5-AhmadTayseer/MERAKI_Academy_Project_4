@@ -9,11 +9,18 @@ import Follow from "../Follow/";
 import { isLoggedInContext } from "../../App";
 
 const AllTweets = () => {
-  const { setAllTweet, allTweet, setSignInUserId, signInUserId , userFollower , setUserFollower } =
-    useContext(isLoggedInContext);
+  const {
+    setAllTweet,
+    allTweet,
+    setSignInUserId,
+    signInUserId,
+    userFollower,
+    setUserFollower,
+    userBookMark,
+    setUserBookMark
+  } = useContext(isLoggedInContext);
 
   // i got all the signin user info using backEnd with all tweets ,(to take bookmark array and later userName and profile photo to use it .)
-  const [userBookMark, setUserBookMark] = useState("");
   // const [userFollower, setUserFollower] = useState("");
 
   //info for the loggend in user (userName , pforileImage )
@@ -92,16 +99,20 @@ const AllTweets = () => {
                   <div className="displayName">
                     <p> {element.userId.userName} </p>
                   </div>
-                  <div className="tweetBody">
+                  <div
+                    className="tweetBody"
+                    onClick={() => {
+                      navigate(`/tweets/${element._id}`);
+                    }}
+                  >
                     <p>Tweet Body {element.tweetBody}</p>
                   </div>
                   {/* have className tweetbtn in Buttons component */}
                   <Buttons
                     tweetId={element._id}
                     tweetPublisher={element.userId._id}
-                    signInUserId={signInUserId}
-                    userBookMark={userBookMark}
-                    setUserBookMark={setUserBookMark}
+                    // userBookMark={userBookMark}
+                    // setUserBookMark={setUserBookMark}
                     // will use another proprs , to pass it to create comment (will make it as a button on click appear popUp)
 
                     //Publisher Info

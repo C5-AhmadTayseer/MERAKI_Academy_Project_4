@@ -93,7 +93,32 @@ const getTweetById = async (req, res) => {
   const id = req.params.id;
 
   try {
-    const result = await tweetModel.findById(id);
+    const result = await tweetModel.findById(id).populate({
+        path: "userId",
+        select: "userName profileImage coverImage following followers",
+        populate: [
+          {
+            path: "following",
+            model: "User",
+            select: "userName profileImage",
+          },
+          {
+            path: "followers",
+            model: "User",
+            select: "userName profileImage",
+          },
+        ],
+      })
+      .populate({
+        path: "comments",
+        populate: [
+          {
+            path: "commenter",
+            model: "User",
+            select: "userName profileImage",
+          },
+        ],
+      });
 
     if (result) {
       res.status(200).json({
