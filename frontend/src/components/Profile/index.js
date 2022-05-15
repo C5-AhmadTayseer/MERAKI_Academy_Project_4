@@ -18,14 +18,13 @@ const Profile = () => {
     setProfileFollower,
     profileFollowing,
     setProfileFollowing,
-    signInUserId ,
+    signInUserId,
     setSignInUserId,
     userFollower,
-    setUserFollower
+    setUserFollower,
+    depState,
+    setDepState,
   } = useContext(isLoggedInContext);
-
-  // const [profileFollower, setProfileFollower] = useState("");
-  // const [profileFollowing, setProfileFollowing] = useState("");
 
   const { id } = useParams();
   const TOKEN = JSON.parse(localStorage.getItem("token"));
@@ -37,19 +36,17 @@ const Profile = () => {
   const [coverImage, setCoverImage] = useState("");
   const [profileImage, setProfileImage] = useState("");
 
-  //Test
-  // const [profileFollower, setProfileFollower] = useState("");
-  // const [profileFollowing, setProfileFollowing] = useState("");
-
+  //(to use it in Profile header .)
   //info for the loggend in user (userName , pforileImage )
   const [loggedInUserName, setLoggedInUserName] = useState("");
   const [loggedInProfileImage, setLoggedInProfileImage] = useState("");
-
-  // const [signInUserId, setSignInUserId] = useState("");
+  //N1: << getProfile set user
+  const [USER, setUser] = useState("");
 
   useEffect(() => {
     getProfile();
-  }, []);
+    console.log("DEP STATE INSIDE USE EFFECT");
+  }, [depState]);
 
   const getProfile = () => {
     console.log(id);
@@ -63,13 +60,17 @@ const Profile = () => {
         console.log(result.data, "PROFILE RESULT");
         setSignInUserId(result.data.signInUserId);
         setProfileTweets(result.data.tweets);
+        //userFollowr for the logged in user .
         setUserFollower(result.data.newResult.following);
         setUserBookMark(result.data.newResult.bookMark);
+        //
         setLoggedInUserName(result.data.newResult.userName);
         setLoggedInProfileImage(result.data.newResult.profileImage);
         ////
         setProfileFollower(result.data.tweets[0].userId.followers);
         setProfileFollowing(result.data.tweets[0].userId.following);
+        //N1:to send it to the profile header then to inProfil follow to create a button for follow or unfollow
+        setUser(result.data.tweets[0].userId._id);
         //images
         setCoverImage(result.data.tweets[0].userId.coverImage);
         // profileImage
@@ -81,13 +82,20 @@ const Profile = () => {
         console.log(err, "Catch inside Profile");
       });
   };
-  console.log(coverImage, "CoverImage");
-  console.log(profileFollower, "Profile Follower");
-  console.log(profileFollowing, "Profile Following");
 
+  // console.log(coverImage, "CoverImage");
+  // console.log(profileFollower, "Profile Follower");
+  // console.log(profileFollowing, "Profile Following");
+  // console.log(USER , "==================");
   return (
     <>
-      <ProfileHeader setCoverImage={setCoverImage} coverImage={coverImage} profileImage={profileImage} setProfileImage={setProfileImage}  />
+      <ProfileHeader
+        setCoverImage={setCoverImage}
+        coverImage={coverImage}
+        profileImage={profileImage}
+        setProfileImage={setProfileImage}
+        USER={USER}
+      />
       {/* modify it  */}
       <div className="Header">
         <div className="BackButton">
@@ -137,7 +145,7 @@ const Profile = () => {
                     <Buttons
                       tweetId={element._id}
                       tweetPublisher={element.userId._id}
-                      signInUserId={signInUserId} 
+                      signInUserId={signInUserId}
                       userBookMark={userBookMark}
                       setUserBookMark={setUserBookMark}
                       // will use another proprs , to pass it to create comment (will make it as a button on click appear popUp)
@@ -164,7 +172,7 @@ const Profile = () => {
                   setUserFollower={setUserFollower}
                   signInUserId={signInUserId}
 
-                  // made it in context . 
+                  // made it in context .
                   // setProfileFollowing={setProfileFollowing}
                   // profileFollowing={profileFollowing}
                   // setProfileFollower={setProfileFollower}

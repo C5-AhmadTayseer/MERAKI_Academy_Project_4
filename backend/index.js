@@ -15,6 +15,7 @@ const loginRouter = require("./routes/loginRouter");
 const tweetsRouter = require("./routes/tweetsRouter");
 const usersRouter = require("./routes/usersRouter");
 const bookMarkRouter = require("./routes/bookMarkRouter");
+const likesRouter = require("./routes/likes");
 
 
 
@@ -25,7 +26,7 @@ app.use("/login" , loginRouter)
 app.use("/users" , usersRouter)
 app.use("/tweets" , tweetsRouter)
 app.use("/bookMark" , bookMarkRouter)
-
+app.use("/likes" , likesRouter)
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
 

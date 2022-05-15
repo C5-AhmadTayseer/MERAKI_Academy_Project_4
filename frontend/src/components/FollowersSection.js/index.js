@@ -5,7 +5,7 @@ import { isLoggedInContext } from "../../App";
 import InProfileFollow from "../InProfileFollow"
 
 const FollowersSection = () => {
-  const { profileFollower } = useContext(isLoggedInContext);
+  const { profileFollower , userFollower} = useContext(isLoggedInContext);
 
 //   console.log(profileFollower , profileFollowing,"=====================");
 // >>Header 
@@ -16,8 +16,8 @@ const FollowersSection = () => {
       </div>
 
       {profileFollower && profileFollower.map((element)=>{
+        console.log(element._id , "USEER" , userFollower ,"USERFOLLOWE");
           return <div className="followerSection">
-
               <div className="image">
               <img src={`${element.profileImage}`}/>
               </div>
@@ -27,6 +27,7 @@ const FollowersSection = () => {
               <p>{element.userName}</p>
               <p>Bio test ..</p>
               </div>
+              {/* {console.log(element._id ,"USEER " , userFollower , "USEEER FOLLOWER" ) */}
 
               <div className="button">
             <InProfileFollow USER ={element._id}/>

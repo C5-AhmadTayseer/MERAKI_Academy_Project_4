@@ -15,6 +15,7 @@ const Buttons = ({
   tweetContent,
   loggedInUserName,
   loggedInProfileImage,
+  isDeleteinProfile,
 }) => {
   // console.log(props);
   // console.log(bookMarkTweet);
@@ -28,7 +29,7 @@ const Buttons = ({
     userBookMark,
     setUserBookMark,
     singleTweet,
-    setSingleTweet
+    setSingleTweet,
   } = useContext(isLoggedInContext);
   const [isAddedToBookMark, setIsAddedToBookMark] = useState(false);
   const [tweetBody, setTweetBody] = useState("");
@@ -54,17 +55,38 @@ const Buttons = ({
         }
       )
       .then((result) => {
-        console.log(result, "Update Tweet Result");
+        console.log(profilTweets, "SSSSSSS");
+        console.log(result, "Update Tweet Result ==== ");
         console.log("TWEETS", allTweet);
-        const mappedArr = allTweet.map((element) => {
-          console.log(element);
-          if (element._id === tweetId) {
-            return result.data.tweet;
-          }
-          return element;
-        });
-        console.log("MAPPEDTWEETS-", [...mappedArr]);
-        setAllTweet([...mappedArr]);
+        //for update in home page
+        if (allTweet) {
+          const mappedArr = allTweet.map((element) => {
+            console.log(element);
+            if (element._id === tweetId) {
+              return result.data.tweet;
+            }
+
+            return element;
+          });
+          setAllTweet([...mappedArr]);
+          console.log("MAPPEDTWEETS-", [...mappedArr]);
+        }
+        //for update in profile
+        if (profilTweets) {
+          const mappedArr = profilTweets.map((element) => {
+            console.log(element);
+            if (element._id === tweetId) {
+              return result.data.tweet;
+            }
+
+            return element;
+          });
+          setProfileTweets([...mappedArr]);
+        }
+
+        //for update in oneTweet
+        setSingleTweet(result.data.tweet);
+
         // Here ,
         // getAllTweets();
       })
@@ -97,10 +119,10 @@ const Buttons = ({
           });
           setProfileTweets(filterArrayForProfile);
         }
-        console.log(singleTweet._id ,"INSIDE DELETE");
-        if(singleTweet._id === tweetId) {
-        //  
-        }
+        setSingleTweet("");
+        console.log(isDeleteinProfile, "====");
+        console.log(singleTweet._id, "INSIDE DELETE");
+
         // setAllTweet([...filterArray]);
       });
   };

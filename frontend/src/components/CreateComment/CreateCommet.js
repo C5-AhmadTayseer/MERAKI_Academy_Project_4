@@ -10,7 +10,13 @@ const CreateComment = ({
   tweetId,
   loggedInProfileImage,
 }) => {
-  const { allTweet, setAllTweet } = useContext(isLoggedInContext);
+  const {
+    allTweet,
+    setAllTweet,
+    setSingleTweet,
+    setProfileTweets,
+    profilTweets,
+  } = useContext(isLoggedInContext);
 
   const TOKEN = JSON.parse(localStorage.getItem("token"));
 
@@ -30,17 +36,29 @@ const CreateComment = ({
         }
       )
       .then((result) => {
+        console.log(result, "COMMENT RESULT ");
+        console.log(profilTweets, "PROFILE TWEET IN COMMENT");
         const mappedArr = allTweet.map((element) => {
-          console.log(element);
+          // console.log(element);
           if (element._id === tweetId) {
             return result.data;
           }
           return element;
         });
-        // console.log(result, "CCCCCCCCCCC Added");
-        // console.log(mappedArr , "NEEEEEEEEEEW");
         setAllTweet([...mappedArr]);
+        setSingleTweet(result.data);
+        console.log(result, "CREATE COMMENT");
+
+        const inProfileMap = profilTweets.map((element) => {
+          if (element._id === tweetId) {
+            return result.data;
+          }
+          return element;
+        });
+        setProfileTweets([...inProfileMap]);
       })
+      //For Comment in profile section
+
       .catch((err) => {
         console.log(err, "err in update Tweet");
       });

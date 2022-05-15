@@ -29,8 +29,8 @@ function App() {
   //
   const [userFollower, setUserFollower] = useState("");
   const [userBookMark, setUserBookMark] = useState("");
-
-
+//
+const [depState , setDepState] = useState(false)
   useEffect(() => {
     const localStorageToken = JSON.parse(localStorage.getItem("token"));
     if (localStorageToken) {
@@ -64,7 +64,9 @@ function App() {
           setSingleTweet,
           //for buttons test
           userBookMark,
-          setUserBookMark
+          setUserBookMark,
+          depState,
+          setDepState
         }}
       >
         {console.log("app", allTweet)}

@@ -10,6 +10,7 @@ const users = new mongoos.Schema({
   following: [{ type: mongoos.Schema.Types.ObjectId, ref: "User" }],
   followers: [{ type: mongoos.Schema.Types.ObjectId, ref: "User" }],
   bookMark: [{ type: mongoos.Schema.Types.ObjectId, ref: "tweet" }],
+  likesTweet:[{type:mongoos.Schema.Types.ObjectId , ref:"tweet"}]
 });
 
 users.pre("save", async function () {

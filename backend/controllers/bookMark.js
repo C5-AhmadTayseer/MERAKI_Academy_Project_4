@@ -1,18 +1,17 @@
 const userModel = require("../models/usersShema");
 
 const tweetModel = require("../models/tweetsSchema");
-const { populate } = require("../models/usersShema");
 
 //should use populate to get user info to show it .<<<<<<
 const addToBookMark = async (req, res) => {
   const signInUser = req.token.userId;
-  let params = req.params.id;
+
+  let params = req.params.id; //tweet id . 
 
   try {
     // to get the tweet id on params
     const response = await tweetModel.findById(params);
-
-    console.log(response);
+    console.log(response , "LIKEEE ===");
     if (response) {
       const result = await userModel.updateOne(
         { _id: signInUser },

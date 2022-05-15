@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
-
+import './style.css'
 import { isLoggedInContext } from "../../App";
 
 const FollowAndUnFollow = ({
@@ -98,6 +98,7 @@ console.log(userFollower , PublisherId , "NNNEW");
             </button>
           ) : (
             <button
+            className="follow"
               onClick={() => {
                 follow(PublisherId);
               }}

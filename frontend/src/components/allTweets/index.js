@@ -31,7 +31,7 @@ const AllTweets = () => {
   const TOKEN = JSON.parse(localStorage.getItem("token"));
 
   // const [signInUserId, setSignInUserId] = useState("");
-  console.log("in alltweet app:", allTweet);
+  // console.log("in alltweet app:", allTweet);
   useEffect(() => {
     getAllTweets();
   }, []);
@@ -47,6 +47,7 @@ const AllTweets = () => {
         // console.log(result , "result from get all tweets");
         console.log(result.data);
         setSignInUserId(result.data.signInUserId);
+        console.log(result , "HHOOOME");
         // console.log(result.data.tweets);
         setAllTweet(result.data.tweets);
         // setTweets(result.data.tweets);
@@ -55,6 +56,7 @@ const AllTweets = () => {
         setUserFollower(result.data.newResult.following);
         // console.log("xxxxxxxxxxxxxxxx", result.data.newResult.followers); << i was mistake with making it .followers T_T
         setUserBookMark(result.data.newResult.bookMark);
+        
         //-- to get extra info abuot SignIn user to use it ..
         setLoggedInUserName(result.data.newResult.userName);
         setLoggedInProfileImage(result.data.newResult.profileImage);
@@ -75,7 +77,7 @@ const AllTweets = () => {
 
   return (
     <div className="tweets-Container">
-      {console.log(allTweet, "============")}
+      {/* {console.log(allTweet, "============")} */}
       {allTweet &&
         allTweet.map((element, index) => {
           // Test Values ,,

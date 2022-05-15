@@ -3,7 +3,7 @@ import axios from "axios";
 import { isLoggedInContext } from "../../App";
 
 const InProfileFollow = ({ USER }) => {
-  const { userFollower, setUserFollower, signInUserId } =
+  const { userFollower, setUserFollower, signInUserId, depState, setDepState } =
     useContext(isLoggedInContext);
   const TOKEN = JSON.parse(localStorage.getItem("token"));
 
@@ -23,6 +23,7 @@ const InProfileFollow = ({ USER }) => {
         console.log(userFollower, "UU====UU");
         console.log(USER, "USER ID INSIDE FOLLOW");
         setUserFollower([...userFollower, USER]);
+        setDepState(!depState);
       })
       .catch((err) => {
         console.log(err, "PROFILE FOLLOW ERROR");
@@ -43,6 +44,7 @@ const InProfileFollow = ({ USER }) => {
           return element !== USER;
         });
         setUserFollower([...filterArray]);
+        setDepState(!depState);
       });
   };
 
@@ -54,21 +56,21 @@ const InProfileFollow = ({ USER }) => {
       ) : (
         <div>
           {userFollower.includes(USER) ? (
-              <button
-                onClick={() => {
-                  unFollow(USER);
-                }}
-              >
-                unFollow
-              </button>
+            <button
+              onClick={() => {
+                unFollow(USER);
+              }}
+            >
+              unFollow
+            </button>
           ) : (
-              <button
-                onClick={() => {
-                  follow(USER);
-                }}
-              >
-                follow
-              </button>
+            <button
+              onClick={() => {
+                follow(USER);
+              }}
+            >
+              follow
+            </button>
           )}
         </div>
       )}

@@ -2,6 +2,8 @@ import "./style.css";
 import React, { useContext } from "react";
 import { isLoggedInContext } from "../../App";
 import { Link } from "react-router-dom";
+import InProfileFollow from "../InProfileFollow";
+
 
 const ProfileHeader = ({
     // set will use it for updating info .
@@ -9,6 +11,7 @@ const ProfileHeader = ({
   setProfileImage,
   coverImage,
   profileImage,
+  USER
 }) => {
   const { profileFollower, profileFollowing } = useContext(isLoggedInContext);
 //   console.log("SSSSSSS" , profileFollower , profileFollowing);
@@ -22,6 +25,7 @@ const ProfileHeader = ({
           <img src={`${profileImage}`} />
         </div>
         <div>userName and info</div>
+        <InProfileFollow USER={USER} />
 
         <div>button</div>
         <div className="Test">

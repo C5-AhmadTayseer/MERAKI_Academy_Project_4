@@ -12,6 +12,7 @@ const OneTweet = () => {
   const TOKEN = JSON.parse(localStorage.getItem("token"));
   const [userName, setUserName] = useState("");
   const [publisherId, setPublisherId] = useState("");
+  const [isDeleteinProfile, setIsDeleteinProfile] = useState(true);
 
   console.log(id);
 
@@ -48,35 +49,43 @@ const OneTweet = () => {
 
   return (
     //   << Header
+    // Object.values(singleTweet).length
+
     <div className="tweets-Container singleTweet">
-      <div className="oneTweet">
-        <div className="publisherImg">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg" />
-        </div>
-
-        <div className="Container">
-          <div className="displayName">
-            <p> {userName} </p>
-          </div>
-          <div className="tweetBody">
-            <p>Tweet Body {singleTweet.tweetBody}</p>
+      {singleTweet !== "" && (
+        <div className="oneTweet">
+          <div className="publisherImg">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg" />
           </div>
 
-          <Buttons tweetId={singleTweet._id} tweetPublisher={publisherId} />
+          <div className="Container">
+            <div className="displayName">
+              <p> {userName} </p>
+            </div>
+            <div className="tweetBody">
+              <p>Tweet Body {singleTweet.tweetBody}</p>
+            </div>
 
-          {singleTweet.comments &&
-            singleTweet.comments.map((element) => {
-              // comment component
-              return (
-                <Comments
-                  profileImage={element.commenter.profileImage}
-                  commenterUserName={element.commenter.userName}
-                  commentBody={element.comment}
-                />
-              );
-            })}
+            <Buttons
+              tweetId={singleTweet._id}
+              tweetPublisher={publisherId}
+              isDeleteinProfile={isDeleteinProfile}
+            />
+
+            {singleTweet.comments &&
+              singleTweet.comments.map((element) => {
+                // comment component
+                return (
+                  <Comments
+                    profileImage={element.commenter.profileImage}
+                    commenterUserName={element.commenter.userName}
+                    commentBody={element.comment}
+                  />
+                );
+              })}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
