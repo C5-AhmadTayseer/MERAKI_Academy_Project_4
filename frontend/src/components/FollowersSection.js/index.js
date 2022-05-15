@@ -5,14 +5,14 @@ import { isLoggedInContext } from "../../App";
 import InProfileFollow from "../InProfileFollow"
 
 const FollowersSection = () => {
-  const { profileFollowing, profileFollower } = useContext(isLoggedInContext);
+  const { profileFollower } = useContext(isLoggedInContext);
 
 //   console.log(profileFollower , profileFollowing,"=====================");
 // >>Header 
   return <div className="followingSection-Container">
       <div className="Links">
           <Link to="/followers">Follower</Link>
-          <Link to="/">Following</Link>
+          <Link to="/following">Following</Link>
       </div>
 
       {profileFollower && profileFollower.map((element)=>{
@@ -30,13 +30,9 @@ const FollowersSection = () => {
 
               <div className="button">
             <InProfileFollow USER ={element._id}/>
-
-                  <button>Test</button>
               </div>
               </div>
           </div>
-
-
       })}
 
 

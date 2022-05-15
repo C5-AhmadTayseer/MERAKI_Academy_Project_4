@@ -3,16 +3,9 @@ import axios from "axios";
 import { isLoggedInContext } from "../../App";
 
 const InProfileFollow = ({ USER }) => {
-  const {
-    profileFollowing,
-    profileFollower,
-    userFollower,
-    setUserFollower,
-    signInUserId,
-  } = useContext(isLoggedInContext);
+  const { userFollower, setUserFollower, signInUserId } =
+    useContext(isLoggedInContext);
   const TOKEN = JSON.parse(localStorage.getItem("token"));
-
-  // console.log(profileFollower, "INPROFILE");
 
   const follow = (USER) => {
     axios
@@ -55,25 +48,28 @@ const InProfileFollow = ({ USER }) => {
 
   return (
     <>
-      {userFollower.includes(USER) ? (
-        <div>
-          <button
-            onClick={() => {
-              unFollow(USER);
-            }}
-          >
-            unFollow
-          </button>
-        </div>
+      {/* to not show follow and unfollow to logged in user for his profile ..  */}
+      {signInUserId === USER ? (
+        ""
       ) : (
         <div>
-          <button
-            onClick={() => {
-              follow(USER);
-            }}
-          >
-            follow
-          </button>
+          {userFollower.includes(USER) ? (
+              <button
+                onClick={() => {
+                  unFollow(USER);
+                }}
+              >
+                unFollow
+              </button>
+          ) : (
+              <button
+                onClick={() => {
+                  follow(USER);
+                }}
+              >
+                follow
+              </button>
+          )}
         </div>
       )}
     </>

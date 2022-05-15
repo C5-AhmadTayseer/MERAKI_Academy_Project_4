@@ -7,6 +7,7 @@ import BookMark from "./components/BookMark";
 import LeftSideBar from "./components/SideBar-left";
 import Profile from "./components/Profile";
 import FollowersSection from "./components/FollowersSection.js";
+import FollowingSection from "./components/FollowingSection";
 import { Routes, Route, Link } from "react-router-dom";
 
 export const isLoggedInContext = createContext();
@@ -14,18 +15,17 @@ export const isLoggedInContext = createContext();
 // export const allTweetContext = createContext();
 
 function App() {
-//Test
-const [profileFollower, setProfileFollower] = useState("");
-const [profileFollowing, setProfileFollowing] = useState("");
-const [profilTweets, setProfileTweets] = useState("");
+  //Test
+  const [profileFollower, setProfileFollower] = useState("");
+  const [profileFollowing, setProfileFollowing] = useState("");
+  const [profilTweets, setProfileTweets] = useState("");
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState("");
   const [signInUserId, setSignInUserId] = useState("");
   const [allTweet, setAllTweet] = useState();
-//
-const [userFollower, setUserFollower] = useState("");
-
+  //
+  const [userFollower, setUserFollower] = useState("");
 
   useEffect(() => {
     const localStorageToken = JSON.parse(localStorage.getItem("token"));
@@ -55,7 +55,7 @@ const [userFollower, setUserFollower] = useState("");
           profilTweets,
           setProfileTweets,
           userFollower,
-          setUserFollower
+          setUserFollower,
         }}
       >
         {console.log("app", allTweet)}
@@ -73,10 +73,8 @@ const [userFollower, setUserFollower] = useState("");
           <Route path="/home" element={<Home />}></Route>
           <Route path="/bookmark" element={<BookMark />}></Route>
           <Route path="/profile/:id" element={<Profile />}></Route>
-          <Route
-            path="/followers"
-            element={<FollowersSection />}
-          ></Route>
+          <Route path="/followers" element={<FollowersSection />}></Route>
+          <Route path="/following" element={<FollowingSection />}></Route>
         </Routes>
       </isLoggedInContext.Provider>
     </div>

@@ -27,7 +27,7 @@ const ProfileHeader = ({
         <div className="Test">
  
           <Link to="/followers">Followers {profileFollower.length}</Link>
-          <Link to="">Following {profileFollowing.length}</Link> 
+          <Link to="/following">Following {profileFollowing.length}</Link> 
 
         </div>
       </div>
