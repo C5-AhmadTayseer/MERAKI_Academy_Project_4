@@ -1,3 +1,42 @@
-.followerSection { 
+.followingSection-Container { 
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    width: 50%;
+    padding: 10px;
+}
 
+.Links { 
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.followerSection { 
+width: 100%;
+display: flex;
+justify-content: space-around;
+height: fit-content;
+}
+
+
+.followerSection .image { 
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+    justify-content: center;
+    align-items: center;
+}
+
+.followerSection .image img { 
+    width: 100%;
+    object-fit: contain;
+}
+.followerSection .Container2 { 
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
 }

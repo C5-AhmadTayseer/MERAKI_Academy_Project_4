@@ -21,8 +21,11 @@ const [profilTweets, setProfileTweets] = useState("");
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState("");
-  const [signInUser, setSignInUserId] = useState("");
+  const [signInUserId, setSignInUserId] = useState("");
   const [allTweet, setAllTweet] = useState();
+//
+const [userFollower, setUserFollower] = useState("");
+
 
   useEffect(() => {
     const localStorageToken = JSON.parse(localStorage.getItem("token"));
@@ -42,7 +45,7 @@ const [profilTweets, setProfileTweets] = useState("");
           setIsLoggedIn,
           setAllTweet,
           allTweet,
-          signInUser,
+          signInUserId,
           setSignInUserId,
           // Test
           profileFollower,
@@ -50,7 +53,9 @@ const [profilTweets, setProfileTweets] = useState("");
           profileFollowing,
           setProfileFollowing,
           profilTweets,
-          setProfileTweets
+          setProfileTweets,
+          userFollower,
+          setUserFollower
         }}
       >
         {console.log("app", allTweet)}
@@ -70,7 +75,7 @@ const [profilTweets, setProfileTweets] = useState("");
           <Route path="/profile/:id" element={<Profile />}></Route>
           <Route
             path="/followers"
-            element={FollowersSection}
+            element={<FollowersSection />}
           ></Route>
         </Routes>
       </isLoggedInContext.Provider>

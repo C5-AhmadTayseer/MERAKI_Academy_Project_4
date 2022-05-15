@@ -7,7 +7,6 @@ import { isLoggedInContext } from "../../App";
 const Buttons = ({
   tweetId,
   tweetPublisher,
-  signInUserId,
   isBookMarkTweet,
   bookMarkTweet,
   setBookMarkTweet,
@@ -22,7 +21,7 @@ const Buttons = ({
   // console.log(props);
   // console.log(bookMarkTweet);
   // console.log(userBookMark);
-  const { allTweet, setAllTweet, setProfileTweets, profilTweets } =
+  const { allTweet, setAllTweet, setProfileTweets, profilTweets , signInUserId} =
     useContext(isLoggedInContext);
   const [isAddedToBookMark, setIsAddedToBookMark] = useState(false);
   const [tweetBody, setTweetBody] = useState("");

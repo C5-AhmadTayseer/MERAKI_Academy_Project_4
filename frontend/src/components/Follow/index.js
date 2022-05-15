@@ -4,10 +4,8 @@ import React, { useContext, useState } from "react";
 import { isLoggedInContext } from "../../App";
 
 const FollowAndUnFollow = ({
-  userFollower,
-  setUserFollower,
   PublisherId,
-  signInUserId,
+  // signInUserId,
   // setProfileFollower,
   // setProfileFollowing,
   // profileFollower,
@@ -18,6 +16,9 @@ const FollowAndUnFollow = ({
     setProfileFollower,
     profileFollowing,
     setProfileFollowing,
+    signInUserId,
+    userFollower,
+    setUserFollower,
   } = useContext(isLoggedInContext);
 
   //   const [isFollowed, setIsFollowed] = useState(false);
@@ -42,7 +43,7 @@ const FollowAndUnFollow = ({
         console.log(PublisherId, "PUBLISHER ID INSIDE FOLLOW");
         if (profileFollower) {
           console.log(profileFollower, signInUserId, "@@@@");
-          setProfileFollower([signInUserId, ...profileFollowing]);
+          setProfileFollower([signInUserId, ...profileFollower]);
         }
         setUserFollower([PublisherId, ...userFollower]);
       })
@@ -80,7 +81,7 @@ const FollowAndUnFollow = ({
         setUserFollower(filterArray);
       });
   };
-
+console.log(userFollower , PublisherId , "NNNEW");
   return (
     <div>
       {PublisherId === signInUserId ? (

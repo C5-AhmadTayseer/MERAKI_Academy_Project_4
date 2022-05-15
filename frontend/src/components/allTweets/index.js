@@ -9,11 +9,12 @@ import Follow from "../Follow/";
 import { isLoggedInContext } from "../../App";
 
 const AllTweets = () => {
-  const { setAllTweet, allTweet } = useContext(isLoggedInContext);
+  const { setAllTweet, allTweet, setSignInUserId, signInUserId , userFollower , setUserFollower } =
+    useContext(isLoggedInContext);
 
   // i got all the signin user info using backEnd with all tweets ,(to take bookmark array and later userName and profile photo to use it .)
   const [userBookMark, setUserBookMark] = useState("");
-  const [userFollower, setUserFollower] = useState("");
+  // const [userFollower, setUserFollower] = useState("");
 
   //info for the loggend in user (userName , pforileImage )
   const [loggedInUserName, setLoggedInUserName] = useState("");
@@ -22,7 +23,7 @@ const AllTweets = () => {
   const navigate = useNavigate();
   const TOKEN = JSON.parse(localStorage.getItem("token"));
 
-  const [signInUserId, setSignInUserId] = useState("");
+  // const [signInUserId, setSignInUserId] = useState("");
   console.log("in alltweet app:", allTweet);
   useEffect(() => {
     getAllTweets();
@@ -115,9 +116,9 @@ const AllTweets = () => {
               </div>
               <Follow
                 PublisherId={element.userId._id}
-                userFollower={userFollower}
-                setUserFollower={setUserFollower}
-                signInUserId={signInUserId}
+                // userFollower={userFollower}
+                // setUserFollower={setUserFollower}
+                // signInUserId={signInUserId}
               />
 
               {/* Comments component ...  */}

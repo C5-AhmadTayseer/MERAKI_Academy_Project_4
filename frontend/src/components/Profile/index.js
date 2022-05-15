@@ -18,6 +18,10 @@ const Profile = () => {
     setProfileFollower,
     profileFollowing,
     setProfileFollowing,
+    signInUserId ,
+    setSignInUserId,
+    userFollower,
+    setUserFollower
   } = useContext(isLoggedInContext);
 
   // const [profileFollower, setProfileFollower] = useState("");
@@ -28,7 +32,6 @@ const Profile = () => {
   const navigate = useNavigate();
 
   const [userBookMark, setUserBookMark] = useState("");
-  const [userFollower, setUserFollower] = useState("");
 
   //image
   const [coverImage, setCoverImage] = useState("");
@@ -42,7 +45,7 @@ const Profile = () => {
   const [loggedInUserName, setLoggedInUserName] = useState("");
   const [loggedInProfileImage, setLoggedInProfileImage] = useState("");
 
-  const [signInUserId, setSignInUserId] = useState("");
+  // const [signInUserId, setSignInUserId] = useState("");
 
   useEffect(() => {
     getProfile();
@@ -85,6 +88,7 @@ const Profile = () => {
   return (
     <>
       <ProfileHeader setCoverImage={setCoverImage} coverImage={coverImage} profileImage={profileImage} setProfileImage={setProfileImage}  />
+      {/* modify it  */}
       <div className="Header">
         <div className="BackButton">
           <button
@@ -100,10 +104,10 @@ const Profile = () => {
         </div>
       </div>
 
-      <div className="Test">
+      {/* <div className="Test">
         <Link to="/followers">Followers {profileFollower.length}</Link>
         <Link to="">Following {profileFollowing.length}</Link>
-      </div>
+      </div> */}
 
       <div className="tweets-Container">
         {profilTweets &&
@@ -133,7 +137,7 @@ const Profile = () => {
                     <Buttons
                       tweetId={element._id}
                       tweetPublisher={element.userId._id}
-                      signInUserId={signInUserId}
+                      signInUserId={signInUserId} 
                       userBookMark={userBookMark}
                       setUserBookMark={setUserBookMark}
                       // will use another proprs , to pass it to create comment (will make it as a button on click appear popUp)
@@ -153,15 +157,16 @@ const Profile = () => {
                     />
                   </div>
                 </div>
+                {/* i can make other info as a context . */}
                 <Follow
                   PublisherId={element.userId._id}
-                  userFollower={userFollower}
+                  // userFollower={userFollower}
                   setUserFollower={setUserFollower}
                   signInUserId={signInUserId}
-                  //
-                  setProfileFollowing={setProfileFollowing}
-                  profileFollowing={profileFollowing}
-                  //
+
+                  // made it in context . 
+                  // setProfileFollowing={setProfileFollowing}
+                  // profileFollowing={profileFollowing}
                   // setProfileFollower={setProfileFollower}
                   // profileFollower={profileFollower}
                 />
