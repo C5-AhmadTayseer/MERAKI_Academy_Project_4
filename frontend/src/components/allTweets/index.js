@@ -124,6 +124,10 @@ const AllTweets = () => {
                   {/* <Follow
                     PublisherId={element.userId._id}
                   /> */}
+                  <div className="bottom-btns">
+                    <span>{element.likes.length}</span>
+                    <span>{element.comments.length}</span>
+                  </div>
                   <DropDown
                     PublisherId={element.userId._id}
                     tweetId={element._id}

@@ -1,7 +1,7 @@
 import "./style.css";
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext, useState  } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams , useNavigate} from "react-router-dom";
 import { isLoggedInContext } from "../../App";
 import Buttons from "../Buttons";
 import Comments from "../Comments.js";
@@ -9,6 +9,7 @@ import DropDown from "../DropDown";
 
 const OneTweet = () => {
   const { singleTweet, setSingleTweet } = useContext(isLoggedInContext);
+  const navigate = useNavigate()
   const { id } = useParams();
   const TOKEN = JSON.parse(localStorage.getItem("token"));
   const [userName, setUserName] = useState("");
@@ -54,6 +55,23 @@ const OneTweet = () => {
     //   << Header
     // Object.values(singleTweet).length
     <div className="Main">
+      <div className="Section-Header">
+        <div className="BackButton">
+          <button
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            Back
+          </button>
+        </div>
+        <div className="rightHeader">
+          Tweet 
+        </div>
+      </div>
+
+
+
       <div className="tweets-Container singleTweet">
         {singleTweet !== "" && (
           <div className="oneTweet">

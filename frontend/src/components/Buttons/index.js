@@ -1,10 +1,13 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import { BiDotsHorizontalRounded } from "react-icons/bi";
+// import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { BsHeart } from "react-icons/bs";
+import { FaRegComment } from "react-icons/fa";
+import { AiOutlineRetweet } from "react-icons/ai";
 
 import CreateComment from "../CreateComment/CreateCommet";
 import { isLoggedInContext } from "../../App";
+import AllTweets from "../allTweets";
 
 const Buttons = ({
   tweetId,
@@ -17,6 +20,8 @@ const Buttons = ({
   // console.log(userBookMark);
   const {
     //
+    allTweet,
+    setAllTweet,
     loggedInUserName,
     loggedInProfileImage,
     //
@@ -47,6 +52,15 @@ const Buttons = ({
       )
       .then((result) => {
         console.log("LIKE Result", result);
+        const mappedArray = allTweet.map((element) => {
+          if (element._id === tweetId) {
+            console.log("INSIDE MAP", element);
+            return result.data.addLikeToTweet;
+          }
+          return element;
+        });
+        console.log(mappedArray);
+        setAllTweet([...mappedArray]);
         setUserLikes([...userLikes, tweetId]);
         //will throw an error (populate .)
         setSingleTweet(result.data.addLikeToTweet);
@@ -64,28 +78,37 @@ const Buttons = ({
         },
       })
       .then((result) => {
+        if (allTweet) {
+          const mappedArray = allTweet.map((element) => {
+            if (element._id === tweetId) {
+              return result.data.deleteLikeFromTweet;
+            }
+            return element;
+          });
+          setAllTweet([...mappedArray]);
+        }
         console.log("UNLIKE Result", result);
         const filterArray = userLikes.filter((element) => {
           return element !== tweetId;
         });
         setUserLikes([...filterArray]);
-        setSingleTweet(result.data.deleteLikeFromTweet)
+        setSingleTweet(result.data.deleteLikeFromTweet);
       })
-     
+
       .catch((err) => {
         console.log("UNLIKE Error", err);
       });
   };
 
   return (
-    <div>
-      <button
+    <div className="bottom-btns">
+      <span
         onClick={() => {
           setIsInCommentMode(!isInCommentMode);
         }}
       >
-        create Comment
-      </button>
+        <FaRegComment />
+      </span>
       {isInCommentMode ? (
         <CreateComment
           userNamePublisher={userNamePublisher}
@@ -98,14 +121,17 @@ const Buttons = ({
       ) : (
         ""
       )}
+      <span>
+        <AiOutlineRetweet />
+      </span>
       {userLikes.includes(tweetId) ? (
-        <button
+        <span
           onClick={() => {
             unLikeTweet(tweetId);
           }}
         >
           UnLike
-        </button>
+        </span>
       ) : (
         <span
           onClick={() => {
