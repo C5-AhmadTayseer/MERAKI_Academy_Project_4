@@ -5,17 +5,10 @@ import { isLoggedInContext } from "../../App";
 
 const FollowAndUnFollow = ({
   PublisherId,
-  // signInUserId,
-  // setProfileFollower,
-  // setProfileFollowing,
-  // profileFollower,
-  // profileFollowing,
 }) => {
   const {
     profileFollower,
     setProfileFollower,
-    profileFollowing,
-    setProfileFollowing,
     signInUserId,
     userFollower,
     setUserFollower,
@@ -87,9 +80,9 @@ console.log(userFollower , PublisherId , "NNNEW");
       {PublisherId === signInUserId ? (
         ""
       ) : (
-        <div className="dropDown">
+        <div>
           {userFollower.includes(PublisherId) ? (
-            <button className="unFollow"
+            <button 
               onClick={() => {
                 unFollow(PublisherId);
               }}

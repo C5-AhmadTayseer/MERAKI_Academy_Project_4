@@ -4,7 +4,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Comments from "../Comments.js";
 import Buttons from "../Buttons/index.js";
-import Follow from "../Follow/";
+// import Follow from "../Follow/";
+import DropDown from "../DropDown";
 // import allTweetContext from "../../App";
 import { isLoggedInContext } from "../../App";
 
@@ -119,16 +120,17 @@ const AllTweets = () => {
                     <p>Tweet Body {element.tweetBody}</p>
                   </div>
                   {/* have className tweetbtn in Buttons component */}
-                  
-                  <Follow
+
+                  {/* <Follow
                     PublisherId={element.userId._id}
-                    // userFollower={userFollower}
-                    // setUserFollower={setUserFollower}
-                    // signInUserId={signInUserId}
+                  /> */}
+                  <DropDown
+                    PublisherId={element.userId._id}
+                    tweetId={element._id}
                   />
                   <Buttons
                     tweetId={element._id}
-                    tweetPublisher={element.userId._id}
+                    // tweetPublisher={element.userId._id}
                     // userBookMark={userBookMark}
                     // setUserBookMark={setUserBookMark}
                     // will use another proprs , to pass it to create comment (will make it as a button on click appear popUp)
