@@ -2,6 +2,7 @@ import "./style.css";
 import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+
 import Comments from "../Comments.js";
 import Buttons from "../Buttons/index.js";
 import Follow from "../Follow/";
@@ -88,16 +89,9 @@ const Profile = () => {
   // console.log(profileFollowing, "Profile Following");
   // console.log(USER , "==================");
   return (
-    <>
-      <ProfileHeader
-        setCoverImage={setCoverImage}
-        coverImage={coverImage}
-        profileImage={profileImage}
-        setProfileImage={setProfileImage}
-        USER={USER}
-      />
+    <div className="Main">
       {/* modify it  */}
-      <div className="Header">
+      <div className="Section-Header">
         <div className="BackButton">
           <button
             onClick={() => {
@@ -111,6 +105,14 @@ const Profile = () => {
           userName , Tweets {profilTweets.length}
         </div>
       </div>
+
+      <ProfileHeader
+        setCoverImage={setCoverImage}
+        coverImage={coverImage}
+        profileImage={profileImage}
+        setProfileImage={setProfileImage}
+        USER={USER}
+      />
 
       {/* <div className="Test">
         <Link to="/followers">Followers {profileFollower.length}</Link>
@@ -142,6 +144,8 @@ const Profile = () => {
                       <p>Tweet Body {element.tweetBody}</p>
                     </div>
                     {/* have className tweetbtn in Buttons component */}
+
+                    {/* i can make other info as a context . */}
                     <Buttons
                       tweetId={element._id}
                       tweetPublisher={element.userId._id}
@@ -165,7 +169,6 @@ const Profile = () => {
                     />
                   </div>
                 </div>
-                {/* i can make other info as a context . */}
                 <Follow
                   PublisherId={element.userId._id}
                   // userFollower={userFollower}
@@ -195,7 +198,7 @@ const Profile = () => {
             );
           })}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,15 +1,15 @@
-.HeaderContainer{
-    display: flex;
-    flex-direction: column;
-    margin-top: 50px;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    width: 50%;
-    padding: 10px;
+.HeaderContainer {
+  display: flex;
+  flex-direction: column;
+  /* margin-top: 50px; */
+  /* position: absolute; */
+  /* left: 50%;
+  transform: translate(-50%); */
+  width: 100%;
+  /* padding: 10px; */
 }
 .profile-header {
- width: 100%;
+  width: 100%;
   /* border: red 1px solid; */
 }
 
@@ -26,17 +26,24 @@
 }
 
 .profile-header .profilImg {
-  width: 140px;
-  height: 140px;
-  border-radius: 100%;
-  position: absolute;
-  bottom: -60px;
-  left: 30px;
+  margin-left: 3%;
+  display: flex;
+  align-items: center;
+  margin-top: -10%;
 }
 .profile-header .profilImg img {
   object-fit: contain;
-  width: 140px;
-  height: 140px;
+  width: 30%;
+  height: 30%;
   border-radius: 100%;
   border-color: var(--SubColor);
+}
+
+.profileInfo-Container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 5%;
+  gap: 10px;
+  margin-top: 10px;
 }

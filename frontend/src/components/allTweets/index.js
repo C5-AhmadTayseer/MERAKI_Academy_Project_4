@@ -119,6 +119,13 @@ const AllTweets = () => {
                     <p>Tweet Body {element.tweetBody}</p>
                   </div>
                   {/* have className tweetbtn in Buttons component */}
+                  
+                  <Follow
+                    PublisherId={element.userId._id}
+                    // userFollower={userFollower}
+                    // setUserFollower={setUserFollower}
+                    // signInUserId={signInUserId}
+                  />
                   <Buttons
                     tweetId={element._id}
                     tweetPublisher={element.userId._id}
@@ -135,12 +142,6 @@ const AllTweets = () => {
                   />
                 </div>
               </div>
-              <Follow
-                PublisherId={element.userId._id}
-                // userFollower={userFollower}
-                // setUserFollower={setUserFollower}
-                // signInUserId={signInUserId}
-              />
 
               {/* Comments component ...  */}
 

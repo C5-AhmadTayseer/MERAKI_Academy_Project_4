@@ -31,7 +31,10 @@ function App() {
   const [userBookMark, setUserBookMark] = useState("");
   //
   const [depState, setDepState] = useState(false);
+  //  
+  const [profileId , setProfileId] = useState("")
   //
+
 
   //that will be used in create post to take the photo , and in leftSide bar to show image with userName values will set on all tweet (homePage)
   const [loggedInUserName, setLoggedInUserName] = useState("");
@@ -84,6 +87,10 @@ function App() {
           //
           userLikes,
           setUserLikes,
+          //
+          profileId,
+          setProfileId
+
         }}
       >
         {console.log("app", allTweet)}
@@ -104,6 +111,7 @@ function App() {
           <Route path="/followers" element={<FollowersSection />}></Route>
           <Route path="/following" element={<FollowingSection />}></Route>
           <Route path="/tweets/:id" element={<OneTweet />}></Route>
+          {/* <Route path="liked/:id" ></Route> */}
         </Routes>
       </isLoggedInContext.Provider>
     </div>

@@ -38,24 +38,29 @@ const CreateComment = ({
       .then((result) => {
         console.log(result, "COMMENT RESULT ");
         console.log(profilTweets, "PROFILE TWEET IN COMMENT");
-        const mappedArr = allTweet.map((element) => {
-          // console.log(element);
-          if (element._id === tweetId) {
-            return result.data;
-          }
-          return element;
-        });
-        setAllTweet([...mappedArr]);
+        // an error when creating comment in single tweet , when refresh the page because map array .
+        if (allTweet) {
+          const mappedArr = allTweet.map((element) => {
+            // console.log(element);
+            if (element._id === tweetId) {
+              return result.data;
+            }
+            return element;
+          });
+          setAllTweet([...mappedArr]);
+        }
         setSingleTweet(result.data);
         console.log(result, "CREATE COMMENT");
 
-        const inProfileMap = profilTweets.map((element) => {
-          if (element._id === tweetId) {
-            return result.data;
-          }
-          return element;
-        });
-        setProfileTweets([...inProfileMap]);
+        if (profilTweets) {
+          const inProfileMap = profilTweets.map((element) => {
+            if (element._id === tweetId) {
+              return result.data;
+            }
+            return element;
+          });
+          setProfileTweets([...inProfileMap]);
+        }
       })
       //For Comment in profile section
 

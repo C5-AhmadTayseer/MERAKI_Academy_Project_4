@@ -87,9 +87,9 @@ console.log(userFollower , PublisherId , "NNNEW");
       {PublisherId === signInUserId ? (
         ""
       ) : (
-        <div>
+        <div className="dropDown">
           {userFollower.includes(PublisherId) ? (
-            <button
+            <button className="unFollow"
               onClick={() => {
                 unFollow(PublisherId);
               }}

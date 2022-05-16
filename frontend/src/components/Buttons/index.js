@@ -1,5 +1,7 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
+import { BiDotsHorizontalRounded } from "react-icons/bi";
+import { BsHeart } from "react-icons/bs";
 
 import CreateComment from "../CreateComment/CreateCommet";
 import { isLoggedInContext } from "../../App";
@@ -40,6 +42,8 @@ const Buttons = ({
   const [tweetBody, setTweetBody] = useState("");
   // temp state will remove it
   const [isInCommentMode, setIsInCommentMode] = useState(false);
+
+  const [isOpen, setIsOpen] = useState(false); // << for the 3 dot icon
 
   const TOKEN = JSON.parse(localStorage.getItem("token"));
 
@@ -195,6 +199,8 @@ const Buttons = ({
       .then((result) => {
         console.log("LIKE Result", result);
         setUserLikes([...userLikes, tweetId]);
+        //will throw an error (populate .)
+        // setSingleTweet(result.data.addLikeToTweet);
       })
       .catch((err) => {
         console.log("LIKE Error", err);
@@ -222,59 +228,73 @@ const Buttons = ({
 
   return (
     <div className="tweetbtn">
-      {tweetPublisher === signInUserId ? (
-        <>
-          <input
-            placeholder="Update"
-            onChange={(e) => {
-              setTweetBody(e.target.value);
-            }}
-          />
+      <BiDotsHorizontalRounded
+        className="dropDown"
+        onClick={() => {
+          setIsOpen(true);
+        }}
+      />
+      {/* isOpen? className="list-hide" : className ="show" */}
+      {/* update and delete */}
+      <div className={isOpen ? "list-show" : "list-hide"}>
+        {tweetPublisher === signInUserId ? (
+          <>
+            <input
+              placeholder="Update"
+              onChange={(e) => {
+                setTweetBody(e.target.value);
+              }}
+            />
+            <button
+              onClick={() => {
+                updateTweet(tweetId);
+              }}
+            >
+              update
+            </button>
+            <button
+              onClick={() => {
+                deleteTweet(tweetId);
+              }}
+            >
+              Delete
+            </button>
+          </>
+        ) : (
+          ""
+        )}
+
+        {isAddedToBookMark ||
+        isBookMarkTweet ||
+        userBookMark.includes(tweetId) ? (
           <button
-            onClick={() => {
-              updateTweet(tweetId);
+            onClick={(e) => {
+              // setIsOpen(false);
+              removeFromBookMark(tweetId);
             }}
           >
-            update
+            Remve Frombook mark
           </button>
+        ) : (
           <button
-            onClick={() => {
-              deleteTweet(tweetId);
+            onClick={(e) => {
+              // setIsOpen(false);
+              e.target = tweetId;
+              console.log(e.target, "EE");
+              console.log(tweetId, "Add =====");
+              addToBookMark(tweetId);
             }}
           >
-            Delete
+            add To book mark
           </button>
-        </>
-      ) : (
-        ""
-      )}
+        )}
+      </div>
 
       {/* BookMark and >>createComment<<sperated component    */}
 
       {/* Add || to check if it's om bookmark ..(it's not working on twitter , after refresh still (BookMark) => but on click message said it's already in book mark , (can handle it ..))  */}
       {/* {isAddedToBookMark  ? ( */}
-      {isAddedToBookMark ||
-      isBookMarkTweet ||
-      userBookMark.includes(tweetId) ? (
-        <button
-          onClick={(e) => {
-            removeFromBookMark(tweetId);
-          }}
-        >
-          Remve Frombook mark
-        </button>
-      ) : (
-        <button
-          onClick={(e) => {
-            e.target = tweetId;
-            console.log(e.target, "EE");
-            console.log(tweetId, "Add =====");
-            addToBookMark(tweetId);
-          }}
-        >
-          add To book mark
-        </button>
-      )}
+
       <button
         onClick={() => {
           setIsInCommentMode(!isInCommentMode);
@@ -303,13 +323,13 @@ const Buttons = ({
           UnLike
         </button>
       ) : (
-        <button
+        <span
           onClick={() => {
             likeTweet(tweetId);
           }}
         >
-          Like
-        </button>
+          <BsHeart />
+        </span>
       )}
     </div>
   );

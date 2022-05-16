@@ -50,42 +50,72 @@ const OneTweet = () => {
   return (
     //   << Header
     // Object.values(singleTweet).length
-
-    <div className="tweets-Container singleTweet">
-      {singleTweet !== "" && (
-        <div className="oneTweet">
-          <div className="publisherImg">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg" />
-          </div>
-
-          <div className="Container">
-            <div className="displayName">
-              <p> {userName} </p>
-            </div>
-            <div className="tweetBody">
-              <p>Tweet Body {singleTweet.tweetBody}</p>
+    <div className="Main">
+      <div className="tweets-Container singleTweet">
+        {singleTweet !== "" && (
+          <div className="oneTweet">
+            <div className="publisherImg">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg" />
             </div>
 
-            <Buttons
-              tweetId={singleTweet._id}
-              tweetPublisher={publisherId}
-              isDeleteinProfile={isDeleteinProfile}
-            />
+            <div className="Container">
+              <div className="displayName">
+                <p> {userName} </p>
+              </div>
+              <div className="tweetBody">
+                <p>Tweet Body {singleTweet.tweetBody}</p>
+              </div>
 
-            {singleTweet.comments &&
-              singleTweet.comments.map((element) => {
-                // comment component
+              <Buttons
+                tweetId={singleTweet._id}
+                tweetPublisher={publisherId}
+                isDeleteinProfile={isDeleteinProfile}
+              />
+              {/* Comments Component , that will be shown just in a single tweet ,  */}
+              {singleTweet.comments.length ? (
+                <span>Comments {singleTweet.comments.length}</span>
+              ) : (
+                "No Comments yet"
+              )}
+              {/* To show likes Number and the the users like the tweet (span on click will show a popUp with the users liked the tweet ). */}
+
+              {singleTweet.likes.length ? (
+                <span
+                  onClick={() => {
+                    // will show the mapped popUp when click on it .
+                  }}
+                >
+                  Number of likes {singleTweet.likes.length}
+                </span>
+              ) : (
+                "No Likes on this tweet"
+              )}
+              {/* likes .*/}
+              {singleTweet.likes.map((element) => {
+                console.log(element, "ONCLICK");
                 return (
-                  <Comments
-                    profileImage={element.commenter.profileImage}
-                    commenterUserName={element.commenter.userName}
-                    commentBody={element.comment}
-                  />
+                  <div className="testAndDelete">
+                    <p>userName {element.userName}</p>
+                    <p>useName Photo </p>
+                  </div>
                 );
               })}
+
+              {singleTweet.comments &&
+                singleTweet.comments.map((element) => {
+                  // comment component
+                  return (
+                    <Comments
+                      profileImage={element.commenter.profileImage}
+                      commenterUserName={element.commenter.userName}
+                      commentBody={element.comment}
+                    />
+                  );
+                })}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

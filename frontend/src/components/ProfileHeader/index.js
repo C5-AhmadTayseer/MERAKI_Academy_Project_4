@@ -4,17 +4,16 @@ import { isLoggedInContext } from "../../App";
 import { Link } from "react-router-dom";
 import InProfileFollow from "../InProfileFollow";
 
-
 const ProfileHeader = ({
-    // set will use it for updating info .
+  // set will use it for updating info .
   setCoverImage,
   setProfileImage,
   coverImage,
   profileImage,
-  USER
+  USER,
 }) => {
   const { profileFollower, profileFollowing } = useContext(isLoggedInContext);
-//   console.log("SSSSSSS" , profileFollower , profileFollowing);
+  //   console.log("SSSSSSS" , profileFollower , profileFollowing);
   return (
     <div className="HeaderContainer">
       <div className="profile-header">
@@ -24,15 +23,23 @@ const ProfileHeader = ({
         <div className="profilImg">
           <img src={`${profileImage}`} />
         </div>
-        <div>userName and info</div>
-        <InProfileFollow USER={USER} />
 
-        <div>button</div>
-        <div className="Test">
- 
-          <Link to="/followers">Followers {profileFollower.length}</Link>
-          <Link to="/following">Following {profileFollowing.length}</Link> 
+        <div className="profileInfo-Container">
+          <div>
+            <h2>userName</h2>
+          </div>
+          <InProfileFollow USER={USER} />
 
+          <div>Info.....</div>
+          <div className="Test">
+            <Link to="/following">Following {profileFollowing.length}</Link>
+            <Link to="/followers">Followers {profileFollower.length}</Link>
+
+            {/* Likes Tweet ,  */}
+            <div>
+              <Link to="/"> Liked Tweet </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
