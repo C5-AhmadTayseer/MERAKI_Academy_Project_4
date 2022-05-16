@@ -10,6 +10,8 @@ const DropDown = ({
   bookMarkTweet,
   setBookMarkTweet,
   isDeleteinProfile,
+  //in oneTweet
+  inSingleTweetAction,
 }) => {
   const {
     allTweet,
@@ -34,6 +36,7 @@ const DropDown = ({
   const [isOpen, setIsOpen] = useState(false); // << for the 3 dot icon
 
   const TOKEN = JSON.parse(localStorage.getItem("token"));
+
 
   const updateTweet = (tweetId) => {
     axios
@@ -79,7 +82,7 @@ const DropDown = ({
         }
 
         //for update in oneTweet
-        setSingleTweet(result.data.tweet);
+        // setSingleTweet(result.data.tweet);
 
         // Here ,
         // getAllTweets();
@@ -170,7 +173,14 @@ const DropDown = ({
 
   //Follow
   const follow = (PublisherId) => {
+    //   console.log(PublisherId , "INSIDE SINGLE TWEET");
     // console.log(PublisherId, userFollower);
+    if (!PublisherId) {
+      console.log(singleTweet , "INSIDE IFFF -=====");
+    //   That's because it undifined when i sent it from obj , so i reset the value by this conditon ...
+      PublisherId = singleTweet.userId 
+      console.log(PublisherId , "AFTER RESET");
+    }
 
     axios
       .post(
@@ -191,6 +201,8 @@ const DropDown = ({
           setProfileFollower([signInUserId, ...profileFollower]);
         }
         setUserFollower([PublisherId, ...userFollower]);
+        // 
+
       })
       .catch((err) => {
         console.log(err, "FollowError");

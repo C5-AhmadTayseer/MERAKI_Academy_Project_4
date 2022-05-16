@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { isLoggedInContext } from "../../App";
 import Buttons from "../Buttons";
 import Comments from "../Comments.js";
+import DropDown from "../DropDown";
 
 const OneTweet = () => {
   const { singleTweet, setSingleTweet } = useContext(isLoggedInContext);
@@ -13,6 +14,7 @@ const OneTweet = () => {
   const [userName, setUserName] = useState("");
   const [publisherId, setPublisherId] = useState("");
   const [isDeleteinProfile, setIsDeleteinProfile] = useState(true);
+  // const [inSingleTweetAction, setInSingleTweetAction] = useState(false);
 
   console.log(id);
 
@@ -31,7 +33,8 @@ const OneTweet = () => {
         console.log(result.data, "==ONE TWEET RESULT==");
         setSingleTweet(result.data.tweet);
         setUserName(result.data.tweet.userId.userName);
-        setPublisherId(result.data.tweet.userId._id);
+        // setPublisherId(result.data.tweet.userId._id);
+        setPublisherId(singleTweet.userId);
       })
       .catch((err) => {
         console.log(err);
@@ -40,7 +43,7 @@ const OneTweet = () => {
   };
 
   console.log(singleTweet, "ONE TWEET");
-  console.log(userName, "user");
+  // console.log(userName, "user");
 
   //   console.log(singleTweet.userId.userName);
   //   console.log(singleTweet.userId.userName, "SS");
@@ -66,9 +69,17 @@ const OneTweet = () => {
                 <p>Tweet Body {singleTweet.tweetBody}</p>
               </div>
 
+              <DropDown
+                tweetId={singleTweet._id}
+                // Condition because i got to result , one after update and the original one before update T_T
+                PublisherId={singleTweet.userId._id ? singleTweet.userId._id : singleTweet.userId}
+                // inSingleTweetAction={inSingleTweetAction}
+                // setInSingleTweetAction={setInSingleTweetAction}
+              />
+
               <Buttons
                 tweetId={singleTweet._id}
-                tweetPublisher={publisherId}
+                tweetPublisher={singleTweet.userId}
                 isDeleteinProfile={isDeleteinProfile}
               />
               {/* Comments Component , that will be shown just in a single tweet ,  */}

@@ -14,7 +14,21 @@ const addToLike = async (req, res) => {
         $push: { likes: signInUser },
       },
       { new: true }
-    );
+    )  .populate({
+      path: "likes",
+      model: "User",
+      select: "userName profileImage",
+    })
+    .populate({
+      path: "comments",
+      populate: [
+        {
+          path: "commenter",
+          model: "User",
+          select: "userName profileImage",
+        },
+      ],
+    });
     ////
 
     // res.json(addLikeToTweet)
@@ -25,7 +39,7 @@ const addToLike = async (req, res) => {
           $push: { likesTweet: addLikeToTweet._id },
         },
         { new: true }
-      );
+      )
 
       return res.status(201).json({
         success: true,
@@ -56,7 +70,21 @@ const deleteFromLike = async (req, res) => {
         $pull: { likes: signInUser },
       },
       { new: true }
-    );
+    )  .populate({
+      path: "likes",
+      model: "User",
+      select: "userName profileImage",
+    })
+    .populate({
+      path: "comments",
+      populate: [
+        {
+          path: "commenter",
+          model: "User",
+          select: "userName profileImage",
+        },
+      ],
+    });
     // res.json(addLikeToTweet)
     if (deleteLikeFromTweet) {
       const deleteTweetFromUserLikes = await userModel.findByIdAndUpdate(

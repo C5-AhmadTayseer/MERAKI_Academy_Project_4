@@ -69,7 +69,9 @@ const Buttons = ({
           return element !== tweetId;
         });
         setUserLikes([...filterArray]);
+        setSingleTweet(result.data.deleteLikeFromTweet)
       })
+     
       .catch((err) => {
         console.log("UNLIKE Error", err);
       });

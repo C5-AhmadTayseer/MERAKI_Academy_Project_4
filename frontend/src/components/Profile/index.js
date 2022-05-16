@@ -5,7 +5,8 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 
 import Comments from "../Comments.js";
 import Buttons from "../Buttons/index.js";
-import Follow from "../Follow/";
+// import Follow from "../Follow/";
+import DropDown from "../DropDown";
 import ProfileHeader from "../ProfileHeader";
 
 import { isLoggedInContext } from "../../App";
@@ -148,7 +149,7 @@ const Profile = () => {
                     {/* i can make other info as a context . */}
                     <Buttons
                       tweetId={element._id}
-                      tweetPublisher={element.userId._id}
+                      // tweetPublisher={element.userId._id}
                       signInUserId={signInUserId}
                       userBookMark={userBookMark}
                       setUserBookMark={setUserBookMark}
@@ -169,11 +170,13 @@ const Profile = () => {
                     />
                   </div>
                 </div>
-                <Follow
+                <DropDown
                   PublisherId={element.userId._id}
+                  tweetId={element._id}
+
                   // userFollower={userFollower}
-                  setUserFollower={setUserFollower}
-                  signInUserId={signInUserId}
+                  // setUserFollower={setUserFollower}
+                  // signInUserId={signInUserId}
 
                   // made it in context .
                   // setProfileFollowing={setProfileFollowing}
