@@ -1,7 +1,11 @@
+import "./style.css"
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { isLoggedInContext } from "../../App";
+import { FiUserPlus , FiUserX } from "react-icons/fi";
+import { MdOutlineBookmarkAdd , MdOutlineBookmarkRemove , MdDeleteOutline } from "react-icons/md";
+
 
 const DropDown = ({
   tweetId,
@@ -12,6 +16,7 @@ const DropDown = ({
   isDeleteinProfile,
   //in oneTweet
   inSingleTweetAction,
+  publisherUserName
 }) => {
   const {
     allTweet,
@@ -33,10 +38,10 @@ const DropDown = ({
   const [isAddedToBookMark, setIsAddedToBookMark] = useState(false);
   const [tweetBody, setTweetBody] = useState("");
   // temp state will remove it
-  const [isOpen, setIsOpen] = useState(false); // << for the 3 dot icon
+  const [isOpen, setIsOpen] = useState(false);
+   // << for the 3 dot icon
 
   const TOKEN = JSON.parse(localStorage.getItem("token"));
-
 
   const updateTweet = (tweetId) => {
     axios
@@ -176,10 +181,10 @@ const DropDown = ({
     //   console.log(PublisherId , "INSIDE SINGLE TWEET");
     // console.log(PublisherId, userFollower);
     if (!PublisherId) {
-      console.log(singleTweet , "INSIDE IFFF -=====");
-    //   That's because it undifined when i sent it from obj , so i reset the value by this conditon ...
-      PublisherId = singleTweet.userId 
-      console.log(PublisherId , "AFTER RESET");
+      console.log(singleTweet, "INSIDE IFFF -=====");
+      //   That's because it undifined when i sent it from obj , so i reset the value by this conditon ...
+      PublisherId = singleTweet.userId;
+      console.log(PublisherId, "AFTER RESET");
     }
 
     axios
@@ -201,8 +206,7 @@ const DropDown = ({
           setProfileFollower([signInUserId, ...profileFollower]);
         }
         setUserFollower([PublisherId, ...userFollower]);
-        // 
-
+        //
       })
       .catch((err) => {
         console.log(err, "FollowError");
@@ -244,88 +248,94 @@ const DropDown = ({
       <BiDotsHorizontalRounded
         className="dropDown"
         onClick={() => {
-          setIsOpen(true);
+          setIsOpen(!isOpen);
         }}
       />
       {/* isOpen? className="list-hide" : className ="show" */}
       {/* update and delete */}
-      <div className={isOpen ? "list-show" : "list-hide"}>
-        {PublisherId === signInUserId ? (
-          <>
-            <input
-              placeholder="Update"
-              onChange={(e) => {
-                setTweetBody(e.target.value);
-              }}
-            />
-            <button
-              onClick={() => {
-                updateTweet(tweetId);
-              }}
-            >
-              update
-            </button>
-            <button
-              onClick={() => {
-                deleteTweet(tweetId);
-              }}
-            >
-              Delete
-            </button>
-          </>
-        ) : (
-          ""
-        )}
+      {isOpen ? (
 
-        {isAddedToBookMark ||
-        isBookMarkTweet ||
-        userBookMark.includes(tweetId) ? (
-          <button
-            onClick={(e) => {
-              // setIsOpen(false);
-              removeFromBookMark(tweetId);
-            }}
-          >
-            Remve Frombook mark
-          </button>
-        ) : (
-          <button
-            onClick={(e) => {
-              // setIsOpen(false);
-              e.target = tweetId;
-              console.log(e.target, "EE");
-              console.log(tweetId, "Add =====");
-              addToBookMark(tweetId);
-            }}
-          >
-            add To book mark
-          </button>
-        )}
-      </div>
-      {/* Follow */}
-      {PublisherId === signInUserId ? (
-        ""
-      ) : (
-        <div>
-          {userFollower.includes(PublisherId) ? (
-            <button
-              onClick={() => {
-                unFollow(PublisherId);
-              }}
-            >
-              UnFollow
-            </button>
+        <div className="icon-List">
+
+          {PublisherId === signInUserId ? (
+            <>
+              <input
+                placeholder="Update"
+                onChange={(e) => {
+                  setTweetBody(e.target.value);
+                }}
+              />
+              <span className="icon"
+                onClick={() => {
+                  updateTweet(tweetId);
+                }}
+              >
+                update
+              </span>
+              <span className="delete"
+                onClick={() => {
+                  deleteTweet(tweetId);
+                }}
+              >
+             <MdDeleteOutline />   Delete
+              </span>
+            </>
           ) : (
-            <button
-              className="follow"
-              onClick={() => {
-                follow(PublisherId);
+            ""
+          )}
+
+          {isAddedToBookMark ||
+          isBookMarkTweet ||
+          userBookMark.includes(tweetId) ? (
+            <span className="icon"
+              onClick={(e) => {
+                // setIsOpen(false);
+                removeFromBookMark(tweetId);
               }}
             >
-              Follow
-            </button>
+             <MdOutlineBookmarkRemove /> Remove Tweet from Bookmark
+            </span>
+          ) : (
+            <span className="icon"
+              onClick={(e) => {
+                // setIsOpen(false);
+                e.target = tweetId;
+                console.log(e.target, "EE");
+                console.log(tweetId, "Add =====");
+                addToBookMark(tweetId);
+              }}
+            >
+              <MdOutlineBookmarkAdd /> Bookmark
+            </span>
+          )}
+          {/* FOLLOW */}
+          {PublisherId === signInUserId ? (
+            ""
+          ) : (
+            <div>
+              {userFollower.includes(PublisherId) ? (
+                <span className="icon"
+                  onClick={() => {
+                    unFollow(PublisherId);
+                  }}
+                >
+                 <FiUserX /> UnFollow {publisherUserName}
+                </span>
+              ) : (
+                <span
+                  className="icon"
+                  onClick={() => {
+                    follow(PublisherId);
+                  }}
+                >
+                <FiUserPlus />  Follow {publisherUserName}
+                </span>
+              )}
+            </div>
           )}
         </div>
+      ) : (
+        ""
       )}
     </div>
   );

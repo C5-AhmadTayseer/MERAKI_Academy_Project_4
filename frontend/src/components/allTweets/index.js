@@ -128,6 +128,8 @@ const AllTweets = () => {
                   <DropDown
                     PublisherId={element.userId._id}
                     tweetId={element._id}
+                    // for dropDown
+                    publisherUserName={element.userId.userName}
                   />
                   <Buttons
                     //number Of Comments ;
@@ -151,9 +153,8 @@ const AllTweets = () => {
 
               {/* Comments component ...  */}
 
-            
               {/* <Need to Modifiy To be >div On Click will open comment section . */}
-              
+
               {/* {element.comments.map((el, ind) => {
                 // comment component
                 return (
@@ -164,7 +165,7 @@ const AllTweets = () => {
                   />
                 );
               })} */}
-              
+
               {/* Buttons */}
             </>
           );
