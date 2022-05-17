@@ -54,15 +54,18 @@ const Buttons = ({
       )
       .then((result) => {
         console.log("LIKE Result", result);
-        const mappedArray = allTweet.map((element) => {
-          if (element._id === tweetId) {
-            console.log("INSIDE MAP", element);
-            return result.data.addLikeToTweet;
-          }
-          return element;
-        });
-        console.log(mappedArray);
-        setAllTweet([...mappedArray]);
+        if (allTweet) {
+          const mappedArray = allTweet.map((element) => {
+            if (element._id === tweetId) {
+              console.log("INSIDE MAP", element);
+              return result.data.addLikeToTweet;
+            }
+            return element;
+          });
+          setAllTweet([...mappedArray]);
+        }
+        // console.log(mappedArray);
+
         setUserLikes([...userLikes, tweetId]);
         //will throw an error (populate .)
         setSingleTweet(result.data.addLikeToTweet);
@@ -106,10 +109,10 @@ const Buttons = ({
     <div className="bottom-btns">
       <span
         onClick={() => {
-          setIsInCommentMode(!isInCommentMode);
+          setIsInCommentMode(true);
         }}
       >
-      <FaRegComment /> 
+        <FaRegComment />
       </span>
       {isInCommentMode ? (
         <CreateComment
@@ -119,6 +122,7 @@ const Buttons = ({
           loggedInUserName={loggedInUserName}
           loggedInProfileImage={loggedInProfileImage}
           tweetId={tweetId}
+          setIsInCommentMode={setIsInCommentMode}
         />
       ) : (
         ""
@@ -126,7 +130,7 @@ const Buttons = ({
       <span>
         <AiOutlineRetweet />
       </span>
-      
+
       {userLikes.includes(tweetId) ? (
         <span
           onClick={() => {

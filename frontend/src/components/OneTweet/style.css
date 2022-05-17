@@ -2,10 +2,6 @@
     margin-top: 70px;
 } */
 
-
-
-
-
 .singleTweet-Container {
   display: flex;
   flex-direction: column;
@@ -24,6 +20,14 @@
   justify-content: center;
   align-items: flex-start;
   gap: 0.3rem;
+}
+
+.single-Con .oneTweet {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid var(--SubColor);
+  margin: 14px 0;
+  align-items: center;
 }
 
 .displayName-single {
@@ -92,14 +96,13 @@
 }
 
 .replySingle {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    /* justify-content: space-between; */
-    padding: 5px;
-    border-top: 1px solid var(--SubColor);
-    border-bottom: 1px solid var(--SubColor)
-
+  display: flex;
+  width: 100%;
+  align-items: center;
+  /* justify-content: space-between; */
+  padding: 5px;
+  border-top: 1px solid var(--SubColor);
+  border-bottom: 1px solid var(--SubColor);
 }
 
 .photoInReply {
@@ -112,7 +115,6 @@
 }
 .inputInReply {
   width: 80%;
-  
 }
 .inputInReply input {
   width: 100%;
@@ -139,4 +141,47 @@
 .ReplyButton button:hover {
   background-color: var(--blueColor1);
   transition: 0.3s;
+}
+
+.inProfile {
+  width: 50%;
+  height: 65%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: inherit;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f4f4ff;
+  border-radius: 10px;
+  border-color: unset;
+  /* box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px; */
+  box-shadow: rgb(0 0 0 / 25%) 0px 54px 55px, rgb(0 0 0 / 12%) 0px -12px 30px,
+    rgb(0 0 0 / 12%) 0px 4px 6px, rgb(0 0 0 / 17%) 0px 12px 13px,
+    rgb(0 0 0 / 9%) 0px -3px 5px;
+  z-index: 2;
+  flex-direction: column;
+}
+
+.profile {
+  padding: 10px;
+  border-bottom: 1px solid var(--btnColor);
+}
+.profile img {
+  width: 48px;
+  height: 48px;
+}
+
+.follow-unfollow {
+  display: flex;
+  align-self: flex-end;
+}
+
+.follow-unfollow button {
+  width: 90px;
+  height: 35px;
+  background-color: var(--mainColor2);
+  color: white;
+  border-radius: 18px;
 }

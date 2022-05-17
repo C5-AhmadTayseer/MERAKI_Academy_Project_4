@@ -28,6 +28,8 @@ const OneTweet = () => {
   const [loggedInProfileImage, setLoggedInProfileImage] = useState("");
   const [comment, setComment] = useState("");
 
+  const [isLikesOpan, setIsLikesOpan] = useState(false);
+
   // const [inSingleTweetAction, setInSingleTweetAction] = useState(false);
 
   console.log(id);
@@ -167,20 +169,55 @@ const OneTweet = () => {
               ) : (
                 "No Comments yet"
               )}
-              {/* To show likes Number and the the users like the tweet (span on click will show a popUp with the users liked the tweet ). */}
 
-              {singleTweet.likes.length ? (
-                <span
-                  onClick={() => {
-                    // will show the mapped popUp when click on it .
-                  }}
-                >
-                  Number of likes {singleTweet.likes.length}
-                </span>
+              {/* To show likes Number and the the users like the tweet (span on click will show a popUp with the users liked the tweet ). */}
+              <span
+                onClick={() => {
+                  setIsLikesOpan(true);
+                  // will show the mapped popUp when click on it .
+                }}
+              >
+                likes{singleTweet.likes.length}
+              </span>
+
+              {isLikesOpan ? (
+                <>
+                  <div className="overlay"> </div>
+
+                  <div className="modal inProfile">
+                    {singleTweet.likes && singleTweet.likes.map((element) => {
+                      console.log(element, "ONCLICK");
+                      return (
+                        <>
+                          <h2>Liked By</h2>
+
+                          <div
+                            className="oneTweet profile"
+                            onClick={() => {
+                              navigate(`/profile/${element._id}`);
+                            }}
+                          >
+                            <img src={`${element.profileImage}`} />
+                            <p>userName {element.userName}</p>
+                          </div>
+                        </>
+                      );
+                    })}
+                    {/* can add condition if there's no likes  */}
+                    <button
+                      onClick={() => {
+                        setIsLikesOpan(false);
+                      }}
+                    >
+                      X
+                    </button>
+                  </div>
+                </>
               ) : (
-                "No Likes on this tweet"
+                ""
               )}
             </div>
+
             {/* buttons already have class name  */}
             <Buttons
               tweetId={singleTweet._id}
@@ -211,18 +248,19 @@ const OneTweet = () => {
               </div>
             </div>
             {singleTweet.comments &&
-          singleTweet.comments.map((element) => {
-            // comment component
-            return (
-              <Comments
-                profileImage={element.commenter.profileImage}
-                commenterUserName={element.commenter.userName}
-                commentBody={element.comment}
-              />
-            );
-          })}
+              singleTweet.comments.map((element) => {
+                // comment component
+                return (
+                  <Comments
+                    profileImage={element.commenter.profileImage}
+                    commenterUserName={element.commenter.userName}
+                    commentBody={element.comment}
+                  />
+                );
+              })}
             {/* Comments Component , that will be shown just in a single tweet ,  */}
             {/* likes .*/}
+
             {/* {singleTweet.likes.map((element) => {
                 console.log(element, "ONCLICK");
                 return (
@@ -234,7 +272,6 @@ const OneTweet = () => {
               })} */}
           </div>
         )}
-        
       </div>
     </div>
   );

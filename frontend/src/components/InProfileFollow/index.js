@@ -54,7 +54,7 @@ const InProfileFollow = ({ USER }) => {
       {signInUserId === USER ? (
         ""
       ) : (
-        <div>
+        <div className="follow-unfollow">
           {userFollower.includes(USER) ? (
             <button
               onClick={() => {

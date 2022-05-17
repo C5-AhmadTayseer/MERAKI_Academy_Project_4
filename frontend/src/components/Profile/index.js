@@ -114,6 +114,18 @@ const Profile = () => {
         setProfileImage={setProfileImage}
         USER={USER}
       />
+      <div className="linksinProfile">
+        <div>
+              <Link to={`/liked/${id}`}> Liked Tweet </Link>
+            </div>
+            <div>
+                Tweets 
+            </div>
+            <div>
+            Re-tweet
+            </div>
+            
+            </div>
 
       {/* <div className="Test">
         <Link to="/followers">Followers {profileFollower.length}</Link>
@@ -141,7 +153,9 @@ const Profile = () => {
                     <div className="displayName">
                       <p> {element.userId.userName} </p>
                     </div>
-                    <div className="tweetBody">
+                    <div className="tweetBody" onClick={()=>{
+                                              navigate(`/tweets/${element._id}`);
+                    }}>
                       <p>Tweet Body {element.tweetBody}</p>
                     </div>
                     {/* have className tweetbtn in Buttons component */}
@@ -187,7 +201,7 @@ const Profile = () => {
 
                 {/* Comments component ...  */}
 
-                {element.comments.map((el, ind) => {
+                {/* {element.comments.map((el, ind) => {
                   // comment component
                   return (
                     <Comments
@@ -196,10 +210,11 @@ const Profile = () => {
                       commentBody={el.comment}
                     />
                   );
-                })}
+                })} */}
               </>
             );
           })}
+
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import "./style.css";
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { isLoggedInContext } from "../../App";
@@ -9,6 +10,7 @@ const CreateComment = ({
   loggedInUserName,
   tweetId,
   loggedInProfileImage,
+  setIsInCommentMode,
 }) => {
   const {
     allTweet,
@@ -70,38 +72,67 @@ const CreateComment = ({
   };
 
   return (
-    <div>
-      <div>
+    <>
+      <div className="overlay"></div>
+      <div className="modal-reply">
         {/* for username and photo */}
-        <div className="test1">
-          <img src={`${PublisherIdProfileImg}`} />
-          <p>{userNamePublisher}</p>
-        </div>
-        {/* tweet body */}
-        <div>
-          <p>TweetBody ,, {tweetContent}</p>
-        </div>
-        <p>replying to {userNamePublisher}</p>
+        {/* two div ,  */}
 
-        <div className="test1">
-          <img src={`${loggedInProfileImage}`} />
-          <input
-            placeholder="Tweet Your reply"
-            onChange={(e) => {
-              setComment(e.target.value);
-            }}
-          />
+        <div className="popUpContainer">
+          <div className="upperSection">
+            <div className="publisherPhoto">
+              <img src={`${PublisherIdProfileImg}`} />
+            </div>
 
+            <div className="userNameAndtweetBody">
+              <div className="userName">
+                <p>{userNamePublisher}</p>
+              </div>
+              <div className="tweetBody">
+                <p>TweetBody ,, {tweetContent}</p>
+              </div>
+            </div>
+          </div>
+          {/* for Replying to ,, Middle */}
+          <div className="middle">
+            <p>replying to {userNamePublisher}</p>
+          </div>
+          {/* lower-Section for commenter photo and input field  (container - devided to 2 div) */}
+          <div className="lowerSection">
+            <div className="lowerSection-image">
+              <img src={`${loggedInProfileImage}`} />
+            </div>
+
+            <div className="lowerSection-input">
+              <input
+                placeholder="Tweet Your reply"
+                onChange={(e) => {
+                  setComment(e.target.value);
+                }}
+              />
+            </div>
+
+          </div>
           <button
-            onClick={() => {
-              newComment(tweetId);
-            }}
-          >
-            Reply
-          </button>
+              onClick={() => {
+                setIsInCommentMode(false);
+                newComment(tweetId);
+              }}
+            >
+              Reply
+            </button>
+            <button
+              onClick={() => {
+                setIsInCommentMode(false);
+              }}
+            >
+              X
+            </button>
         </div>
+
+        {/* tweet body */}
       </div>
-    </div>
+    </>
   );
 };
 

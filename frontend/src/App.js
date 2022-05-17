@@ -9,6 +9,7 @@ import Profile from "./components/Profile";
 import FollowersSection from "./components/FollowersSection.js";
 import FollowingSection from "./components/FollowingSection";
 import OneTweet from "./components/OneTweet";
+import LikedTweet from "./components/Liked";
 import { Routes, Route, Link } from "react-router-dom";
 
 export const isLoggedInContext = createContext();
@@ -31,10 +32,9 @@ function App() {
   const [userBookMark, setUserBookMark] = useState("");
   //
   const [depState, setDepState] = useState(false);
-  //  
-  const [profileId , setProfileId] = useState("")
   //
-
+  const [profileId, setProfileId] = useState("");
+  //
 
   //that will be used in create post to take the photo , and in leftSide bar to show image with userName values will set on all tweet (homePage)
   const [loggedInUserName, setLoggedInUserName] = useState("");
@@ -76,7 +76,7 @@ function App() {
           //for buttons test
           userBookMark,
           setUserBookMark,
-          //for post and left-sidebar . 
+          //for post and left-sidebar .
           loggedInUserName,
           setLoggedInUserName,
           loggedInProfileImage,
@@ -89,8 +89,7 @@ function App() {
           setUserLikes,
           //
           profileId,
-          setProfileId
-
+          setProfileId,
         }}
       >
         {console.log("app", allTweet)}
@@ -111,7 +110,7 @@ function App() {
           <Route path="/followers" element={<FollowersSection />}></Route>
           <Route path="/following" element={<FollowingSection />}></Route>
           <Route path="/tweets/:id" element={<OneTweet />}></Route>
-          {/* <Route path="liked/:id" ></Route> */}
+          <Route path="/liked/:id" element={<LikedTweet />}></Route>
         </Routes>
       </isLoggedInContext.Provider>
     </div>

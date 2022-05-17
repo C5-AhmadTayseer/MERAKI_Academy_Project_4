@@ -2,7 +2,7 @@ import "./style.css";
 import React from "react";
 import AllTweets from "../allTweets/";
 import PostTweet from "../PostTweet/index"
-
+import ModalpopUp from "../ModalTest";
 const Home = () => {
   return (
     <div className="Main">
@@ -10,6 +10,7 @@ const Home = () => {
       <p>Home</p>
       <p>Icon</p>
       </div>
+      {/* <ModalpopUp /> */}
       <PostTweet />
       <AllTweets />
     </div>

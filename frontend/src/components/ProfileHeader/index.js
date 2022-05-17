@@ -36,9 +36,7 @@ const ProfileHeader = ({
             <Link to="/followers">Followers {profileFollower.length}</Link>
 
             {/* Likes Tweet ,  */}
-            <div>
-              <Link to="/"> Liked Tweet </Link>
-            </div>
+            
           </div>
         </div>
       </div>

@@ -39,7 +39,7 @@ const LeftSideBar = () => {
           <Link to="">Profile</Link>
         </div>
       </div>
-      <button>Tweet</button>
+      <button className="sideBarbtn">Tweet</button>
 
       <div> img With userName</div>
     </div>
