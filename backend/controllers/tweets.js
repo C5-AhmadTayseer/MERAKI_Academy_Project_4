@@ -90,6 +90,8 @@ const getAllTweets = async (req, res) => {
 }
 */
 const getTweetById = async (req, res) => {
+const signInUserId = req.token.userId
+
   const id = req.params.id;
   /*
   path: "userId",
@@ -111,6 +113,7 @@ const getTweetById = async (req, res) => {
   try {
     const result = await tweetModel
       .findById(id)
+      .populate("userId", "userName profileImage")
       .populate({
         path: "likes",
         model: "User",
@@ -128,12 +131,32 @@ const getTweetById = async (req, res) => {
       });
 
     if (result) {
-      res.status(200).json({
+      // To Solve addToBookMark after reloading the page ....
+      try {
+        const loggedInUser = await userModel
+          .findById(signInUserId)
+          .select("-password");
+
+        res.status(201).json({
+          success: true,
+          message: `The tweet with id ${id}`,
+          tweet: result,
+          newResult: loggedInUser,
+        });
+      } catch (err) {
+        res.json({
+          message: "EROR IN FINDALLTWEETS",
+          err: err,
+        });
+      }
+    }
+    /*
+              res.status(200).json({
         success: true,
         message: `The tweet with id ${id}`,
         tweet: result,
       });
-    }
+            */
   } catch (err) {
     if (err.kind === "ObjectId") {
       res.status(404).json({

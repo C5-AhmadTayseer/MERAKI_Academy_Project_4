@@ -14,6 +14,8 @@ const Buttons = ({
   userNamePublisher,
   PublisherIdProfileImg,
   tweetContent,
+  numberOfComment,
+  numberOfLikes,
 }) => {
   // console.log(props);
   // console.log(bookMarkTweet);
@@ -107,7 +109,7 @@ const Buttons = ({
           setIsInCommentMode(!isInCommentMode);
         }}
       >
-        <FaRegComment />
+      <FaRegComment /> 
       </span>
       {isInCommentMode ? (
         <CreateComment
@@ -124,13 +126,14 @@ const Buttons = ({
       <span>
         <AiOutlineRetweet />
       </span>
+      
       {userLikes.includes(tweetId) ? (
         <span
           onClick={() => {
             unLikeTweet(tweetId);
           }}
         >
-          UnLike
+          {numberOfLikes ? numberOfLikes : ""} UnLike
         </span>
       ) : (
         <span
@@ -138,7 +141,7 @@ const Buttons = ({
             likeTweet(tweetId);
           }}
         >
-          <BsHeart />
+          {numberOfLikes ? numberOfLikes : ""} <BsHeart />
         </span>
       )}
     </div>

@@ -124,15 +124,15 @@ const AllTweets = () => {
                   {/* <Follow
                     PublisherId={element.userId._id}
                   /> */}
-                  <div className="bottom-btns">
-                    <span>{element.likes.length}</span>
-                    <span>{element.comments.length}</span>
-                  </div>
+
                   <DropDown
                     PublisherId={element.userId._id}
                     tweetId={element._id}
                   />
                   <Buttons
+                    //number Of Comments ;
+                    numberOfComment={element.comments.length}
+                    numberOfLikes={element.likes.length}
                     tweetId={element._id}
                     // tweetPublisher={element.userId._id}
                     // userBookMark={userBookMark}
@@ -151,8 +151,10 @@ const AllTweets = () => {
 
               {/* Comments component ...  */}
 
+            
               {/* <Need to Modifiy To be >div On Click will open comment section . */}
-              {element.comments.map((el, ind) => {
+              
+              {/* {element.comments.map((el, ind) => {
                 // comment component
                 return (
                   <Comments
@@ -161,7 +163,8 @@ const AllTweets = () => {
                     commentBody={el.comment}
                   />
                 );
-              })}
+              })} */}
+              
               {/* Buttons */}
             </>
           );

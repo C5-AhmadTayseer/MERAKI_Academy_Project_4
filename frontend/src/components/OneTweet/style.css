@@ -2,9 +2,141 @@
     margin-top: 70px;
 } */
 
-.testAndDelete { 
-    position: fixed;
+
+
+
+
+.singleTweet-Container {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: start; */
+  align-items: center;
+  width: 100%;
+  /* height: 95vh; */
+  padding: 0 10px 10px;
+}
+
+.single-Con {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.3rem;
+}
+
+.displayName-single {
+  display: flex;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.displayName-single p {
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.publisherImg-single {
+  display: flex;
+  width: 10%;
+}
+.publisherImg-single img {
+  width: 100%;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.userName-drop {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+}
+
+.tweetBody-single {
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.tweetBody-single p {
+  text-align: left;
+  font-weight: 600;
+  line-height: 23px;
+  font-size: 1.1em;
+}
+
+.likesNum-single {
+  display: flex;
+  align-items: center;
+  gap: 10%;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: 1px solid var(--SubColor);
+  border-bottom: 1px solid var(--SubColor);
+}
+
+.Date-single {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--btnColor);
+}
+
+.singleTweet-Container .bottom-btns {
+  margin-top: 2%;
+}
+
+.replySingle {
+    display: flex;
     width: 100%;
-    top: 0;
-    background-color: red;
+    align-items: center;
+    /* justify-content: space-between; */
+    padding: 5px;
+    border-top: 1px solid var(--SubColor);
+    border-bottom: 1px solid var(--SubColor)
+
+}
+
+.photoInReply {
+  width: 10%;
+}
+.photoInReply img {
+  width: 100%;
+  border-radius: 100%;
+  object-fit: cover;
+}
+.inputInReply {
+  width: 80%;
+  
+}
+.inputInReply input {
+  width: 100%;
+  height: 100%;
+  border-color: transparent;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.ReplyButton button {
+  width: 80px;
+  height: 35px;
+  border-radius: 18px;
+  /* padding: 10px; */
+  border-color: transparent;
+  background-color: var(--blueColor2);
+  color: var(--mainColor);
+  text-align: center;
+  transition: 0.3s;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.ReplyButton button:hover {
+  background-color: var(--blueColor1);
+  transition: 0.3s;
 }
