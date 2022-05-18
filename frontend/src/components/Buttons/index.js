@@ -22,6 +22,9 @@ const Buttons = ({
   // console.log(userBookMark);
   const {
     //
+    profilTweets,
+    setProfileTweets,
+
     allTweet,
     setAllTweet,
     loggedInUserName,
@@ -98,6 +101,7 @@ const Buttons = ({
         });
         setUserLikes([...filterArray]);
         setSingleTweet(result.data.deleteLikeFromTweet);
+        
       })
 
       .catch((err) => {
@@ -112,7 +116,7 @@ const Buttons = ({
           setIsInCommentMode(true);
         }}
       >
-      {numberOfComment}  <FaRegComment />
+        {numberOfComment} <FaRegComment />
       </span>
       {isInCommentMode ? (
         <CreateComment

@@ -14,3 +14,49 @@
     width: 20%;
 }
 
+.linksinProfile { 
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 20px;
+    padding-right: 15px;
+    border-bottom: 1px solid var(--SubColor);
+    height: 4%;
+    margin-top: 15px;
+}
+
+.linksinProfile a { 
+    text-decoration: none;
+    color: var(--btnColor);
+}
+
+.links-div { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% / 3);
+    height: 100%;
+    cursor: pointer;
+}
+
+.links-div:hover{ 
+    background-color: var(--SubColor);
+    border-bottom: 2px solid var(--blueColor1);
+
+}
+
+.ProfileContainer { 
+    border: 2px solid var(--SubColor);
+
+}
+
+.ProfileContainer .Main {
+    width: 100%;
+    border: none;
+    height: -webkit-fill-available;
+    margin-top: 10px;
+}
+
+.ProfileContainer .Main .tweets-Container .oneTweet { 
+    border-top: unset;
+}

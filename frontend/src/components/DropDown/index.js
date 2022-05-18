@@ -16,6 +16,7 @@ const DropDown = ({
   isDeleteinProfile,
   //in oneTweet
   inSingleTweetAction,
+  //to show in dropDown
   publisherUserName
 }) => {
   const {

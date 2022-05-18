@@ -129,7 +129,8 @@
 .info,
 .LinksTo {
   display: flex;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
+  padding: 10px;
 }
 
 .info {

@@ -26,7 +26,7 @@ const Profile = () => {
     setUserFollower,
     depState,
     setDepState,
-
+    userLikes,
   } = useContext(isLoggedInContext);
 
   const { id } = useParams();
@@ -46,11 +46,11 @@ const Profile = () => {
   //N1: << getProfile set user
   const [USER, setUser] = useState("");
   //forProfile UserName
-const [profileUserName , setProfileUserName] = useState("")
+  const [profileUserName, setProfileUserName] = useState("");
   useEffect(() => {
     getProfile();
     console.log("DEP STATE INSIDE USE EFFECT");
-  }, [depState]);
+  }, [depState, userLikes]);
 
   const getProfile = () => {
     console.log(id);
@@ -61,7 +61,7 @@ const [profileUserName , setProfileUserName] = useState("")
         },
       })
       .then((result) => {
-        console.log(result.data, "PROFILE RESULT");
+        console.log(result, "PROFILE RESULT");
         setSignInUserId(result.data.signInUserId);
         setProfileTweets(result.data.tweets);
         //userFollowr for the logged in user .
@@ -75,8 +75,8 @@ const [profileUserName , setProfileUserName] = useState("")
         setProfileFollowing(result.data.tweets[0].userId.following);
         //N1:to send it to the profile header then to inProfil follow to create a button for follow or unfollow
         setUser(result.data.tweets[0].userId._id);
-        // profile userName 
-        setProfileUserName(result.data.tweets[0].userId.userName)
+        // profile userName
+        setProfileUserName(result.data.tweets[0].userId.userName);
 
         setCoverImage(result.data.tweets[0].userId.coverImage);
         // profileImage
@@ -112,7 +112,7 @@ const [profileUserName , setProfileUserName] = useState("")
       </div>
 
       <ProfileHeader
-      profileUserName={profileUserName}
+        profileUserName={profileUserName}
         setCoverImage={setCoverImage}
         coverImage={coverImage}
         profileImage={profileImage}
@@ -120,23 +120,28 @@ const [profileUserName , setProfileUserName] = useState("")
         USER={USER}
       />
       <div className="linksinProfile">
-        <div>
-              <Link to={`/liked/${id}`}> Liked Tweet </Link>
-            </div>
-            <div>
-                Tweets 
-            </div>
-            <div>
-            Re-tweet
-            </div>
-            
-            </div>
+        <div className="links-div">
+          <span className="blue-border">
+            <Link to={`/profile/${id}`}>Tweets</Link>
+          </span>
+        </div>
+
+        <div className="links-div">
+          <span className="blue-border">
+            <Link to={`/liked/${id}`}> Liked Tweet </Link>
+          </span>
+        </div>
+        <div className="links-div">
+          <span className="blue-border">
+            <Link to="">Re-tweet</Link>
+          </span>
+        </div>
+      </div>
 
       {/* <div className="Test">
         <Link to="/followers">Followers {profileFollower.length}</Link>
         <Link to="">Following {profileFollowing.length}</Link>
       </div> */}
-
 
       <div className="Main">
         {profilTweets &&
@@ -159,14 +164,23 @@ const [profileUserName , setProfileUserName] = useState("")
                     <div className="displayName">
                       <p> {element.userId.userName} </p>
                     </div>
-                    <div className="tweetBody" onClick={()=>{
-                     navigate(`/tweets/${element._id}`);
-                    }}>
+                    <div
+                      className="tweetBody"
+                      onClick={() => {
+                        navigate(`/tweets/${element._id}`);
+                      }}
+                    >
                       <p>Tweet Body {element.tweetBody}</p>
                     </div>
                     {/* have className tweetbtn in Buttons component */}
 
-                    {/* i can make other info as a context . */}
+                    <DropDown
+                      PublisherId={element.userId._id}
+                      tweetId={element._id}
+                      publisherUserName={element.userId.userName}
+                      // add userName Publisher to follow .
+                    />
+
                     <Buttons
                       tweetId={element._id}
                       // tweetPublisher={element.userId._id}
@@ -183,19 +197,14 @@ const [profileUserName , setProfileUserName] = useState("")
                       //logged in info
                       loggedInUserName={loggedInUserName}
                       loggedInProfileImage={loggedInProfileImage}
+                      numberOfComment={element.comments.length}
+                      numberOfLikes={element.likes.length}
                     />
                   </div>
                 </div>
-                <DropDown
-                  PublisherId={element.userId._id}
-                  tweetId={element._id}
-                  // add userName Publisher to follow . 
-                />
-
               </div>
             );
           })}
-
       </div>
     </div>
   );
