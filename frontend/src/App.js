@@ -123,7 +123,7 @@ const [bookMarkTweet, setBookMarkTweet] = useState("");
           <Route path="/followers" element={<FollowersSection />}></Route>
           <Route path="/following" element={<FollowingSection />}></Route>
           <Route path="/tweets/:id" element={<OneTweet />}></Route>
-          <Route path="/liked/" element={<LikedTweet />}></Route>
+          <Route path="/liked" element={<LikedTweet />}></Route>
         </Routes>
       </isLoggedInContext.Provider>
     </div>

@@ -6,7 +6,7 @@ import Buttons from "../Buttons";
 import { useNavigate } from "react-router-dom";
 
 const LikedTweet = ({ id }) => {
-  const { LIKEDTWEET, setLIKEDTWEET, userBookMark } =
+  const { LIKEDTWEET, setLIKEDTWEET, userBookMark , userLikes} =
     useContext(isLoggedInContext);
 
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const LikedTweet = ({ id }) => {
 
   useEffect(() => {
     getLikedTweets();
-  }, []);
+  }, [userLikes]);
 
   const getLikedTweets = () => {
     axios

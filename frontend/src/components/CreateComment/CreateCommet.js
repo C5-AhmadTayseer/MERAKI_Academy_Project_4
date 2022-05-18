@@ -21,6 +21,8 @@ const CreateComment = ({
     setSingleTweet,
     setProfileTweets,
     profilTweets,
+    LIKEDTWEET,
+    setLIKEDTWEET,
   } = useContext(isLoggedInContext);
 
   const TOKEN = JSON.parse(localStorage.getItem("token"));
@@ -74,6 +76,15 @@ const CreateComment = ({
             return element;
           });
           setBookMarkTweet([...mappedBookMark]);
+        }
+        if (LIKEDTWEET) {
+          const mapLikedSection = LIKEDTWEET.map((element) => {
+            if (element._id === tweetId) {
+              return result.data;
+            }
+            return element;
+          });
+          setLIKEDTWEET([...mapLikedSection]);
         }
       })
       //For Comment in profile section

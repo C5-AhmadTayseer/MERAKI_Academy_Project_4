@@ -21,6 +21,7 @@ const Buttons = ({
   // console.log(bookMarkTweet);
   // console.log(userBookMark);
   const {
+    signInUserId,
     //bookmarkPage , to update number of likes ,
     setBookMarkTweet,
     bookMarkTweet,
@@ -38,6 +39,7 @@ const Buttons = ({
     //For Like Button .
     userLikes,
     setUserLikes,
+    ///
   } = useContext(isLoggedInContext);
   // temp state will remove it
   const [isInCommentMode, setIsInCommentMode] = useState(false);
@@ -167,7 +169,7 @@ const Buttons = ({
             unLikeTweet(tweetId);
           }}
         >
-          {numberOfLikes ? numberOfLikes : ""} UnLike
+          {numberOfLikes } UnLike
         </span>
       ) : (
         <span
@@ -175,7 +177,7 @@ const Buttons = ({
             likeTweet(tweetId);
           }}
         >
-          {numberOfLikes ? numberOfLikes : ""} <BsHeart />
+          {numberOfLikes } <BsHeart />
         </span>
       )}
     </div>

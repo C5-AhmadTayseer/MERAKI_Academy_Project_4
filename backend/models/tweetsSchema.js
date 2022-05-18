@@ -7,7 +7,8 @@ const tweets = new mongoos.Schema({
 
   comments: [{ type: mongoos.Schema.Types.ObjectId, ref: "Comment" }],
 
-  likes:[{type:mongoos.Schema.Types.ObjectId , ref:"User"}]
+  likes:[{type:mongoos.Schema.Types.ObjectId , ref:"User"}],
+  reTweet:[{type:mongoos.Schema.Types.ObjectId , ref:"User"}]
   //   date : date() << will check it when create comment
 });
 

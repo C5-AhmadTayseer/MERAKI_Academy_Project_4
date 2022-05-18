@@ -90,7 +90,7 @@ const getAllTweets = async (req, res) => {
 }
 */
 const getTweetById = async (req, res) => {
-const signInUserId = req.token.userId
+  const signInUserId = req.token.userId;
 
   const id = req.params.id;
   /*
@@ -116,6 +116,11 @@ const signInUserId = req.token.userId
       .populate("userId", "userName profileImage")
       .populate({
         path: "likes",
+        model: "User",
+        select: "userName profileImage",
+      })
+      .populate({
+        path: "reTweet",
         model: "User",
         select: "userName profileImage",
       })
@@ -201,6 +206,11 @@ const updateTweet = async (req, res) => {
             select: "userName profileImage",
           },
         ],
+      })
+      .populate({
+        path: "reTweet",
+        model: "User",
+        select: "userName profileImage",
       });
 
     res.status(201).json({

@@ -10,10 +10,15 @@ import DropDown from "../DropDown";
 import ProfileHeader from "../ProfileHeader";
 
 import { isLoggedInContext } from "../../App";
+import { FaLastfm } from "react-icons/fa";
 
 const Profile = () => {
   // Test ,
   const {
+    loggedInProfileImage,
+    setLoggedInProfileImage,
+    loggedInUserName,
+    setLoggedInUserName,
     setUserBookMark,
     userBookMark,
     //NEW
@@ -39,6 +44,8 @@ const Profile = () => {
   // const [userBookMark, setUserBookMark] = useState("");
 
 const [currentComponent , setCurrentComponent] = useState(false)
+//
+const [test ,setTest] = useState(false)
 
   //image
   const [coverImage, setCoverImage] = useState("");
@@ -46,8 +53,8 @@ const [currentComponent , setCurrentComponent] = useState(false)
 
   //(to use it in Profile header .)
   //info for the loggend in user (userName , pforileImage )
-  const [loggedInUserName, setLoggedInUserName] = useState("");
-  const [loggedInProfileImage, setLoggedInProfileImage] = useState("");
+  // const [loggedInUserName, setLoggedInUserName] = useState("");
+  // const [loggedInProfileImage, setLoggedInProfileImage] = useState("");
   //N1: << getProfile set user
   const [USER, setUser] = useState("");
   //forProfile UserName
@@ -55,7 +62,7 @@ const [currentComponent , setCurrentComponent] = useState(false)
   useEffect(() => {
     getProfile();
     console.log("DEP STATE INSIDE USE EFFECT");
-  }, [depState, userLikes]);
+  }, [depState, userLikes , test]);
 
   const getProfile = () => {
     console.log(id);
@@ -132,6 +139,7 @@ const [currentComponent , setCurrentComponent] = useState(false)
                       PublisherId={element.userId._id}
                       tweetId={element._id}
                       publisherUserName={element.userId.userName}
+                      setTest={setTest}
                       // add userName Publisher to follow .
                     />
 
@@ -203,7 +211,7 @@ const [currentComponent , setCurrentComponent] = useState(false)
           <span className="blue-border">
             {/* <Link to={`/profile/${id}`}>Tweets</Link> */}
             <a onClick={()=> { 
-              setCurrentComponent(true)
+              setCurrentComponent(false)
             }}>Tweets</a>
           </span>
         </div>
@@ -212,7 +220,7 @@ const [currentComponent , setCurrentComponent] = useState(false)
           <span className="blue-border">
             {/* <Link to={`/liked/${id}`}> Liked Tweet </Link> */}
             <a onClick={() => {
-              setCurrentComponent(false)
+              setCurrentComponent(true)
             }}>Liked Tweet</a>
           </span>
         </div>
@@ -228,7 +236,7 @@ const [currentComponent , setCurrentComponent] = useState(false)
         <Link to="">Following {profileFollowing.length}</Link>
       </div> */}
 
-      {currentComponent ? <Tweets /> : <Liked  id={id}/>}
+      {currentComponent ? <Liked  id={id}/> : <Tweets />}
     </div>
   );
 };

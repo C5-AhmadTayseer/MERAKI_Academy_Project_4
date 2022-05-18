@@ -12,8 +12,9 @@ const ProfileHeader = ({
   coverImage,
   profileImage,
   USER,
+
 }) => {
-  const { profileFollower, profileFollowing } = useContext(isLoggedInContext);
+  const { profileFollower, profileFollowing  } = useContext(isLoggedInContext);
   //   console.log("SSSSSSS" , profileFollower , profileFollowing);
   return (
     <div className="HeaderContainer">

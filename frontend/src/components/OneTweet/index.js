@@ -203,7 +203,7 @@ const OneTweet = () => {
                         <h2>Liked By</h2>
                       </div>
                       <div>
-                        {" "}
+                        
                         <button
                           onClick={() => {
                             setIsLikesOpan(false);
