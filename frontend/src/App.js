@@ -21,6 +21,13 @@ function App() {
   const [profileFollower, setProfileFollower] = useState("");
   const [profileFollowing, setProfileFollowing] = useState("");
   const [profilTweets, setProfileTweets] = useState("");
+//like  section 
+const [LIKEDTWEET , setLIKEDTWEET] = useState("")
+
+
+//For BookMarkPage , 
+const [bookMarkTweet, setBookMarkTweet] = useState("");
+
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState("");
@@ -90,6 +97,12 @@ function App() {
           //
           profileId,
           setProfileId,
+          //BookMarkPage 
+          bookMarkTweet,
+          setBookMarkTweet,
+          //likeSection ...
+          LIKEDTWEET,
+          setLIKEDTWEET
         }}
       >
         {console.log("app", allTweet)}
@@ -110,7 +123,7 @@ function App() {
           <Route path="/followers" element={<FollowersSection />}></Route>
           <Route path="/following" element={<FollowingSection />}></Route>
           <Route path="/tweets/:id" element={<OneTweet />}></Route>
-          <Route path="/liked/:id" element={<LikedTweet />}></Route>
+          <Route path="/liked/" element={<LikedTweet />}></Route>
         </Routes>
       </isLoggedInContext.Provider>
     </div>

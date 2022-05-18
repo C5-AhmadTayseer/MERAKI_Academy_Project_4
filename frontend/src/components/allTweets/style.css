@@ -13,13 +13,17 @@
   display: flex;
   width: 100%;
   height: fit-content;
-  border-top: 1px solid var(--SubColor);
+  /* border-top: 1px solid var(--SubColor); */
   border-bottom: 1px solid var(--SubColor);
   justify-content: start;
   align-items: center;
   padding: 10px;
   line-height: 20px;
 }
+/* 
+.tweets-Container .oneTweet:not(:last-child) { 
+  border-bottom: 1px solid var(--SubColor);
+} */
 
 .oneTweet .publisherImg {
   width: 48px;

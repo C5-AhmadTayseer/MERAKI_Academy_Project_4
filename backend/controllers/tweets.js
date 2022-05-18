@@ -188,10 +188,16 @@ const updateTweet = async (req, res) => {
       )
       .populate("userId", "userName profileImage")
       .populate({
+        path: "likes",
+        model: "User",
+        select: "userName profileImage",
+      })
+      .populate({
         path: "comments",
         populate: [
           {
             path: "commenter",
+            model: "User",
             select: "userName profileImage",
           },
         ],

@@ -13,6 +13,9 @@ const CreateComment = ({
   setIsInCommentMode,
 }) => {
   const {
+    //forBookMark
+    bookMarkTweet,
+    setBookMarkTweet,
     allTweet,
     setAllTweet,
     setSingleTweet,
@@ -63,6 +66,15 @@ const CreateComment = ({
           });
           setProfileTweets([...inProfileMap]);
         }
+        if (bookMarkTweet) {
+          const mappedBookMark = bookMarkTweet.map((element) => {
+            if (element._id === tweetId) {
+              return result.data;
+            }
+            return element;
+          });
+          setBookMarkTweet([...mappedBookMark]);
+        }
       })
       //For Comment in profile section
 
@@ -111,23 +123,22 @@ const CreateComment = ({
                 }}
               />
             </div>
-
           </div>
           <button
-              onClick={() => {
-                setIsInCommentMode(false);
-                newComment(tweetId);
-              }}
-            >
-              Reply
-            </button>
-            <button
-              onClick={() => {
-                setIsInCommentMode(false);
-              }}
-            >
-              X
-            </button>
+            onClick={() => {
+              setIsInCommentMode(false);
+              newComment(tweetId);
+            }}
+          >
+            Reply
+          </button>
+          <button
+            onClick={() => {
+              setIsInCommentMode(false);
+            }}
+          >
+            X
+          </button>
         </div>
 
         {/* tweet body */}

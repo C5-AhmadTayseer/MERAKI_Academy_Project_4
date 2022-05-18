@@ -12,6 +12,7 @@
 .profileImage .round-photo {
   width: 100%;
   border-radius: 100%;
+  height: 60%;
 }
 
 .input-btnContainer {

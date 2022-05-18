@@ -28,6 +28,7 @@ const AllTweets = () => {
     setUserLikes,
   } = useContext(isLoggedInContext);
 
+  const [test ,setTest] = useState(false)
   // i got all the signin user info using backEnd with all tweets ,(to take bookmark array and later userName and profile photo to use it .)
   // const [userFollower, setUserFollower] = useState("");
 
@@ -42,7 +43,7 @@ const AllTweets = () => {
   // console.log("in alltweet app:", allTweet);
   useEffect(() => {
     getAllTweets();
-  }, []);
+  }, [test]);
 
   const getAllTweets = () => {
     axios
@@ -53,7 +54,10 @@ const AllTweets = () => {
       })
       .then((result) => {
         // console.log(result , "result from get all tweets");
+        
         console.log(result.data);
+        //forBook mark after refresh , 
+        setUserBookMark(result.data.newResult.bookMark)
         setSignInUserId(result.data.signInUserId);
         console.log(result, "HHOOOME");
         // console.log(result.data.tweets);
@@ -130,6 +134,7 @@ const AllTweets = () => {
                     tweetId={element._id}
                     // for dropDown
                     publisherUserName={element.userId.userName}
+                    setTest={setTest}
                   />
                   <Buttons
                     //number Of Comments ;

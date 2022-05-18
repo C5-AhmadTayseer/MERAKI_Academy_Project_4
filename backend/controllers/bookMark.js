@@ -6,12 +6,35 @@ const tweetModel = require("../models/tweetsSchema");
 const addToBookMark = async (req, res) => {
   const signInUser = req.token.userId;
 
-  let params = req.params.id; //tweet id . 
+  let params = req.params.id; //tweet id .
+
+/*
+.populate({
+      path: "bookMark",
+      populate: [
+        {
+          path: "userId",
+          model: "User",
+          select: "userName profileImage",
+        },
+        {
+          path: "comments",
+          model: "Comment",
+          populate: {
+            path: "commenter",
+            model: "User",
+            select: "userName profileImage",
+          },
+        },
+      ],
+      // populate: { path: "commenter", model: "User" },
+    })
+*/
 
   try {
     // to get the tweet id on params
     const response = await tweetModel.findById(params);
-    console.log(response , "LIKEEE ===");
+    console.log(response, "TEST INSIDE ADD TO BOOKMARK ===");
     if (response) {
       const result = await userModel.updateOne(
         { _id: signInUser },
@@ -51,7 +74,7 @@ const removeFromBookMark = async (req, res) => {
       { new: true }
     );
     console.log(result, "delete BookMark");
-// to solve remove to bookmark after refresh
+    // to solve remove to bookmark after refresh
     if (result.modifiedCount === 0) {
       console.log("==== inside deleteBookMark BE");
       return res.status(404).json({

@@ -2,7 +2,7 @@ import "./style.css";
 import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-
+import Liked from "../Liked";
 import Comments from "../Comments.js";
 import Buttons from "../Buttons/index.js";
 // import Follow from "../Follow/";
@@ -14,6 +14,9 @@ import { isLoggedInContext } from "../../App";
 const Profile = () => {
   // Test ,
   const {
+    setUserBookMark,
+    userBookMark,
+    //NEW
     profilTweets,
     setProfileTweets,
     profileFollower,
@@ -33,7 +36,9 @@ const Profile = () => {
   const TOKEN = JSON.parse(localStorage.getItem("token"));
   const navigate = useNavigate();
 
-  const [userBookMark, setUserBookMark] = useState("");
+  // const [userBookMark, setUserBookMark] = useState("");
+
+const [currentComponent , setCurrentComponent] = useState(false)
 
   //image
   const [coverImage, setCoverImage] = useState("");
@@ -89,60 +94,8 @@ const Profile = () => {
       });
   };
 
-  // console.log(coverImage, "CoverImage");
-  // console.log(profileFollower, "Profile Follower");
-  // console.log(profileFollowing, "Profile Following");
-  // console.log(USER , "==================");
-  return (
-    <div className="ProfileContainer">
-      {/* modify it  */}
-      <div className="Section-Header">
-        <div className="BackButton">
-          <button
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            Back
-          </button>
-        </div>
-        <div className="rightHeader">
-          userName , Tweets {profilTweets.length}
-        </div>
-      </div>
-
-      <ProfileHeader
-        profileUserName={profileUserName}
-        setCoverImage={setCoverImage}
-        coverImage={coverImage}
-        profileImage={profileImage}
-        setProfileImage={setProfileImage}
-        USER={USER}
-      />
-      <div className="linksinProfile">
-        <div className="links-div">
-          <span className="blue-border">
-            <Link to={`/profile/${id}`}>Tweets</Link>
-          </span>
-        </div>
-
-        <div className="links-div">
-          <span className="blue-border">
-            <Link to={`/liked/${id}`}> Liked Tweet </Link>
-          </span>
-        </div>
-        <div className="links-div">
-          <span className="blue-border">
-            <Link to="">Re-tweet</Link>
-          </span>
-        </div>
-      </div>
-
-      {/* <div className="Test">
-        <Link to="/followers">Followers {profileFollower.length}</Link>
-        <Link to="">Following {profileFollowing.length}</Link>
-      </div> */}
-
+  const Tweets = () => {
+    return (
       <div className="Main">
         {profilTweets &&
           profilTweets.map((element, index) => {
@@ -172,8 +125,9 @@ const Profile = () => {
                     >
                       <p>Tweet Body {element.tweetBody}</p>
                     </div>
-                    {/* have className tweetbtn in Buttons component */}
+                    {/* For Update Button  */}
 
+                    {/* have className tweetbtn in Buttons component */}
                     <DropDown
                       PublisherId={element.userId._id}
                       tweetId={element._id}
@@ -206,6 +160,75 @@ const Profile = () => {
             );
           })}
       </div>
+    );
+  };
+  /////////////make it as a spreated component , to switch between other components ,
+
+  // console.log(coverImage, "CoverImage");
+  // console.log(profileFollower, "Profile Follower");
+  // console.log(profileFollowing, "Profile Following");
+  // console.log(USER , "==================");
+  return (
+    <div className="ProfileContainer">
+      {/* modify it  */}
+      <div className="Section-Header">
+        <div className="BackButton">
+          <button
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            Back
+          </button>
+        </div>
+        <div className="rightHeader">
+          userName , Tweets {profilTweets.length}
+        </div>
+      </div>
+
+      <ProfileHeader
+        profileUserName={profileUserName}
+        setCoverImage={setCoverImage}
+        coverImage={coverImage}
+        profileImage={profileImage}
+        setProfileImage={setProfileImage}
+        USER={USER}
+      />
+      {/* need to position it -_- */}
+      {/* {USER === signInUserId ? <span className="updateInfo"> UPDATE TEST</span> : ""} */}
+
+      <div className="linksinProfile">
+
+        <div className="links-div">
+          <span className="blue-border">
+            {/* <Link to={`/profile/${id}`}>Tweets</Link> */}
+            <a onClick={()=> { 
+              setCurrentComponent(true)
+            }}>Tweets</a>
+          </span>
+        </div>
+
+        <div className="links-div">
+          <span className="blue-border">
+            {/* <Link to={`/liked/${id}`}> Liked Tweet </Link> */}
+            <a onClick={() => {
+              setCurrentComponent(false)
+            }}>Liked Tweet</a>
+          </span>
+        </div>
+        <div className="links-div">
+          <span className="blue-border">
+            <Link to="">Re-tweet</Link>
+          </span>
+        </div>
+      </div>
+
+      {/* <div className="Test">
+        <Link to="/followers">Followers {profileFollower.length}</Link>
+        <Link to="">Following {profileFollowing.length}</Link>
+      </div> */}
+
+      {currentComponent ? <Tweets /> : <Liked  id={id}/>}
     </div>
   );
 };

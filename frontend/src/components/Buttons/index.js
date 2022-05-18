@@ -21,10 +21,13 @@ const Buttons = ({
   // console.log(bookMarkTweet);
   // console.log(userBookMark);
   const {
+    //bookmarkPage , to update number of likes ,
+    setBookMarkTweet,
+    bookMarkTweet,
     //
     profilTweets,
     setProfileTweets,
-
+    //
     allTweet,
     setAllTweet,
     loggedInUserName,
@@ -68,7 +71,19 @@ const Buttons = ({
           setAllTweet([...mappedArray]);
         }
         // console.log(mappedArray);
+        ///forBookMarkPage ,
+        if (bookMarkTweet) {
+          const mappedBookMark = bookMarkTweet.map((element) => {
+            if (element._id === tweetId) {
+              console.log("INSIDE MAP", element);
+              return result.data.addLikeToTweet;
+            }
+            return element;
+          });
+          setBookMarkTweet([...mappedBookMark]);
+        }
 
+        ///
         setUserLikes([...userLikes, tweetId]);
         //will throw an error (populate .)
         setSingleTweet(result.data.addLikeToTweet);
@@ -95,13 +110,24 @@ const Buttons = ({
           });
           setAllTweet([...mappedArray]);
         }
+        ///BookMark
+        if (bookMarkTweet) {
+          const mappedBookMark = bookMarkTweet.map((element) => {
+            if (element._id === tweetId) {
+              console.log("INSIDE MAP", element);
+              return result.data.deleteLikeFromTweet;
+            }
+            return element;
+          });
+          setBookMarkTweet([...mappedBookMark]);
+        }
+
         console.log("UNLIKE Result", result);
         const filterArray = userLikes.filter((element) => {
           return element !== tweetId;
         });
         setUserLikes([...filterArray]);
         setSingleTweet(result.data.deleteLikeFromTweet);
-        
       })
 
       .catch((err) => {

@@ -47,16 +47,18 @@
 
 .ProfileContainer { 
     border: 2px solid var(--SubColor);
-
+    /* border-bottom: 0; */
 }
 
 .ProfileContainer .Main {
     width: 100%;
     border: none;
-    height: -webkit-fill-available;
+    /* height: -webkit-fill-available; */
+    /* height: 100%; */
     margin-top: 10px;
 }
 
 .ProfileContainer .Main .tweets-Container .oneTweet { 
     border-top: unset;
+    align-items: flex-start;
 }

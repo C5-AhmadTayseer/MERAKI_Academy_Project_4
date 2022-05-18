@@ -6,9 +6,14 @@ import { isLoggedInContext } from "../../App";
 import Buttons from "../Buttons";
 import Comments from "../Comments.js";
 import DropDown from "../DropDown";
+import InProfileFollow from "../InProfileFollow";
 
 const OneTweet = () => {
   const {
+    // to avoid appearance of follow button for the logged in user if the page refreshed
+    signInUserId,
+    setSignInUserId,
+    setUserBookMark,
     singleTweet,
     setSingleTweet,
     allTweet,
@@ -27,6 +32,7 @@ const OneTweet = () => {
   //for comment in singleTweet  < will use the create comment component on click as a modal
   const [loggedInProfileImage, setLoggedInProfileImage] = useState("");
   const [comment, setComment] = useState("");
+  const [test, setTest] = useState(false);
 
   const [isLikesOpan, setIsLikesOpan] = useState(false);
 
@@ -36,7 +42,7 @@ const OneTweet = () => {
 
   useEffect(() => {
     OneTweet();
-  }, []);
+  }, [test]);
 
   const OneTweet = () => {
     axios
@@ -54,6 +60,10 @@ const OneTweet = () => {
         // setPublisherId(result.data.tweet.userId._id);
         setPublisherId(singleTweet.userId);
         setLoggedInProfileImage(result.data.newResult.profileImage);
+        //
+        setUserBookMark(result.data.newResult.bookMark);
+        //InProfileFollow
+        setSignInUserId(result.data.newResult._id);
       })
       .catch((err) => {
         console.log(err);
@@ -146,6 +156,9 @@ const OneTweet = () => {
               <div className="userName-drop">
                 <p> {singleTweet.userId.userName} </p>
                 <DropDown
+                  //
+                  setTest={setTest}
+                  //
                   tweetId={singleTweet._id}
                   // Condition because i got two results , one after update and the original one before update T_T
                   PublisherId={
@@ -184,33 +197,42 @@ const OneTweet = () => {
                 <>
                   <div className="overlay"> </div>
 
-                  <div className="modal inProfile">
-                    {singleTweet.likes && singleTweet.likes.map((element) => {
-                      console.log(element, "ONCLICK");
-                      return (
-                        <>
-                          <h2>Liked By</h2>
-
-                          <div
-                            className="oneTweet profile"
-                            onClick={() => {
-                              navigate(`/profile/${element._id}`);
-                            }}
-                          >
-                            <img src={`${element.profileImage}`} />
-                            <p>userName {element.userName}</p>
-                          </div>
-                        </>
-                      );
-                    })}
+                  <div className="inProfileModal">
+                    <div className="headerAndBtn">
+                      <div>
+                        <h2>Liked By</h2>
+                      </div>
+                      <div>
+                        {" "}
+                        <button
+                          onClick={() => {
+                            setIsLikesOpan(false);
+                          }}
+                        >
+                          X
+                        </button>
+                      </div>
+                    </div>
+                    {singleTweet.likes &&
+                      singleTweet.likes.map((element) => {
+                        console.log(element, "ONCLICK");
+                        return (
+                          <>
+                            <div className="oneTweet profile">
+                              <div className="imgAndUser"
+                                onClick={() => {
+                                  navigate(`/profile/${element._id}`);
+                                }}
+                              >
+                                <img src={`${element.profileImage}`} />
+                                <p>userName {element.userName}</p>
+                              </div>
+                              <InProfileFollow USER={element._id} />
+                            </div>
+                          </>
+                        );
+                      })}
                     {/* can add condition if there's no likes  */}
-                    <button
-                      onClick={() => {
-                        setIsLikesOpan(false);
-                      }}
-                    >
-                      X
-                    </button>
                   </div>
                 </>
               ) : (

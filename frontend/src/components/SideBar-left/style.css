@@ -42,7 +42,7 @@
   border-radius: 31px;
   width: 70%;
   height: 58px;
-  border-color: var(--mainColor);
+  border:none;
   color: var(--mainColor);
   background-color: var(--blueColor1);
   font-size: 20px;

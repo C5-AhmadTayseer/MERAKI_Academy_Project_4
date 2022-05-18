@@ -1,25 +1,29 @@
-import "./style.css"
+import "./style.css";
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { isLoggedInContext } from "../../App";
-import { FiUserPlus , FiUserX } from "react-icons/fi";
-import { MdOutlineBookmarkAdd , MdOutlineBookmarkRemove , MdDeleteOutline } from "react-icons/md";
-
+import { FiUserPlus, FiUserX } from "react-icons/fi";
+import {
+  MdOutlineBookmarkAdd,
+  MdOutlineBookmarkRemove,
+  MdDeleteOutline,
+} from "react-icons/md";
 
 const DropDown = ({
+  setTest,
   tweetId,
   PublisherId,
   isBookMarkTweet,
-  bookMarkTweet,
-  setBookMarkTweet,
   isDeleteinProfile,
   //in oneTweet
   inSingleTweetAction,
   //to show in dropDown
-  publisherUserName
+  publisherUserName,
 }) => {
   const {
+    bookMarkTweet,
+    setBookMarkTweet,
     allTweet,
     setAllTweet,
     setProfileTweets,
@@ -40,7 +44,7 @@ const DropDown = ({
   const [tweetBody, setTweetBody] = useState("");
   // temp state will remove it
   const [isOpen, setIsOpen] = useState(false);
-   // << for the 3 dot icon
+  // << for the 3 dot icon
 
   const TOKEN = JSON.parse(localStorage.getItem("token"));
 
@@ -88,7 +92,17 @@ const DropDown = ({
         }
 
         //for update in oneTweet
-        // setSingleTweet(result.data.tweet);
+        setSingleTweet(result.data.tweet);
+
+        if (bookMarkTweet) {
+          const bookmarkMap = bookMarkTweet.map((element) => {
+            if (element._id === tweetId) {
+              return result.data.tweet;
+            }
+            return element;
+          });
+          setBookMarkTweet([...bookmarkMap]);
+        }
 
         // Here ,
         // getAllTweets();
@@ -125,6 +139,13 @@ const DropDown = ({
         setSingleTweet("");
         console.log(isDeleteinProfile, "====");
         console.log(singleTweet._id, "INSIDE DELETE");
+
+        if (bookMarkTweet) {
+          const filterBookMark = bookMarkTweet.filter((element) => {
+            return element._id !== tweetId;
+          });
+          setBookMarkTweet([...filterBookMark]);
+        }
       });
   };
 
@@ -144,6 +165,7 @@ const DropDown = ({
       .then((result) => {
         console.log("bookMark Result", result);
         setIsAddedToBookMark(true);
+        setAllTweet([...allTweet]);
       })
       .catch((err) => {
         console.log("BookMark Error", err);
@@ -169,6 +191,7 @@ const DropDown = ({
           setUserBookMark(filterBookMark);
         }
         setIsAddedToBookMark(false);
+        setTest(true);
 
         // console.log(filterBookMark, "AFTER FILTER");
       })
@@ -255,9 +278,7 @@ const DropDown = ({
       {/* isOpen? className="list-hide" : className ="show" */}
       {/* update and delete */}
       {isOpen ? (
-
         <div className="icon-List">
-
           {PublisherId === signInUserId ? (
             <>
               <input
@@ -266,19 +287,21 @@ const DropDown = ({
                   setTweetBody(e.target.value);
                 }}
               />
-              <span className="icon"
+              <span
+                className="icon"
                 onClick={() => {
                   updateTweet(tweetId);
                 }}
               >
                 update
               </span>
-              <span className="delete"
+              <span
+                className="delete"
                 onClick={() => {
                   deleteTweet(tweetId);
                 }}
               >
-             <MdDeleteOutline />   Delete
+                <MdDeleteOutline /> Delete
               </span>
             </>
           ) : (
@@ -288,16 +311,18 @@ const DropDown = ({
           {isAddedToBookMark ||
           isBookMarkTweet ||
           userBookMark.includes(tweetId) ? (
-            <span className="icon"
+            <span
+              className="icon"
               onClick={(e) => {
                 // setIsOpen(false);
                 removeFromBookMark(tweetId);
               }}
             >
-             <MdOutlineBookmarkRemove /> Remove Tweet from Bookmark
+              <MdOutlineBookmarkRemove /> Remove Tweet from Bookmark
             </span>
           ) : (
-            <span className="icon"
+            <span
+              className="icon"
               onClick={(e) => {
                 // setIsOpen(false);
                 e.target = tweetId;
@@ -315,12 +340,13 @@ const DropDown = ({
           ) : (
             <div>
               {userFollower.includes(PublisherId) ? (
-                <span className="icon"
+                <span
+                  className="icon"
                   onClick={() => {
                     unFollow(PublisherId);
                   }}
                 >
-                 <FiUserX /> UnFollow {publisherUserName}
+                  <FiUserX /> UnFollow {publisherUserName}
                 </span>
               ) : (
                 <span
@@ -329,7 +355,7 @@ const DropDown = ({
                     follow(PublisherId);
                   }}
                 >
-                <FiUserPlus />  Follow {publisherUserName}
+                  <FiUserPlus /> Follow {publisherUserName}
                 </span>
               )}
             </div>
