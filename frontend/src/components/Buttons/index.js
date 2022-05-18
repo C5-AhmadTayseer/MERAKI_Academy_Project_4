@@ -112,7 +112,7 @@ const Buttons = ({
           setIsInCommentMode(true);
         }}
       >
-        <FaRegComment />
+      {numberOfComment}  <FaRegComment />
       </span>
       {isInCommentMode ? (
         <CreateComment

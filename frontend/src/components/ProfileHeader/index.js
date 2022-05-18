@@ -8,6 +8,7 @@ const ProfileHeader = ({
   // set will use it for updating info .
   setCoverImage,
   setProfileImage,
+  profileUserName,
   coverImage,
   profileImage,
   USER,
@@ -16,29 +17,26 @@ const ProfileHeader = ({
   //   console.log("SSSSSSS" , profileFollower , profileFollowing);
   return (
     <div className="HeaderContainer">
-      <div className="profile-header">
-        <div className="Cover">
-          <img src={`${coverImage}`} />
-        </div>
+      <div className="Cover">
+        <img src={`${coverImage}`} />
+      </div>
+
+      <div className="img-btnContainer">
         <div className="profilImg">
           <img src={`${profileImage}`} />
         </div>
+        <InProfileFollow USER={USER} />
+      </div>
 
-        <div className="profileInfo-Container">
-          <div>
-            <h2>userName</h2>
-          </div>
-          <InProfileFollow USER={USER} />
+      <div className="userName">
+        {/* <h2>userName</h2> */}
+        <h2>{profileUserName}</h2>
+      </div>
 
-          <div>Info.....</div>
-          <div className="Test">
-            <Link to="/following">Following {profileFollowing.length}</Link>
-            <Link to="/followers">Followers {profileFollower.length}</Link>
-
-            {/* Likes Tweet ,  */}
-            
-          </div>
-        </div>
+      <div className="info">Info.....</div>
+      <div className="LinksTo">
+        <Link to="/following"> <span className="number">{profileFollowing.length}</span> Following</Link>
+        <Link to="/followers"> <span className="number">{profileFollower.length}</span> Followers</Link>
       </div>
     </div>
   );

@@ -26,6 +26,7 @@ const Profile = () => {
     setUserFollower,
     depState,
     setDepState,
+
   } = useContext(isLoggedInContext);
 
   const { id } = useParams();
@@ -44,7 +45,8 @@ const Profile = () => {
   const [loggedInProfileImage, setLoggedInProfileImage] = useState("");
   //N1: << getProfile set user
   const [USER, setUser] = useState("");
-
+  //forProfile UserName
+const [profileUserName , setProfileUserName] = useState("")
   useEffect(() => {
     getProfile();
     console.log("DEP STATE INSIDE USE EFFECT");
@@ -73,7 +75,9 @@ const Profile = () => {
         setProfileFollowing(result.data.tweets[0].userId.following);
         //N1:to send it to the profile header then to inProfil follow to create a button for follow or unfollow
         setUser(result.data.tweets[0].userId._id);
-        //images
+        // profile userName 
+        setProfileUserName(result.data.tweets[0].userId.userName)
+
         setCoverImage(result.data.tweets[0].userId.coverImage);
         // profileImage
         setProfileImage(result.data.tweets[0].userId.profileImage);
@@ -90,7 +94,7 @@ const Profile = () => {
   // console.log(profileFollowing, "Profile Following");
   // console.log(USER , "==================");
   return (
-    <div className="Main">
+    <div className="ProfileContainer">
       {/* modify it  */}
       <div className="Section-Header">
         <div className="BackButton">
@@ -108,6 +112,7 @@ const Profile = () => {
       </div>
 
       <ProfileHeader
+      profileUserName={profileUserName}
         setCoverImage={setCoverImage}
         coverImage={coverImage}
         profileImage={profileImage}
@@ -132,12 +137,13 @@ const Profile = () => {
         <Link to="">Following {profileFollowing.length}</Link>
       </div> */}
 
-      <div className="tweets-Container">
+
+      <div className="Main">
         {profilTweets &&
           profilTweets.map((element, index) => {
             console.log(element, "PROFILE ELEMENT ");
             return (
-              <>
+              <div className="tweets-Container">
                 <div className="oneTweet">
                   <div className="publisherImg">
                     <img
@@ -154,7 +160,7 @@ const Profile = () => {
                       <p> {element.userId.userName} </p>
                     </div>
                     <div className="tweetBody" onClick={()=>{
-                                              navigate(`/tweets/${element._id}`);
+                     navigate(`/tweets/${element._id}`);
                     }}>
                       <p>Tweet Body {element.tweetBody}</p>
                     </div>
@@ -177,41 +183,16 @@ const Profile = () => {
                       //logged in info
                       loggedInUserName={loggedInUserName}
                       loggedInProfileImage={loggedInProfileImage}
-
-                      //make it as a context
-                      // setProfileTweets={setProfileTweets}
-                      // profilTweets={profilTweets}
                     />
                   </div>
                 </div>
                 <DropDown
                   PublisherId={element.userId._id}
                   tweetId={element._id}
-
-                  // userFollower={userFollower}
-                  // setUserFollower={setUserFollower}
-                  // signInUserId={signInUserId}
-
-                  // made it in context .
-                  // setProfileFollowing={setProfileFollowing}
-                  // profileFollowing={profileFollowing}
-                  // setProfileFollower={setProfileFollower}
-                  // profileFollower={profileFollower}
+                  // add userName Publisher to follow . 
                 />
 
-                {/* Comments component ...  */}
-
-                {/* {element.comments.map((el, ind) => {
-                  // comment component
-                  return (
-                    <Comments
-                      profileImage={el.commenter.profileImage}
-                      commenterUserName={el.commenter.userName}
-                      commentBody={el.comment}
-                    />
-                  );
-                })} */}
-              </>
+              </div>
             );
           })}
 

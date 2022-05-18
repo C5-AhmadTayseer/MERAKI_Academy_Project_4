@@ -69,7 +69,7 @@ const InProfileFollow = ({ USER }) => {
                 follow(USER);
               }}
             >
-              follow
+              Follow
             </button>
           )}
         </div>

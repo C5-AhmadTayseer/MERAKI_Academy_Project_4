@@ -1,5 +1,15 @@
-.follow {
+/* .follow {
   background-color: red;
+} */
+
+.follow-unfollow button {
+    width: 6.3em;
+    height: 2.3em;
+    background-color: var(--mainColor2);
+    color: white;
+    border-radius: 18px;
+    font-weight: 600;
+    font-size: 1em;
+    /* padding: 5px; */
+    text-align: center;
 }
-
-

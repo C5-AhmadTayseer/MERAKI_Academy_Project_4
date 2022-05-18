@@ -1,3 +1,5 @@
+/* Test */
+
 .HeaderContainer {
   display: flex;
   flex-direction: column;
@@ -7,7 +9,9 @@
   transform: translate(-50%); */
   width: 100%;
   /* padding: 10px; */
+  height: 20%;
 }
+
 .profile-header {
   width: 100%;
   /* border: red 1px solid; */
@@ -48,7 +52,98 @@
   margin-top: 10px;
 }
 
-.linksinProfile { 
+.linksinProfile {
   display: flex;
-  
+}
+
+/* MODIFY */
+
+.ProfileContainer {
+  /* height: 100%; */
+  width: 50%;
+}
+
+.ProfileContainer .Section-Header {
+  margin: 0;
+  height: 5%;
+}
+
+.HeaderContainer {
+  height: 40%;
+  width: 100%;
+}
+/* 5 , 40 >> 55% for others , */
+
+.HeaderContainer .Cover {
+  height: 50%;
+  width: 100%;
+}
+
+.HeaderContainer .Cover img {
+  height: 100%;
+  width: 100%;
+  object-fit: fill;
+}
+
+.img-btnContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 20%;
+}
+
+.img-btnContainer .profilImg {
+  width: 20%;
+  border-radius: 100%;
+  margin-top: -7%;
+  margin-left: 1%;
+}
+
+.img-btnContainer .profilImg img {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  border: 5px solid var(--mainColor);
+}
+
+.img-btnContainer .follow-unfollow {
+  display: flex;
+  align-self: baseline;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.img-btnContainer .follow-unfollow button {
+  width: 6.3em;
+  height: 2.3em;
+  background-color: var(--mainColor2);
+  color: white;
+  border-radius: 18px;
+  font-weight: 600;
+  font-size: 1em;
+  /* padding: 5px; */
+  text-align: center;
+  cursor: pointer;
+}
+
+.userName,
+.info,
+.LinksTo {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.info {
+  color: var(--btnColor);
+}
+
+.LinksTo { 
+  gap: 10px;
+}
+.LinksTo a { 
+  text-decoration: none;
+  color: var(--btnColor);
+}
+
+.number { 
+  color: var(--mainColor2);
 }
