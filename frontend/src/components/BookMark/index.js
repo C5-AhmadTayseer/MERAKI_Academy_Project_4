@@ -81,6 +81,7 @@ const BookMark = () => {
                       signInUserId={signInUserId}
                       numberOfComment={element.comments.length}
                       numberOfLikes={element.likes.length}
+                      numberOfRetweet ={element.reTweet.length}
                       bookMarkTweet={bookMarkTweet}
                       setBookMarkTweet={setBookMarkTweet}
                       isBookMarkTweet={isBookMarkTweet}

@@ -21,6 +21,10 @@ const addToLike = async (req, res) => {
         path: "likes",
         model: "User",
         select: "userName profileImage",
+      }).populate({
+        path:"reTweet",
+        model:"User",
+        select:"userName profileImage"
       })
       .populate({
         path: "comments",
@@ -80,6 +84,10 @@ const deleteFromLike = async (req, res) => {
         path: "likes",
         model: "User",
         select: "userName profileImage",
+      }).populate({
+        path:"reTweet",
+        model:"User",
+        select:"userName profileImage"
       })
       .populate({
         path: "comments",

@@ -23,9 +23,11 @@ const AllTweets = () => {
     setLoggedInUserName,
     setLoggedInProfileImage,
 
-    //
+    //==
     userLikes,
     setUserLikes,
+    setUserRetweets
+    //==
   } = useContext(isLoggedInContext);
 
   const [test ,setTest] = useState(false)
@@ -72,8 +74,9 @@ const AllTweets = () => {
         //-- to get extra info abuot SignIn user to use it ..
         setLoggedInUserName(result.data.newResult.userName);
         setLoggedInProfileImage(result.data.newResult.profileImage);
-        //Likes
+        //Likes & Retweets , (array for user contains tweetsId)
         setUserLikes(result.data.newResult.likesTweet);
+        setUserRetweets(result.data.newResult.reTweetByUser)
       })
       .catch((err) => {
         console.log(err);
@@ -140,6 +143,9 @@ const AllTweets = () => {
                     //number Of Comments ;
                     numberOfComment={element.comments.length}
                     numberOfLikes={element.likes.length}
+                    //
+                    numberOfRetweet ={element.reTweet.length}
+                    //
                     tweetId={element._id}
                     // tweetPublisher={element.userId._id}
                     // userBookMark={userBookMark}

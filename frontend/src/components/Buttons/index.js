@@ -16,6 +16,7 @@ const Buttons = ({
   tweetContent,
   numberOfComment,
   numberOfLikes,
+  numberOfRetweet,
 }) => {
   // console.log(props);
   // console.log(bookMarkTweet);
@@ -36,9 +37,14 @@ const Buttons = ({
     //
     singleTweet,
     setSingleTweet,
+    //==
     //For Like Button .
     userLikes,
     setUserLikes,
+    //Retweet Button
+    userRetweets,
+    setUserRetweets,
+    //==
     ///
   } = useContext(isLoggedInContext);
   // temp state will remove it
@@ -85,8 +91,11 @@ const Buttons = ({
           setBookMarkTweet([...mappedBookMark]);
         }
 
-        ///
+        ///==
         setUserLikes([...userLikes, tweetId]);
+
+        ///==
+
         //will throw an error (populate .)
         setSingleTweet(result.data.addLikeToTweet);
       })
@@ -137,6 +146,100 @@ const Buttons = ({
       });
   };
 
+  ////////Retweet
+  const reTweetAdd = (tweetId) => {
+    axios
+      .post(
+        `http://localhost:5000/retweet/${tweetId}`,
+        {},
+        {
+          headers: {
+            authorization: `Bearer ${TOKEN}`,
+          },
+        }
+      )
+      .then((result) => {
+        console.log("ADD TO RETWEET Result", result);
+        console.log(userRetweets , "===================");
+        if (allTweet) {
+          const mappedArray = allTweet.map((element) => {
+            console.log(element , "SSSSSSSSSSSSSS");
+            if (element._id === tweetId) {
+              console.log("INSIDE MAP", element);
+              return result.data.addRetweetToTweet;
+            }
+            return element;
+          });
+          setAllTweet([...mappedArray]);
+        }
+        // console.log(mappedArray);
+        ///forBookMarkPage ,
+        if (bookMarkTweet) {
+          const mappedBookMark = bookMarkTweet.map((element) => {
+            if (element._id === tweetId) {
+              console.log("INSIDE MAP", element);
+              return result.data.addRetweetToTweet;
+            }
+            return element;
+          });
+          setBookMarkTweet([...mappedBookMark]);
+        }
+
+        ///==
+        setUserRetweets([...userRetweets, tweetId]);
+
+        ///==
+
+        //will throw an error (populate .)
+        setSingleTweet(result.data.addRetweetToTweet);
+      })
+      .catch((err) => {
+        console.log("ADD TO RETWEET Error", err);
+      });
+  };
+
+  const reTweetRemove = (tweetId) => {
+    axios
+      .delete(`http://localhost:5000/retweet/${tweetId}`, {
+        headers: {
+          authorization: `Bearer ${TOKEN}`,
+        },
+      })
+      .then((result) => {
+        if (allTweet) {
+          const mappedArray = allTweet.map((element) => {
+            if (element._id === tweetId) {
+              return result.data.deleteReTweetFromTweet;
+            }
+            return element;
+          });
+          setAllTweet([...mappedArray]);
+        }
+        ///BookMark
+        if (bookMarkTweet) {
+          const mappedBookMark = bookMarkTweet.map((element) => {
+            if (element._id === tweetId) {
+              console.log("INSIDE MAP", element);
+              return result.data.deleteReTweetFromTweet;
+            }
+            return element;
+          });
+          setBookMarkTweet([...mappedBookMark]);
+        }
+
+        console.log("REMOVE RETWEET Result", result);
+        const filterArray = userRetweets.filter((element) => {
+          return element !== tweetId;
+        });
+        setUserRetweets([...filterArray]);
+        setSingleTweet(result.data.deleteReTweetFromTweet);
+      })
+
+      .catch((err) => {
+        console.log("REMOVE RETWEET Error", err);
+      });
+  };
+
   return (
     <div className="bottom-btns">
       <span
@@ -159,17 +262,32 @@ const Buttons = ({
       ) : (
         ""
       )}
-      <span>
-        <AiOutlineRetweet />
-      </span>
-
+      {userRetweets.includes(tweetId) ? (
+        <span
+          onClick={() => {
+            reTweetRemove(tweetId);
+          }}
+        >
+          {" "}
+          Remove-Retweet {numberOfRetweet}
+        </span>
+      ) : (
+        <span
+          onClick={() => {
+            reTweetAdd(tweetId);
+          }}
+        >
+          <AiOutlineRetweet /> {numberOfRetweet}
+        </span>
+      )}
+      {/* Like Button */}
       {userLikes.includes(tweetId) ? (
         <span
           onClick={() => {
             unLikeTweet(tweetId);
           }}
         >
-          {numberOfLikes } UnLike
+          {numberOfLikes} UnLike
         </span>
       ) : (
         <span
@@ -177,7 +295,7 @@ const Buttons = ({
             likeTweet(tweetId);
           }}
         >
-          {numberOfLikes } <BsHeart />
+          {numberOfLikes} <BsHeart />
         </span>
       )}
     </div>

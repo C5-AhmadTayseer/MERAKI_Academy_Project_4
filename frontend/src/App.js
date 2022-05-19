@@ -48,6 +48,7 @@ const [bookMarkTweet, setBookMarkTweet] = useState("");
   const [loggedInProfileImage, setLoggedInProfileImage] = useState("");
 
   const [userLikes, setUserLikes] = useState("");
+  const[userRetweets , setUserRetweets] = useState("")
 
   useEffect(() => {
     const localStorageToken = JSON.parse(localStorage.getItem("token"));
@@ -91,10 +92,13 @@ const [bookMarkTweet, setBookMarkTweet] = useState("");
           //depState to re-render the page onChange for profile component .()
           depState,
           setDepState,
-          //
+          //====
           userLikes,
           setUserLikes,
-          //
+          //array for user contains tweetsId . 
+          userRetweets,
+          setUserRetweets,
+          //====
           profileId,
           setProfileId,
           //BookMarkPage 

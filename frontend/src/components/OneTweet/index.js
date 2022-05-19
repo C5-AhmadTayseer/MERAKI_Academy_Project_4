@@ -177,11 +177,7 @@ const OneTweet = () => {
             <div className="Date-single">Date test</div>
 
             <div className="likesNum-single">
-              {singleTweet.comments.length ? (
-                <span>Comments {singleTweet.comments.length}</span>
-              ) : (
-                "No Comments yet"
-              )}
+              <span> Retweet {singleTweet.reTweet.length}</span>
 
               {/* To show likes Number and the the users like the tweet (span on click will show a popUp with the users liked the tweet ). */}
               <span

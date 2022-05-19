@@ -16,7 +16,7 @@ const tweetsRouter = require("./routes/tweetsRouter");
 const usersRouter = require("./routes/usersRouter");
 const bookMarkRouter = require("./routes/bookMarkRouter");
 const likesRouter = require("./routes/likes");
-const reTweetRouter = require("./routes/reTweet");
+const reTweetRouter = require("./routes/retweet");
 
 
 
