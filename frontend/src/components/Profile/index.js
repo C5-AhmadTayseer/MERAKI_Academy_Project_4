@@ -8,6 +8,7 @@ import Buttons from "../Buttons/index.js";
 // import Follow from "../Follow/";
 import DropDown from "../DropDown";
 import ProfileHeader from "../ProfileHeader";
+import UpdateModal from "../Updateinfo";
 
 import { isLoggedInContext } from "../../App";
 import { FaLastfm } from "react-icons/fa";
@@ -43,9 +44,9 @@ const Profile = () => {
 
   // const [userBookMark, setUserBookMark] = useState("");
 
-const [currentComponent , setCurrentComponent] = useState(false)
-//
-const [test ,setTest] = useState(false)
+  const [currentComponent, setCurrentComponent] = useState(false);
+  //
+  const [test, setTest] = useState(false);
 
   //image
   const [coverImage, setCoverImage] = useState("");
@@ -59,10 +60,13 @@ const [test ,setTest] = useState(false)
   const [USER, setUser] = useState("");
   //forProfile UserName
   const [profileUserName, setProfileUserName] = useState("");
+
+  const [isInUpdateMode, setIsInUpdateMode] = useState(false);
+
   useEffect(() => {
     getProfile();
     console.log("DEP STATE INSIDE USE EFFECT");
-  }, [depState, userLikes , test]);
+  }, [depState, userLikes, test]);
 
   const getProfile = () => {
     console.log(id);
@@ -202,26 +206,46 @@ const [test ,setTest] = useState(false)
         setProfileImage={setProfileImage}
         USER={USER}
       />
+      {/* UPDATE ========================*/}
+      {USER === signInUserId ? (
+        <span
+          className="updateInfo"
+          onClick={() => {
+            setIsInUpdateMode(true);
+          }}
+        >
+          Edit profile
+        </span>
+      ) : (
+        ""
+      )}
+      {isInUpdateMode ? <UpdateModal id={signInUserId}/> : ""}
       {/* need to position it -_- */}
-      {/* {USER === signInUserId ? <span className="updateInfo"> UPDATE TEST</span> : ""} */}
 
       <div className="linksinProfile">
-
         <div className="links-div">
           <span className="blue-border">
             {/* <Link to={`/profile/${id}`}>Tweets</Link> */}
-            <a onClick={()=> { 
-              setCurrentComponent(false)
-            }}>Tweets</a>
+            <a
+              onClick={() => {
+                setCurrentComponent(false);
+              }}
+            >
+              Tweets
+            </a>
           </span>
         </div>
 
         <div className="links-div">
           <span className="blue-border">
             {/* <Link to={`/liked/${id}`}> Liked Tweet </Link> */}
-            <a onClick={() => {
-              setCurrentComponent(true)
-            }}>Liked Tweet</a>
+            <a
+              onClick={() => {
+                setCurrentComponent(true);
+              }}
+            >
+              Liked Tweet
+            </a>
           </span>
         </div>
         <div className="links-div">
@@ -236,7 +260,7 @@ const [test ,setTest] = useState(false)
         <Link to="">Following {profileFollowing.length}</Link>
       </div> */}
 
-      {currentComponent ? <Liked  id={id}/> : <Tweets />}
+      {currentComponent ? <Liked id={id} /> : <Tweets />}
     </div>
   );
 };

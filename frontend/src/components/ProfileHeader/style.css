@@ -54,6 +54,13 @@
 
 .linksinProfile {
   display: flex;
+  width: 100%;
+  justify-content: space-between;
+  font-size: 20px;
+  padding-right: 15px;
+  border-bottom: 1px solid var(--SubColor);
+  height: 10%;
+  margin-top: 25px;
 }
 
 /* MODIFY */
@@ -69,7 +76,7 @@
 }
 
 .HeaderContainer {
-  height: 40%;
+  height: 50%;
   width: 100%;
 }
 /* 5 , 40 >> 55% for others , */
@@ -89,7 +96,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 20%;
+  height: 30%;
 }
 
 .img-btnContainer .profilImg {
@@ -128,6 +135,7 @@
 .userName,
 .info,
 .LinksTo {
+  height: 10%;
   display: flex;
   /* margin-bottom: 10px; */
   padding: 10px;
@@ -137,14 +145,28 @@
   color: var(--btnColor);
 }
 
-.LinksTo { 
+.LinksTo {
   gap: 10px;
 }
-.LinksTo a { 
+.LinksTo a {
   text-decoration: none;
   color: var(--btnColor);
 }
 
-.number { 
+.number {
   color: var(--mainColor2);
+}
+
+.updateInfo {
+  position: absolute;
+  top: 40%;
+  right: 25%;
+  border-radius: 19px;
+  color: var(--mainColor2);
+  background-color: var(--SubColor);
+  width: 100px;
+  height: 36px;
+  border:.3px solid var(--btnColor);
+  text-align: center;
+
 }

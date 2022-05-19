@@ -1,0 +1,21 @@
+.updateModal {
+    padding: 10px;
+    width: 50%;
+    height: 65%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--mainColor);
+    border-radius: 10px;
+    border-color: unset;
+    /* box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px; */
+    box-shadow: rgb(0 0 0 / 25%) 0px 54px 55px, rgb(0 0 0 / 12%) 0px -12px 30px,
+      rgb(0 0 0 / 12%) 0px 4px 6px, rgb(0 0 0 / 17%) 0px 12px 13px,
+      rgb(0 0 0 / 9%) 0px -3px 5px;
+    z-index: 2;
+    flex-direction: column;
+  }

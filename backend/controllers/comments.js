@@ -7,13 +7,14 @@ const commentModel = require("../models/commentsSchema");
 const createNewComment = async (req, res) => {
   let id = req.params.id;
 
-  const { comment } = req.body;
+  const { comment ,Date } = req.body;
   const commenter = req.token.userId;
 
   try {
     const newComment = new commentModel({
       comment,
       commenter,
+      Date
     });
     let response = await newComment.save();
     console.log(response, "111");
