@@ -1,13 +1,13 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
+ <img width=200px height=200px src="https://res.cloudinary.com/a-taha-p4/image/upload/v1653103621/yvyffth83xrjez1gz3br.png" alt="Project logo"></a>
 </p>
 
-<h3 align="center">Project Title</h3>
+<h3 align="center">Twitter Clone</h3>
 
 ---
 
-<p align="center"> Few lines describing your project.
+<p align="center"> Platform social media, provide ability to users to communicate together
     <br> 
 </p>
 
@@ -21,7 +21,9 @@
 
 ## 🧐 About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+- The Possibility of adding unlimited options in the future . 
+- trying to fix Twitter buttons issues (like button in Likes section in profile, BookMark after refreshing the page) 
+
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
@@ -29,34 +31,46 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them.
+- [VS Code](https://code.visualstudio.com/) 
+- [Git Bash](https://git-scm.com/download/win/)
+- [MongoDB](https://www.mongodb.com/) 
+- [Node JS](https://nodejs.org/en/) 
 
-```
-Give examples
-```
+
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running.
+1- Clone the repo to your local machine using git bash
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
 
 ```
-until finished
+$ git clone https://github.com/USERNAME/REPOSITORYNAME
+
 ```
 
-End with an example of getting some data out of the system or using it for a little demo.
+2- Install packages , repeat this step in backend and front end 
+```
+npm i
+```
+3- Run server using git bash inside backend folder
+```
+npm run dev
+```
+4-Run application inside frontend folder 
+```
+npm run start
+```
+Now app is ready to go 
+
 
 ## 🎈 Usage <a name="usage"></a>
 
-Add notes about how to use the system.
-
+ 1. You must register first with your email and password (the register page will be the default page when you running the app)
+ 2. You must Sign in
+ 3. you can create tweet or comment and , like , retweet , tweets , and follow users . 
+ 4. you can see the other users following and followers by going to the user profile . 
+ 5. you can edit your profile info by going to your profile page . 
+ 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
 - [MongoDB](https://www.mongodb.com/) - Database
