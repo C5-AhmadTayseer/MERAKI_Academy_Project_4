@@ -1,0 +1,143 @@
+.Register-Login {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.LeftContainer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-image: url("../../assests/cover-img.png");
+  align-items: center;
+  justify-content: center;
+}
+
+.TwitterIcon {
+  font-size: 320px;
+  color: white;
+}
+
+.RightContainer {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  height: 100%;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 45px;
+}
+
+.RIGHTICON {
+  height: 18%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.TwitterIcon2 {
+  font-size: 50px;
+  color: var(--blueColor1);
+}
+
+.LoginHeader {
+  width: 100%;
+  height: 25%;
+  display: flex;
+}
+
+.LoginHeader h2 {
+  font-size: 60px;
+  font-weight: 700;
+}
+
+.LoginHeader h3 {
+  font-size: 30px;
+}
+
+.LoginBtns {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  height: 32%;
+}
+
+.Btns {
+  width: 55%;
+  height: 25%;
+  /* color: var(--blueColor2); */
+  background-color: var(--blueColor1);
+  color: var(--SubColor);
+  font-size: 19px;
+  border-radius: 25px;
+  outline-style: none;
+  border: none;
+  cursor: pointer;
+}
+
+.overlay {
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+  background-color: grey;
+  position: fixed;
+  opacity: 0.7;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.LoginModal {
+  width: 40%;
+  height: 70%;
+  /* display: flex; */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--mainColor);
+  border-radius: 21px;
+  border-color: unset;
+  box-shadow: rgb(0 0 0 / 25%) 0px 54px 55px, rgb(0 0 0 / 12%) 0px -12px 30px,
+    rgb(0 0 0 / 12%) 0px 4px 6px, rgb(0 0 0 / 17%) 0px 12px 13px,
+    rgb(0 0 0 / 9%) 0px -3px 5px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+}
+
+.T1 {
+  font-size: 30px;
+  color: var(--blueColor1);
+}
+
+.Modalinput {
+  height: 30%;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 47px;
+  width: 50%;
+}
+
+.Modalinput input {
+  width: 100%;
+  height: 30%;
+  padding: 10px;
+}
+
+.SignInBtn {
+  margin-top: 50px;
+  width: 45%;
+  background-color: var(--blueColor1);
+  color: var(--SubColor);
+  font-size: 19px;
+  border-radius: 25px;
+  outline-style: none;
+  border: none;
+  cursor: pointer;
+  height: 40px;
+}

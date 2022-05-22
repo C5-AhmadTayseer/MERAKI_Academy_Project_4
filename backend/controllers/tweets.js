@@ -277,7 +277,8 @@ const getAllTweetByUser = async (req, res) => {
       .find({ userId: id })
       .populate({
         path: "userId",
-        select: "userName profileImage coverImage following followers",
+        select:
+          "userName profileImage coverImage following followers Bio dateOfBirthDay joinedAt ",
         populate: [
           {
             path: "following",

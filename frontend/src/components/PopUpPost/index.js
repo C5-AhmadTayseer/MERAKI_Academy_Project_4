@@ -11,7 +11,7 @@ const PostTweet = () => {
 
   const [tweetBody, setTweetBody] = useState("");
 
-  const newTweet = () => {
+  const newTweet = ({setIsOpen}) => {
     axios
       .post(
         `http://localhost:5000/tweets`,
@@ -27,6 +27,7 @@ const PostTweet = () => {
       .then((result) => {
         console.log(result);
         setAllTweet([result.data.tweet, ...allTweet]);
+        setIsOpen(false)
       })
       .catch((err) => {
         console.log(err);

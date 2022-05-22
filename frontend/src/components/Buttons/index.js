@@ -1,3 +1,4 @@
+import "./style.css";
 import React, { useState, useContext } from "react";
 import axios from "axios";
 // import { BiDotsHorizontalRounded } from "react-icons/bi";
@@ -30,10 +31,17 @@ const Buttons = ({
     profilTweets,
     setProfileTweets,
     //
+    LIKEDTWEET,
+    setLIKEDTWEET,
+    RETWEET,
+    setRETWEET,
+    //
     allTweet,
     setAllTweet,
     loggedInUserName,
     loggedInProfileImage,
+    // RETWEET ,
+    // setRETWEET
     //
     singleTweet,
     setSingleTweet,
@@ -78,6 +86,17 @@ const Buttons = ({
           });
           setAllTweet([...mappedArray]);
         }
+        ///
+        if (RETWEET) {
+          const mapRETWEET = RETWEET.map((element) => {
+            if (element._id === tweetId) {
+              console.log("INSIDE MAP", element);
+              return result.data.addLikeToTweet;
+            }
+            return element;
+          });
+          setRETWEET([...mapRETWEET]);
+        }
         // console.log(mappedArray);
         ///forBookMarkPage ,
         if (bookMarkTweet) {
@@ -121,6 +140,17 @@ const Buttons = ({
           });
           setAllTweet([...mappedArray]);
         }
+        ///
+        if (RETWEET) {
+          const mapRETWEET = RETWEET.map((element) => {
+            if (element._id === tweetId) {
+              return result.data.deleteLikeFromTweet;
+            }
+            return element;
+          });
+          setRETWEET([...mapRETWEET]);
+        }
+
         ///BookMark
         if (bookMarkTweet) {
           const mappedBookMark = bookMarkTweet.map((element) => {
@@ -160,10 +190,10 @@ const Buttons = ({
       )
       .then((result) => {
         console.log("ADD TO RETWEET Result", result);
-        console.log(userRetweets , "===================");
+        console.log(userRetweets, "===================");
         if (allTweet) {
           const mappedArray = allTweet.map((element) => {
-            console.log(element , "SSSSSSSSSSSSSS");
+            console.log(element, "SSSSSSSSSSSSSS");
             if (element._id === tweetId) {
               console.log("INSIDE MAP", element);
               return result.data.addRetweetToTweet;
@@ -172,6 +202,36 @@ const Buttons = ({
           });
           setAllTweet([...mappedArray]);
         }
+
+        // profilTweets,
+        // setProfileTweets,
+        if (profilTweets) {
+          const profileMap = profilTweets.map((element) => {
+            console.log(element, "SSSSSSSSSSSSSS");
+            if (element._id === tweetId) {
+              console.log("INSIDE MAP", element);
+              return result.data.addRetweetToTweet;
+            }
+            return element;
+          });
+          setProfileTweets([...profileMap]);
+          console.log("AFTER SET PROFILE <<<<");
+        }
+        if (LIKEDTWEET) {
+          const likedMap = LIKEDTWEET.map((element) => {
+            console.log(element, "SSSSSSSSSSSSSS");
+            if (element._id === tweetId) {
+              console.log("INSIDE MAP", element);
+              return result.data.addRetweetToTweet;
+            }
+            return element;
+          });
+          setLIKEDTWEET([...likedMap]);
+          console.log("AFTER SET PROFILE <<<<");
+        }
+
+        //========= new set
+
         // console.log(mappedArray);
         ///forBookMarkPage ,
         if (bookMarkTweet) {
@@ -215,6 +275,27 @@ const Buttons = ({
           });
           setAllTweet([...mappedArray]);
         }
+
+        if (profilTweets) {
+          const profileMap = profilTweets.map((element) => {
+            if (element._id === tweetId) {
+              return result.data.deleteReTweetFromTweet;
+            }
+            return element;
+          });
+          setProfileTweets([...profileMap]);
+        }
+
+        if (LIKEDTWEET) {
+          const likedMap = LIKEDTWEET.map((element) => {
+            if (element._id === tweetId) {
+              return result.data.deleteReTweetFromTweet;
+            }
+            return element;
+          });
+          setLIKEDTWEET([...likedMap]);
+        }
+
         ///BookMark
         if (bookMarkTweet) {
           const mappedBookMark = bookMarkTweet.map((element) => {
@@ -247,7 +328,9 @@ const Buttons = ({
           setIsInCommentMode(true);
         }}
       >
-        {numberOfComment} <FaRegComment />
+        <span className="CommentButton">
+          <FaRegComment /> {numberOfComment}
+        </span>
       </span>
       {isInCommentMode ? (
         <CreateComment
@@ -263,39 +346,43 @@ const Buttons = ({
         ""
       )}
       {userRetweets.includes(tweetId) ? (
-        <span
+        <span className="onRetweetList"
           onClick={() => {
             reTweetRemove(tweetId);
           }}
         >
-          {" "}
-          Remove-Retweet {numberOfRetweet}
+          
+          <AiOutlineRetweet /> {numberOfRetweet}
+          {/* REMOVE */}
         </span>
       ) : (
-        <span
+        <span className="NotInRetweet"
           onClick={() => {
             reTweetAdd(tweetId);
           }}
         >
           <AiOutlineRetweet /> {numberOfRetweet}
+          {/* ADD TO RETWEET */}
         </span>
       )}
       {/* Like Button */}
       {userLikes.includes(tweetId) ? (
-        <span
+        <span className="inLikeList"
           onClick={() => {
             unLikeTweet(tweetId);
           }}
         >
-          {numberOfLikes} UnLike
+           <BsHeart /> {numberOfLikes}
+           {/* REMOVE */}
         </span>
       ) : (
-        <span
+        <span className="AddToLikes"
           onClick={() => {
             likeTweet(tweetId);
           }}
         >
-          {numberOfLikes} <BsHeart />
+           <BsHeart /> {numberOfLikes}
+           {/* ADD TO LIKE */}
         </span>
       )}
     </div>

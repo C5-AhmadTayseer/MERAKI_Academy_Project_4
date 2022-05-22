@@ -5,6 +5,8 @@ const tweets = new mongoos.Schema({
 
   tweetBody: { type: String, required: true },
 
+  Date:{type:String , default:Date()},
+
   comments: [{ type: mongoos.Schema.Types.ObjectId, ref: "Comment" }],
 
   likes:[{type:mongoos.Schema.Types.ObjectId , ref:"User"}],

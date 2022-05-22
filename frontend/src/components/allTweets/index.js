@@ -26,11 +26,14 @@ const AllTweets = () => {
     //==
     userLikes,
     setUserLikes,
-    setUserRetweets
+    setUserRetweets,
     //==
+    setSideDep,
+    sideDep
   } = useContext(isLoggedInContext);
 
   const [test ,setTest] = useState(false)
+  const TIME = new Date()
   // i got all the signin user info using backEnd with all tweets ,(to take bookmark array and later userName and profile photo to use it .)
   // const [userFollower, setUserFollower] = useState("");
 
@@ -55,6 +58,7 @@ const AllTweets = () => {
         },
       })
       .then((result) => {
+        // console.log(TIME , "TEST");
         // console.log(result , "result from get all tweets");
         
         console.log(result.data);
@@ -103,11 +107,13 @@ const AllTweets = () => {
           // console.log(loggedInProfileImage, "PROFILE IMAGE");
           return (
             <>
+            
               <div className="oneTweet">
                 <div className="publisherImg">
                   <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg"
+                    src={element.userId.profileImage}
                     onClick={() => {
+                      setSideDep(!sideDep)
                       // console.log(element,"{{{{{{{{"); < navigate to params
                       navigate(`/profile/${element.userId._id}`);
                     }}
@@ -116,15 +122,16 @@ const AllTweets = () => {
 
                 <div className="Container">
                   <div className="displayName">
-                    <p> {element.userId.userName} </p>
+                    <p> {element.userId.userName} </p> 
                   </div>
                   <div
                     className="tweetBody"
                     onClick={() => {
+                      setSideDep(!sideDep)
                       navigate(`/tweets/${element._id}`);
                     }}
                   >
-                    <p>Tweet Body {element.tweetBody}</p>
+                    <p>{element.tweetBody}</p>
                   </div>
                   {/* have className tweetbtn in Buttons component */}
 

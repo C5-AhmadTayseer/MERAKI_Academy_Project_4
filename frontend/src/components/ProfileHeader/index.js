@@ -12,9 +12,14 @@ const ProfileHeader = ({
   coverImage,
   profileImage,
   USER,
-
+  // NEW <<
+  Bio,
+  joinedAt,
+  dateOfBirthDay,
 }) => {
-  const { profileFollower, profileFollowing  } = useContext(isLoggedInContext);
+  console.log(joinedAt, "JJJJJ");
+  let JoinedDate = joinedAt.split(" ");
+  const { profileFollower, profileFollowing } = useContext(isLoggedInContext);
   //   console.log("SSSSSSS" , profileFollower , profileFollowing);
   return (
     <div className="HeaderContainer">
@@ -30,14 +35,23 @@ const ProfileHeader = ({
       </div>
 
       <div className="userName">
-        {/* <h2>userName</h2> */}
         <h2>{profileUserName}</h2>
       </div>
-
-      <div className="info">Info.....</div>
+      <div className="info Bio">{Bio}</div>
+      {dateOfBirthDay ? (
+        <div className="info">{`Born ${dateOfBirthDay.substr(0, 7)}`}</div>
+      ) : (
+        ""
+      )}
+      <div className="info">{`Joined ${JoinedDate[1]} ${JoinedDate[3]} `}</div>
       <div className="LinksTo">
-        <Link to="/following"> <span className="number">{profileFollowing.length}</span> Following</Link>
-        <Link to="/followers"> <span className="number">{profileFollower.length}</span> Followers</Link>
+        <Link to="/following">
+          <span className="number">{profileFollowing.length}</span> Following
+        </Link>
+        <Link to="/followers">
+          {" "}
+          <span className="number">{profileFollower.length}</span> Followers
+        </Link>
       </div>
     </div>
   );

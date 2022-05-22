@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import Liked from "../Liked";
+import Retweet from "../Re-Tweet";
 import Comments from "../Comments.js";
 import Buttons from "../Buttons/index.js";
 // import Follow from "../Follow/";
@@ -10,6 +11,7 @@ import DropDown from "../DropDown";
 import ProfileHeader from "../ProfileHeader";
 import UpdateModal from "../Updateinfo";
 
+import { BiArrowBack } from "react-icons/bi";
 import { isLoggedInContext } from "../../App";
 import { FaLastfm } from "react-icons/fa";
 
@@ -44,7 +46,20 @@ const Profile = () => {
 
   // const [userBookMark, setUserBookMark] = useState("");
 
-  const [currentComponent, setCurrentComponent] = useState(false);
+  // const [currentComponent, setCurrentComponent] = useState(false);
+  //dependency to update profile after upload photo's on click on save button .
+  const [isProfileUpdated, setIsProfileUpdated] = useState(false);
+
+  //
+  const [dateOfBirthDay, setDateOfBirthDay] = useState("");
+  const [Bio, setBio] = useState("");
+  const [joinedAt, setJoinedAt] = useState("");
+
+  const [isTweetSection, setisTweetSection] = useState(true);
+  const [isLikeSection, setIsLikeSection] = useState(false);
+  const [isRetweetSection, setIsRetweetSection] = useState(false);
+
+  //state to toggle between component ..
   //
   const [test, setTest] = useState(false);
 
@@ -60,13 +75,12 @@ const Profile = () => {
   const [USER, setUser] = useState("");
   //forProfile UserName
   const [profileUserName, setProfileUserName] = useState("");
-
   const [isInUpdateMode, setIsInUpdateMode] = useState(false);
 
   useEffect(() => {
     getProfile();
     console.log("DEP STATE INSIDE USE EFFECT");
-  }, [depState, userLikes, test]);
+  }, [depState, userLikes, test, isProfileUpdated]);
 
   const getProfile = () => {
     console.log(id);
@@ -77,7 +91,7 @@ const Profile = () => {
         },
       })
       .then((result) => {
-        console.log(result, "PROFILE RESULT");
+        console.log(result, "PROFILE RESULT =====");
         setSignInUserId(result.data.signInUserId);
         setProfileTweets(result.data.tweets);
         //userFollowr for the logged in user .
@@ -91,8 +105,11 @@ const Profile = () => {
         setProfileFollowing(result.data.tweets[0].userId.following);
         //N1:to send it to the profile header then to inProfil follow to create a button for follow or unfollow
         setUser(result.data.tweets[0].userId._id);
-        // profile userName
+        // profile userName INFO FOR HEADER
         setProfileUserName(result.data.tweets[0].userId.userName);
+        setDateOfBirthDay(result.data.tweets[0].userId.dateOfBirthDay);
+        setBio(result.data.tweets[0].userId.Bio);
+        setJoinedAt(result.data.tweets[0].userId.joinedAt);
 
         setCoverImage(result.data.tweets[0].userId.coverImage);
         // profileImage
@@ -100,7 +117,7 @@ const Profile = () => {
       })
       .catch((err) => {
         console.log(err);
-        console.log(err.response.status);
+        console.log(err.response);
         console.log(err, "Catch inside Profile");
       });
   };
@@ -116,7 +133,7 @@ const Profile = () => {
                 <div className="oneTweet">
                   <div className="publisherImg">
                     <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg"
+                      src={element.userId.profileImage}
                       onClick={() => {
                         // console.log(element,"{{{{{{{{"); < navigate to params
                         navigate(`/profile/${element.userId._id}`);
@@ -134,7 +151,7 @@ const Profile = () => {
                         navigate(`/tweets/${element._id}`);
                       }}
                     >
-                      <p>Tweet Body {element.tweetBody}</p>
+                      <p>{element.tweetBody}</p>
                     </div>
                     {/* For Update Button  */}
 
@@ -165,6 +182,7 @@ const Profile = () => {
                       loggedInProfileImage={loggedInProfileImage}
                       numberOfComment={element.comments.length}
                       numberOfLikes={element.likes.length}
+                      numberOfRetweet={element.reTweet.length}
                     />
                   </div>
                 </div>
@@ -182,24 +200,32 @@ const Profile = () => {
   // console.log(USER , "==================");
   return (
     <div className="ProfileContainer">
+          
       {/* modify it  */}
       <div className="Section-Header">
         <div className="BackButton">
-          <button
+          <span
             onClick={() => {
               navigate(-1);
             }}
           >
-            Back
-          </button>
+
+            <BiArrowBack />
+          </span>
         </div>
         <div className="rightHeader">
-          userName , Tweets {profilTweets.length}
+            <div className="headerName">
+            <span>{profileUserName}</span>
+            </div>
+         <span className="NumberOfTweet">{profilTweets.length} Tweets </span>
         </div>
       </div>
 
       <ProfileHeader
         profileUserName={profileUserName}
+        Bio={Bio}
+        joinedAt={joinedAt}
+        dateOfBirthDay={dateOfBirthDay}
         setCoverImage={setCoverImage}
         coverImage={coverImage}
         profileImage={profileImage}
@@ -207,6 +233,7 @@ const Profile = () => {
         USER={USER}
       />
       {/* UPDATE ========================*/}
+      {/* coverImage, setCoverImage */}
       {USER === signInUserId ? (
         <span
           className="updateInfo"
@@ -219,7 +246,20 @@ const Profile = () => {
       ) : (
         ""
       )}
-      {isInUpdateMode ? <UpdateModal id={signInUserId}/> : ""}
+      {isInUpdateMode ? (
+        <UpdateModal
+          id={signInUserId}
+          coverImage={coverImage}
+          setIsInUpdateMode={setIsInUpdateMode}
+          profileImage={profileImage}
+          setIsProfileUpdated={setIsProfileUpdated}
+          Bio={Bio}
+          dateOfBirthDay={dateOfBirthDay}
+          profileUserName={profileUserName}
+        />
+      ) : (
+        ""
+      )}
       {/* need to position it -_- */}
 
       <div className="linksinProfile">
@@ -228,7 +268,9 @@ const Profile = () => {
             {/* <Link to={`/profile/${id}`}>Tweets</Link> */}
             <a
               onClick={() => {
-                setCurrentComponent(false);
+                setisTweetSection(true);
+                setIsLikeSection(false);
+                setIsRetweetSection(false);
               }}
             >
               Tweets
@@ -241,7 +283,9 @@ const Profile = () => {
             {/* <Link to={`/liked/${id}`}> Liked Tweet </Link> */}
             <a
               onClick={() => {
-                setCurrentComponent(true);
+                setisTweetSection(false);
+                setIsLikeSection(true);
+                setIsRetweetSection(false);
               }}
             >
               Liked Tweet
@@ -250,7 +294,15 @@ const Profile = () => {
         </div>
         <div className="links-div">
           <span className="blue-border">
-            <Link to="">Re-tweet</Link>
+            <a
+              onClick={() => {
+                setisTweetSection(false);
+                setIsLikeSection(false);
+                setIsRetweetSection(true);
+              }}
+            >
+              Retweet
+            </a>
           </span>
         </div>
       </div>
@@ -260,7 +312,9 @@ const Profile = () => {
         <Link to="">Following {profileFollowing.length}</Link>
       </div> */}
 
-      {currentComponent ? <Liked id={id} /> : <Tweets />}
+      {isTweetSection ? <Tweets /> : ""}
+      {isLikeSection ? <Liked id={id} /> : ""}
+      {isRetweetSection ? <Retweet id={id} /> : ""}
     </div>
   );
 };

@@ -1,5 +1,24 @@
 const usersModel = require("../models/usersShema");
 
+
+const getAllUsers = async (req , res) => { 
+try{
+  const response = await usersModel.find({}).select("-password")
+
+  res.status(201).json({
+    success:true,
+    allUsers:response
+  })
+} catch(err) {
+  console.log(err);
+  res.status(500).json({
+    err:err
+  })
+}
+
+}
+
+
 const getUserById = async (req, res) => {
   signInUserId = req.token.userId
   id = req.params.id;
@@ -60,7 +79,7 @@ const deleteUser = async (req, res) => {
 const updateUserInfo = async (req, res) => {
   let id = req.params.id;
   //  ========
-  const { profileImage, coverImage } = req.body;
+  const { profileImage, coverImage , dateOfBirthDay , Bio , userName } = req.body;
 
   try {
     const result = await usersModel.findByIdAndUpdate(
@@ -68,6 +87,9 @@ const updateUserInfo = async (req, res) => {
       {
         profileImage,
         coverImage,
+        dateOfBirthDay,
+        Bio,
+        userName
       },
       { new: true }
     );
@@ -87,4 +109,5 @@ module.exports = {
   getUserById,
   deleteUser,
   updateUserInfo,
+  getAllUsers
 };

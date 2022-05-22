@@ -49,6 +49,7 @@
   width: 100%;
   border-radius: 100%;
   object-fit: cover;
+  
 }
 
 .userName-drop {
@@ -82,6 +83,7 @@
   padding-bottom: 10px;
   border-top: 1px solid var(--SubColor);
   border-bottom: 1px solid var(--SubColor);
+  cursor: pointer;
 }
 
 .Date-single {
@@ -145,7 +147,7 @@
 
 .inProfileModal {
   padding: 10px;
-  width: 50%;
+  width: 35%;
   height: 65%;
   display: flex;
   justify-content: flex-start;
@@ -221,4 +223,5 @@
   width: 80%;
   display: flex;
   gap: 10px;
+  
 }

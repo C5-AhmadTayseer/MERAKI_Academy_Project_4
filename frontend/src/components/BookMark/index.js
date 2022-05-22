@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-
+import { Navigate, useNavigate } from "react-router-dom";
 import Comments from "../Comments.js";
 import Buttons from "../Buttons";
 import DropDown from "../DropDown/index.js";
 import { isLoggedInContext } from "../../App";
+import { BiArrowBack } from "react-icons/bi";
 
 const BookMark = () => {
+  const navigate = useNavigate()
   const { userBookMark , setBookMarkTweet , bookMarkTweet , setSignInUserId , signInUserId } = useContext(isLoggedInContext);
 
   //Re-render Book mark page depending on button in other component ? .
@@ -48,6 +50,27 @@ const BookMark = () => {
   return (
     <div className="ProfileContainer">
       <div className="Main">
+      <div className="Section-Header">
+        <div className="BackButton">
+          <span
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+
+            <BiArrowBack />
+          </span>
+        </div>
+        <div className="rightHeader">
+            <div className="headerName">
+            <span>BookMark</span>
+            </div>
+         {/* <span className="NumberOfTweet"> BookMark </span> */}
+        </div>
+      </div>
+
+
+        
         {/* {console.log(allTweet, "============")} */}
         {bookMarkTweet &&
           bookMarkTweet.map((element, index) => {

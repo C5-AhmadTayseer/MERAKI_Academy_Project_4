@@ -107,12 +107,12 @@ const CreateComment = ({
               <img src={`${PublisherIdProfileImg}`} />
             </div>
 
-            <div className="userNameAndtweetBody">
-              <div className="userName">
+            <div className="test">
+              <div className="PublisherUser">
                 <p>{userNamePublisher}</p>
               </div>
-              <div className="tweetBody">
-                <p>TweetBody ,, {tweetContent}</p>
+              <div className="inCommenttweetBody">
+                <p>{tweetContent}</p>
               </div>
             </div>
           </div>
@@ -135,7 +135,8 @@ const CreateComment = ({
               />
             </div>
           </div>
-          <button
+          <div>
+          <button className="inReplyButton"
             onClick={() => {
               setIsInCommentMode(false);
               newComment(tweetId);
@@ -143,13 +144,14 @@ const CreateComment = ({
           >
             Reply
           </button>
-          <button
+          <span className="inReplyClose"
             onClick={() => {
               setIsInCommentMode(false);
             }}
           >
             X
-          </button>
+          </span>
+          </div>
         </div>
 
         {/* tweet body */}

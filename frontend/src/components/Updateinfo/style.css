@@ -1,21 +1,164 @@
 .updateModal {
-    padding: 10px;
-    width: 50%;
-    height: 65%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: var(--mainColor);
-    border-radius: 10px;
-    border-color: unset;
-    /* box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px; */
-    box-shadow: rgb(0 0 0 / 25%) 0px 54px 55px, rgb(0 0 0 / 12%) 0px -12px 30px,
-      rgb(0 0 0 / 12%) 0px 4px 6px, rgb(0 0 0 / 17%) 0px 12px 13px,
-      rgb(0 0 0 / 9%) 0px -3px 5px;
-    z-index: 2;
-    flex-direction: column;
-  }
+  /* padding: 10px; */
+  width: 45%;
+  height: 88%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: fixed;
+  top: 50%;
+  left: 53%;
+  transform: translate(-50%, -50%);
+  background-color: var(--mainColor);
+  border-radius: 18px;
+  border-color: unset;
+  /* box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px; */
+  box-shadow: rgb(0 0 0 / 25%) 0px 54px 55px, rgb(0 0 0 / 12%) 0px -12px 30px,
+    rgb(0 0 0 / 12%) 0px 4px 6px, rgb(0 0 0 / 17%) 0px 12px 13px,
+    rgb(0 0 0 / 9%) 0px -3px 5px;
+  z-index: 2;
+  flex-direction: column;
+}
+
+.coverContainer {
+  position: relative;
+  margin-top: 50px;
+  height: 34%;
+  width: 100%;
+}
+
+.coverImg {
+  width: 100%;
+  border-radius: 10px;
+  height: 100%;
+}
+.coverImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.UploadInput {
+  position: absolute;
+  left: 41%;
+  top: 50%;
+}
+
+.Save {
+ 
+  position: absolute;
+  right: 20px;
+  width: 15%;
+  height: 8%;
+  background-color: var(--mainColor2);
+  color: var(--SubColor);
+  border-radius: 19px;
+  border: none;
+  cursor: pointer;
+  top: 5px;
+}
+
+.Close {
+  position: absolute;
+    top: 2%;
+    left: 10px;
+}
+
+.profileImgContainer {
+  display: flex;
+  height: 20%;
+  width: 100%;
+  /* margin-bottom: -9px; */
+  /* margin: 5px; */
+  /* margin-bottom: 9px; */
+  /* margin-bottom: -23px; */
+  /* padding-top: 10px; */
+  margin-left: 29px;
+  margin-top: -40px;
+  z-index: 1;
+}
+.inUpdateProfileImg {
+  width: 20%;
+  height: 100%;
+}
+
+.inUpdateProfileImg img {
+  width: 100%;
+  border-radius: 100%;
+  height: 100%;
+  object-fit: fill;
+  border:3px solid var(--mainColor)
+}
+
+.Updatinginput { 
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  height: 40%;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.updateName { 
+  width: 100%;
+  height: 35%;
+  position: relative;
+}
+
+.placeholder1 { 
+  position: absolute;
+  color: var(--btnColor);
+  top: 2px;
+  left: 10px;
+}
+
+.updateName input {
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  font-size: 17px;
+  margin-top: 4px;
+  margin-top: 3px;
+}
+
+.updateBio { 
+  height: 35%;
+  width: 100%;
+position: relative;
+}
+
+.updateBio input { 
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  font-size: 17px;
+  margin-top: 4px;
+  margin-top: 3px;
+}
+
+.placeholder2 { 
+  position: absolute;
+  color: var(--btnColor);
+  top: 2px;
+  left: 10px;
+}
+
+.updateBirthDate { 
+  /* padding: -10px; */
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  align-items: center;
+  gap: 7px;
+}
+
+.updateBirthDate input { 
+  width: 34%;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.placeholder3 { 
+  color: var(--btnColor);
+}

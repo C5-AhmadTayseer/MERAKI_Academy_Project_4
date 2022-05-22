@@ -8,21 +8,35 @@
   align-items: center;
   gap: 40px;
   font-size: 1em;
+  /* padding: 10px; */
 }
 
-.Links {
+.Left-sidebar .Links {
   height: 75%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: flex-start;
+  padding: 15px;
+  font-size: 24px;
+  /* margin-left: 50%; */
+  width: 90%;
+  margin-left: 15%;
 }
 
 .Links .sideIcons {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
-  width: 100%;
+  /* width: 100%; */
   cursor: pointer;
+  width: 100%;
+  height: 11%;
+  border-radius: 35px;
+}
+
+.Links .sideIcons:hover { 
+  background-color: var(--SubColor);
 }
 
 .Links .sideIcons a {
@@ -31,10 +45,11 @@
   text-align: center;
   width: fit-content;
   color: black;
+ 
 }
 
 .Left-sidebar .logo {
-  font-size: 30px;
+  font-size: 35px;
   color: var(--blueColor1);
 }
 
@@ -42,9 +57,44 @@
   border-radius: 31px;
   width: 70%;
   height: 58px;
-  border:none;
+  border: none;
   color: var(--mainColor);
   background-color: var(--blueColor1);
   font-size: 20px;
+  cursor: pointer;
+}
+
+.Links .sideIcons svg { 
+  margin-right: 10px ;
+}
+
+.userLeftSideBar { 
+  display: flex;
+  width: 100%;
+  margin-left: 100px;
+}
+
+.userLeftSideBarimg { 
+  width: 15%;
+  height: 100%;
+}
+
+.userLeftSideBarimg img { 
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.LefticonAndName { 
+    width: 90%;
+    display: flex;
+    margin-left: 15px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  gap: 2px;
+}
+.LefticonAndName span svg { 
   cursor: pointer;
 }

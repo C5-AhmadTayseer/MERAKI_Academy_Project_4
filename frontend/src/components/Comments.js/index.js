@@ -1,9 +1,13 @@
 import React from "react";
-
-const Comments = ({ profileImage, commenterUserName, commentBody }) => {
+import { useNavigate } from "react-router-dom";
+const Comments = ({ profileImage, commenterUserName, commentBody , id}) => {
+  const navigate = useNavigate()
   return (
     <div className="oneTweet">
-      <div className="publisherImg">
+      <div className="publisherImg" onClick={() => {
+         navigate(`/profile/${id}`)
+
+      }}>
         <img src={`${profileImage}`} />
       </div>
       <div className="Container">
@@ -11,7 +15,7 @@ const Comments = ({ profileImage, commenterUserName, commentBody }) => {
           <p>{commenterUserName}</p>
         </div>
         <div className="tweetBody">
-          <p>CommentBody {commentBody}</p>
+          <p>{commentBody}</p>
         </div>
       </div>
     </div>

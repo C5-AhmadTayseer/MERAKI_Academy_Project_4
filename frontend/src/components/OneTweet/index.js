@@ -7,6 +7,8 @@ import Buttons from "../Buttons";
 import Comments from "../Comments.js";
 import DropDown from "../DropDown";
 import InProfileFollow from "../InProfileFollow";
+import { BiArrowBack } from "react-icons/bi";
+
 
 const OneTweet = () => {
   const {
@@ -35,6 +37,7 @@ const OneTweet = () => {
   const [test, setTest] = useState(false);
 
   const [isLikesOpan, setIsLikesOpan] = useState(false);
+  const [isRetweetOpen, setIsRetweetOpen] = useState(false);
 
   // const [inSingleTweetAction, setInSingleTweetAction] = useState(false);
 
@@ -133,7 +136,7 @@ const OneTweet = () => {
     //   << Header
     // Object.values(singleTweet).length
     <div className="Main">
-      <div className="Section-Header">
+      {/* <div className="Section-Header">
         <div className="BackButton">
           <button
             onClick={() => {
@@ -143,7 +146,26 @@ const OneTweet = () => {
             Back
           </button>
         </div>
-        <div className="rightHeader">Tweet</div>
+        <div className="rightHeader">Thread</div>
+      </div> */}
+      <div className="Section-Header">
+        <div className="BackButton">
+          <span
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+
+            <BiArrowBack />
+          </span>
+        </div>
+        <div className="rightHeader">
+            <div className="headerName">
+            {/* <span>Thread</span> */}
+
+            </div>
+         {/* <span className="NumberOfTweet"> Thread </span> */}
+        </div>
       </div>
 
       <div className="singleTweet-Container">
@@ -151,7 +173,7 @@ const OneTweet = () => {
           <div className="single-Con">
             <div className="displayName-single">
               <div className="publisherImg-single">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg" />
+                <img src={singleTweet.userId.profileImage} />
               </div>
               <div className="userName-drop">
                 <p> {singleTweet.userId.userName} </p>
@@ -172,12 +194,18 @@ const OneTweet = () => {
               </div>
             </div>
             <div className="tweetBody-single">
-              <p>Tweet Body {singleTweet.tweetBody}</p>
+              <p>{singleTweet.tweetBody}</p>
             </div>
-            <div className="Date-single">Date test</div>
+            {/* <div className="Date-single">Date test</div> */}
 
             <div className="likesNum-single">
-              <span> Retweet {singleTweet.reTweet.length}</span>
+              <span
+                onClick={() => {
+                  setIsRetweetOpen(true);
+                }}
+              >
+                Retweets {singleTweet.reTweet.length}
+              </span>
 
               {/* To show likes Number and the the users like the tweet (span on click will show a popUp with the users liked the tweet ). */}
               <span
@@ -199,7 +227,6 @@ const OneTweet = () => {
                         <h2>Liked By</h2>
                       </div>
                       <div>
-                        
                         <button
                           onClick={() => {
                             setIsLikesOpan(false);
@@ -215,7 +242,8 @@ const OneTweet = () => {
                         return (
                           <>
                             <div className="oneTweet profile">
-                              <div className="imgAndUser"
+                              <div
+                                className="imgAndUser"
                                 onClick={() => {
                                   navigate(`/profile/${element._id}`);
                                 }}
@@ -235,6 +263,53 @@ const OneTweet = () => {
                 ""
               )}
             </div>
+            {/* Retweet */}
+
+            {isRetweetOpen ? (
+              <>
+                <div className="overlay"> </div>
+
+                <div className="inProfileModal">
+                  <div className="headerAndBtn">
+                    <div>
+                      <h2>Re-tweeted By</h2>
+                    </div>
+                    <div>
+                      <button
+                        onClick={() => {
+                          setIsRetweetOpen(false);
+                        }}
+                      >
+                        X
+                      </button>
+                    </div>
+                  </div>
+                  {singleTweet.reTweet &&
+                    singleTweet.reTweet.map((element) => {
+                      console.log(element, "ONCLICK");
+                      return (
+                        <>
+                          <div className="oneTweet profile">
+                            <div
+                              className="imgAndUser"
+                              onClick={() => {
+                                navigate(`/profile/${element._id}`);
+                              }}
+                            >
+                              <img src={`${element.profileImage}`} />
+                              <p>userName {element.userName}</p>
+                            </div>
+                            <InProfileFollow USER={element._id} />
+                          </div>
+                        </>
+                      );
+                    })}
+                  {/* can add condition if there's no likes  */}
+                </div>
+              </>
+            ) : (
+              ""
+            )}
 
             {/* buttons already have class name  */}
             <Buttons
@@ -273,6 +348,7 @@ const OneTweet = () => {
                     profileImage={element.commenter.profileImage}
                     commenterUserName={element.commenter.userName}
                     commentBody={element.comment}
+                    id={element.commenter._id}
                   />
                 );
               })}

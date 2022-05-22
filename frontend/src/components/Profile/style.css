@@ -10,9 +10,26 @@
     padding: 10px;
 }
 
-.Header .BackButton { 
+.Header .BackButton  { 
     width: 20%;
 }
+
+.BackButton span { 
+    cursor: pointer;
+}
+
+.ProfileContainer .Section-Header {
+justify-content: start;
+gap: 10px;
+}
+
+.NumberOfTweet { 
+    color: var(--btnColor);
+    font-size: 12px;
+}
+
+/* .ProfileContainer .Section-Header */
+
 
 .linksinProfile { 
     display: flex;
@@ -41,13 +58,15 @@
 
 .links-div:hover{ 
     background-color: var(--SubColor);
-    border-bottom: 2px solid var(--blueColor1);
+    /* border-bottom: 2px solid var(--blueColor1); */
 
 }
 
 .ProfileContainer { 
     border: 2px solid var(--SubColor);
+    /* height: 100%; */
     /* border-bottom: 0; */
+    height: 100%;
 }
 
 .ProfileContainer .Main {
@@ -62,3 +81,4 @@
     border-top: unset;
     align-items: flex-start;
 }
+

@@ -1,42 +1,82 @@
-.followingSection-Container { 
-    display: flex;
-    flex-direction: column;
-    margin-top: 50px;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    width: 50%;
-    padding: 10px;
+.followingSection-Container {
+  display: flex;
+  flex-direction: column;
+  /* margin-top: 50px; */
+  width: 50%;
+  height: 100%;
+  border-right: 3px solid var(--SubColor);
+  border-left: 3px solid var(--SubColor);
+  padding: 10px;
+
 }
 
-.Links { 
-    display: flex;
+.followingSection-Container .Section-Header {
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+}
+
+.followingSection-Container .Section-Header .inFollow { 
+  position: absolute;
+  top: 5px;
+
+}
+
+.follw-links { 
+    height: 10%;
     width: 100%;
+    display: flex;
     justify-content: space-around;
-}
-
-.followerSection { 
-width: 100%;
-display: flex;
-justify-content: space-around;
-height: fit-content;
-}
-
-
-.followerSection .image { 
-    display: flex;
-    flex-direction: column;
-    width: 10%;
-    justify-content: center;
     align-items: center;
+    font-size: 23px;
+    border-bottom:  1px solid var(--SubColor);
+    margin-bottom: 10px;
 }
 
-.followerSection .image img { 
-    width: 100%;
-    object-fit: contain;
+.follw-links a {
+  text-decoration: none;
+  color: var(--btnColor);
 }
-.followerSection .Container2 { 
-    display: flex;
-    width: 80%;
-    justify-content: space-between;
+
+.follw-links .Visited { 
+  border-bottom: 4px solid var(--blueColor1);
+  color: var(--mainColor2);
+}
+
+.followerSection {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  height: fit-content;
+  margin-bottom:  20px;;
+}
+
+.followerSection button { 
+  align-self: unset;
+  width: 90px;
+  height: 35px;
+  background-color: var(--mainColor2);
+  color: white;
+  border-radius: 18px;
+  cursor: pointer;
+
+}
+
+.followerSection .image {
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+  justify-content: center;
+  align-items: center;
+}
+
+.followerSection .image img {
+  width: 100%;
+  object-fit: contain;
+  border-radius: 100%;
+}
+.followerSection .Container2 {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
 }

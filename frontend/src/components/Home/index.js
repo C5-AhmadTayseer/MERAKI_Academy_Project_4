@@ -1,8 +1,9 @@
 import "./style.css";
-import React, { useState } from "react";
+import React, { useState , useContext } from "react";
 import AllTweets from "../allTweets/";
 import PostTweet from "../PostTweet/index";
-import ModalpopUp from "../ModalTest";
+
+import { isLoggedInContext } from "../../App";
 const Home = () => {
   
 
@@ -11,7 +12,6 @@ const Home = () => {
       {/*  */}
       <div className="Section-Header">
         <p>Home</p>
-        <p>Icon</p>
       </div>
       {/* <ModalpopUp /> */}
       <PostTweet />

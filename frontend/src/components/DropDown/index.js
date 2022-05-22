@@ -8,6 +8,7 @@ import {
   MdOutlineBookmarkAdd,
   MdOutlineBookmarkRemove,
   MdDeleteOutline,
+  MdModeEdit,
 } from "react-icons/md";
 
 const DropDown = ({
@@ -44,6 +45,9 @@ const DropDown = ({
   const [tweetBody, setTweetBody] = useState("");
   // temp state will remove it
   const [isOpen, setIsOpen] = useState(false);
+
+  const [isUpdateOpen , setIsupdateOpen] = useState(false)
+
   // << for the 3 dot icon
 
   const TOKEN = JSON.parse(localStorage.getItem("token"));
@@ -281,19 +285,15 @@ const DropDown = ({
         <div className="icon-List">
           {PublisherId === signInUserId ? (
             <>
-              <input
-                placeholder="Update"
-                onChange={(e) => {
-                  setTweetBody(e.target.value);
-                }}
-              />
+              
               <span
                 className="icon"
                 onClick={() => {
-                  updateTweet(tweetId);
+                  setIsOpen(!isOpen)
+                  setIsupdateOpen(true)
                 }}
               >
-                update
+                <MdModeEdit /> Update
               </span>
               <span
                 className="delete"
@@ -364,6 +364,27 @@ const DropDown = ({
       ) : (
         ""
       )}
+      {isUpdateOpen ? <>
+      <div className="overlay"></div>
+      <div className="UPDATE">
+          <div className="containerUP">
+            <input
+                placeholder="Update"
+                onChange={(e) => {
+                  setTweetBody(e.target.value);
+                }}
+              /> 
+
+              <button onClick={() => {
+                updateTweet(tweetId);
+                setIsupdateOpen(false)
+              }}>Update</button>
+          </div>
+
+
+
+      </div>
+      </> : ""}
     </div>
   );
 };

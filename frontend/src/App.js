@@ -5,29 +5,30 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import BookMark from "./components/BookMark";
 import LeftSideBar from "./components/SideBar-left";
+import RightSideBar from "./components/Right-sideBar";
 import Profile from "./components/Profile";
 import FollowersSection from "./components/FollowersSection.js";
 import FollowingSection from "./components/FollowingSection";
 import OneTweet from "./components/OneTweet";
 import LikedTweet from "./components/Liked";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link , useNavigate } from "react-router-dom";
 
 export const isLoggedInContext = createContext();
 
 // export const allTweetContext = createContext();
 
 function App() {
+  const navigate = useNavigate()
   //Test
   const [profileFollower, setProfileFollower] = useState("");
   const [profileFollowing, setProfileFollowing] = useState("");
   const [profilTweets, setProfileTweets] = useState("");
-//like  section 
-const [LIKEDTWEET , setLIKEDTWEET] = useState("")
+  //like  section  , and Retweet
+  const [LIKEDTWEET, setLIKEDTWEET] = useState("");
+  const [RETWEET, setRETWEET] = useState("");
 
-
-//For BookMarkPage , 
-const [bookMarkTweet, setBookMarkTweet] = useState("");
-
+  //For BookMarkPage ,
+  const [bookMarkTweet, setBookMarkTweet] = useState("");
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState("");
@@ -48,7 +49,10 @@ const [bookMarkTweet, setBookMarkTweet] = useState("");
   const [loggedInProfileImage, setLoggedInProfileImage] = useState("");
 
   const [userLikes, setUserLikes] = useState("");
-  const[userRetweets , setUserRetweets] = useState("")
+  const [userRetweets, setUserRetweets] = useState("");
+
+const [sideDep , setSideDep] = useState(false)
+
 
   useEffect(() => {
     const localStorageToken = JSON.parse(localStorage.getItem("token"));
@@ -95,23 +99,32 @@ const [bookMarkTweet, setBookMarkTweet] = useState("");
           //====
           userLikes,
           setUserLikes,
-          //array for user contains tweetsId . 
+          //array for user contains tweetsId .
           userRetweets,
           setUserRetweets,
           //====
           profileId,
           setProfileId,
-          //BookMarkPage 
+          //BookMarkPage
           bookMarkTweet,
           setBookMarkTweet,
           //likeSection ...
           LIKEDTWEET,
-          setLIKEDTWEET
+          setLIKEDTWEET,
+          RETWEET,
+          setRETWEET,
+          sideDep,
+          setSideDep
         }}
       >
         {console.log("app", allTweet)}
         {/* Links just for testeing */}
+        {isLoggedIn ? <>
+        
+          <RightSideBar />
         <LeftSideBar />
+        </> : ""}
+        
         {/* <Link to="/register">Register</Link>
         <Link to="/login">Login</Link>
         <Link to="/home">home</Link>
@@ -128,6 +141,7 @@ const [bookMarkTweet, setBookMarkTweet] = useState("");
           <Route path="/following" element={<FollowingSection />}></Route>
           <Route path="/tweets/:id" element={<OneTweet />}></Route>
           <Route path="/liked" element={<LikedTweet />}></Route>
+          {/* <Route path="/"> element={<Login />}</Route> */}
         </Routes>
       </isLoggedInContext.Provider>
     </div>

@@ -5,6 +5,7 @@
   width: 50%;
   border: solid 3px var(--SubColor);
   border-top: 0;
+  /* padding: 10px; */
   /* height: 100%; */
 }
 
@@ -33,15 +34,24 @@
   border-bottom: 3px solid;
 } */
 
+
 .Section-Header {
   top: 0;
   position: sticky;
   background-color: var(--mainColor);
   display: flex;
   justify-content: space-between;
-  height: 5vh;
+  height: 10vh;
   width: 100%;
   align-items: center;
+  /* padding: 10px; */
   padding: 10px;
-  margin: 0 10px 0 10px;
+  font-size: 20px;
+  font-weight: 700;
+  z-index: 1;
+  
+}
+
+.FullWidthContainer  { 
+width: 100%;
 }

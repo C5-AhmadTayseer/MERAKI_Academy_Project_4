@@ -1,2 +1,29 @@
 /* the inetial color before hover and click for all buttons  #7d8a94 */
 
+.CommentButton:hover { 
+    color: var(--blueColor2);
+    transition: 0.3s;
+}
+
+.onRetweetList {
+    color: #68c3a4;
+}
+
+.NotInRetweet:hover { 
+    color: #68c3a4;
+    transition: 0.3s;
+}
+
+.bottom-btns svg { 
+    margin-bottom: -3px;
+    cursor: pointer;
+}
+
+.inLikeList { 
+    color: var(--likeColor);
+}
+
+.AddToLikes:hover { 
+    color: var(--likeColor);
+    transition: 0.3s;
+}

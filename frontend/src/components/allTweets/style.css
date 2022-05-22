@@ -1,24 +1,29 @@
 .tweets-Container {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-  width: 100%;
-  /* height: 75vh; */
-  /* to center it  */
-  padding: 0 10px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    /* height: 75vh; */
 }
 
 .tweets-Container .oneTweet {
   display: flex;
   width: 100%;
   height: fit-content;
-  /* border-top: 1px solid var(--SubColor); */
-  border-bottom: 1px solid var(--SubColor);
+  border-top: 1px solid var(--SubColor);
+  /* border-bottom: 1px solid var(--SubColor); */
   justify-content: start;
   align-items: center;
   padding: 10px;
   line-height: 20px;
+
+}
+
+.tweets-Container .oneTweet:hover {
+  background-color: var(--SubColor);
+  transition: 0.3s;
+  cursor: pointer;
 }
 /* 
 .tweets-Container .oneTweet:not(:last-child) { 
@@ -26,10 +31,11 @@
 } */
 
 .oneTweet .publisherImg {
-  width: 48px;
+  width: 10%;
   height: 100%;
   margin-right: 12px;
 }
+
 .oneTweet .publisherImg img {
   width: 48px;
   height: 48px;
@@ -52,6 +58,7 @@
 }
 
 .oneTweet .displayName {
+  font-weight: 600;
   width: 100%;
   height: 10%;
   margin-top: 5px;

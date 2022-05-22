@@ -5,8 +5,8 @@ import DropDown from "../DropDown";
 import Buttons from "../Buttons";
 import { useNavigate } from "react-router-dom";
 
-const LikedTweet = ({ id }) => {
-  const { LIKEDTWEET, setLIKEDTWEET, userBookMark , userLikes , userRetweets} =
+const Retweet = ({ id }) => {
+  const { RETWEET, setRETWEET, userBookMark, userLikes, userRetweets } =
     useContext(isLoggedInContext);
 
   const navigate = useNavigate();
@@ -14,20 +14,23 @@ const LikedTweet = ({ id }) => {
 
   // const { id } = useParams();
 
-  useEffect(() => {
-    getLikedTweets();
-  }, [userLikes] );
+  useEffect(
+    () => {
+      ReTweetSection();
+    },
+    [userRetweets]
+  );
 
-  const getLikedTweets = () => {
+  const ReTweetSection = () => {
     axios
-      .get(`http://localhost:5000/likes/${id}`, {
+      .get(`http://localhost:5000/retweet/${id}`, {
         headers: {
           authorization: "Bearer " + TOKEN,
         },
       })
       .then((result) => {
-        console.log(result, "LIKED TWEET SECTION ");
-        setLIKEDTWEET(result.data.likedTweets);
+        console.log(result, "RETWEET  SECTION ");
+        setRETWEET(result.data.ReTweetTweet);
       })
       .catch((err) => {
         console.log(err);
@@ -36,13 +39,13 @@ const LikedTweet = ({ id }) => {
       });
   };
 
-  console.log(LIKEDTWEET, "LIKEED");
+  console.log(RETWEET, "RETWEET");
 
   return (
     <div className="Main">
-      {LIKEDTWEET &&
-        LIKEDTWEET.map((element, index) => {
-          console.log(element, "LIKEEED ELEMEEENT ");
+      {RETWEET &&
+        RETWEET.map((element, index) => {
+          console.log(element, "RETWEET ELEMEEENT ");
           return (
             <div className="tweets-Container">
               <div className="oneTweet">
@@ -66,7 +69,7 @@ const LikedTweet = ({ id }) => {
                       navigate(`/tweets/${element._id}`);
                     }}
                   >
-                    <p>Tweet Body {element.tweetBody}</p>
+                    <p>{element.tweetBody}</p>
                   </div>
                   {/* For Update Button  */}
 
@@ -108,4 +111,4 @@ const LikedTweet = ({ id }) => {
   );
 };
 
-export default LikedTweet;
+export default Retweet;
