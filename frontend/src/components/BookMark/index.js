@@ -78,7 +78,7 @@ const BookMark = () => {
                 <div className="tweets-Container">
               <div className="oneTweet">
                 <div className="publisherImg">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg" />
+                  <img src={element.userId.profileImage} />
                 </div>
                   <div className="Container">
                     <div className="displayName">

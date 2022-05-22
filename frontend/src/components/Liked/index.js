@@ -66,7 +66,7 @@ const LikedTweet = ({ id }) => {
                       navigate(`/tweets/${element._id}`);
                     }}
                   >
-                    <p>Tweet Body {element.tweetBody}</p>
+                    <p>{element.tweetBody}</p>
                   </div>
                   {/* For Update Button  */}
 

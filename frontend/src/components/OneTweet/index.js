@@ -249,7 +249,7 @@ const OneTweet = () => {
                                 }}
                               >
                                 <img src={`${element.profileImage}`} />
-                                <p>userName {element.userName}</p>
+                                <p> {element.userName}</p>
                               </div>
                               <InProfileFollow USER={element._id} />
                             </div>
@@ -297,7 +297,7 @@ const OneTweet = () => {
                               }}
                             >
                               <img src={`${element.profileImage}`} />
-                              <p>userName {element.userName}</p>
+                              <p> {element.userName}</p>
                             </div>
                             <InProfileFollow USER={element._id} />
                           </div>
